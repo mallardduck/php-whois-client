@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites>
-  <testsuite name="Unit Tests" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001530">
-    <testsuite name="LucidInternets\Whodis\Test\WhodisTest" file="/home/dan/GitProjects/php-whodis/tests/WhodisTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001530">
-      <testcase name="testIsThereAnySyntaxError" class="LucidInternets\Whodis\Test\WhodisTest" classname="LucidInternets.Whodis.Test.WhodisTest" file="/home/dan/GitProjects/php-whodis/tests/WhodisTest.php" line="25" assertions="1" time="0.001492"/>
-      <testcase name="testMethod1" class="LucidInternets\Whodis\Test\WhodisTest" classname="LucidInternets.Whodis.Test.WhodisTest" file="/home/dan/GitProjects/php-whodis/tests/WhodisTest.php" line="39" assertions="1" time="0.000038"/>
-    </testsuite>
-  </testsuite>
-</testsuites>
