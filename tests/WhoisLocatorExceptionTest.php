@@ -62,7 +62,7 @@ class WhoisLocatorExceptionTest extends TestCase
     public function test_null_string_throws_exception()
     {
         if (version_compare(phpversion(), "7.0", ">=")) {
-            $this->expectException(\TypeError::class);
+            $this->expectException(MissingArgException::class);
         } else {
             $this->expectException(\Exception::class);
         }
@@ -87,7 +87,7 @@ class WhoisLocatorExceptionTest extends TestCase
         $this->assertTrue("whois.verisign-grs.com" === $results);
 
         if (version_compare(phpversion(), "7.0", ">=")) {
-            $this->expectException(\TypeError::class);
+            $this->expectException(MissingArgException::class);
         } else {
             $this->expectException(\Exception::class);
         }
