@@ -92,6 +92,9 @@ class Locator
         $tldInfo = $this->tldCollection->filter(function ($item, $key) use ($domain) {
             return preg_match('/'.$key.'/', $domain);
         });
+        if (empty($tldInfo->all())) {
+            throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");
+        }
         $this->lastMatch = $tldInfo->all();
         return $this;
     }
@@ -108,7 +111,7 @@ class Locator
             $this->findWhoisServer($domain);
         }
         $server = current($this->lastMatch);
-        if ('UNKNOWN' == strtoupper($server) || empty($server)) {
+        if ('UNKNOWN' == strtoupper($server)) {
             throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");
         }
         return $server;
