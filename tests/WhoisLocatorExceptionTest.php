@@ -23,28 +23,9 @@ class WhoisLocatorExceptionTest extends TestCase
     * any typo before you even use this library in a real project.
     *
     */
-    public function test_find_server_then_get_whois_server_then_empty()
-    {
-        $var = new Locator;
-        $results = $var->findWhoisServer("com")->getWhoisServer();
-        $this->assertTrue(is_string($results) && !empty($results));
-        $this->assertTrue("whois.verisign-grs.com" === $results);
-
-        $this->expectException(MissingArgException::class);
-
-        $results = $var->findWhoisServer();
-        unset($var, $results);
-    }
-
-    /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
     public function test_blank_string_throws_exception()
     {
+
         $this->expectException(MissingArgException::class);
 
         $var = new Locator;
@@ -59,8 +40,30 @@ class WhoisLocatorExceptionTest extends TestCase
     * any typo before you even use this library in a real project.
     *
     */
+    public function test_find_server_then_get_whois_server_then_empty()
+    {
+
+        $var = new Locator;
+        $results = $var->findWhoisServer("com")->getWhoisServer();
+        $this->assertTrue(is_string($results) && !empty($results));
+        $this->assertTrue("whois.verisign-grs.com" === $results);
+
+        $this->expectException(MissingArgException::class);
+
+        $results = $var->findWhoisServer('');
+        unset($var, $results);
+    }
+
+    /**
+    * Just check if the YourClass has no syntax error
+    *
+    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
+    * any typo before you even use this library in a real project.
+    *
+    */
     public function test_null_string_throws_exception()
     {
+
         if (version_compare(phpversion(), "7.0", ">=")) {
             $this->expectException(\TypeError::class);
         } else {
@@ -68,6 +71,31 @@ class WhoisLocatorExceptionTest extends TestCase
         }
 
         $var = new Locator;
+        $results = $var->findWhoisServer(null);
+        unset($var, $results);
+    }
+
+    /**
+    * Just check if the YourClass has no syntax error
+    *
+    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
+    * any typo before you even use this library in a real project.
+    *
+    */
+    public function test_find_server_then_get_whois_server_then_null()
+    {
+
+        $var = new Locator;
+        $results = $var->findWhoisServer("com")->getWhoisServer();
+        $this->assertTrue(is_string($results) && !empty($results));
+        $this->assertTrue("whois.verisign-grs.com" === $results);
+
+        if (version_compare(phpversion(), "7.0", ">=")) {
+            $this->expectException(\TypeError::class);
+        } else {
+            $this->expectException(\Exception::class);
+        }
+
         $results = $var->findWhoisServer(null);
         unset($var, $results);
     }
