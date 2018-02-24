@@ -3,9 +3,9 @@ namespace MallardDuck\Whois;
 
 use TrueBV\Punycode;
 use League\Uri\Components\Host;
-use League\Uri\Components\Exception;
 use Hoa\Socket\Client as SocketClient;
 use MallardDuck\Whois\WhoisServerList\Locator;
+use MallardDuck\Whois\Exceptions\MissingArgException;
 
 /**
  * The Whois Client Class.
@@ -63,22 +63,21 @@ class AbstractClient
      */
     protected function parseWhoisDomain($domain)
     {
+        if (empty($domain)) {
+            throw new MissingArgException("Must provide a domain name when using lookup method.");
+        }
         $this->inputDomain = $domain;
 
         // Check domain encoding
         $encoding = mb_detect_encoding($domain);
 
         // Attempt to parse the domains Host component and get the registrable parts.
-        try {
-            $host = new Host($domain);
-            // Get the method by which is supported to maintain PHP 7 and 5.6 compatibility.
-            $method = (method_exists($host, 'getRegistrableDomain')) ? 'getRegistrableDomain' : 'getRegisterableDomain';
-            $processedDomain = $host->$method();
-            // Check how the host component was parsed
-            if (strlen($processedDomain) === 0 && strlen($host) >= 0) {
-                $processedDomain = $domain;
-            }
-        } catch (Exception $e) {
+        $host = new Host($domain);
+        // Get the method by which is supported to maintain PHP 7 and 5.6 compatibility.
+        $method = (method_exists($host, 'getRegistrableDomain')) ? 'getRegistrableDomain' : 'getRegisterableDomain';
+        $processedDomain = $host->$method();
+        // Check how the host component was parsed
+        if (strlen($processedDomain) === 0 && strlen($domain) >= 0) {
             $processedDomain = $domain;
         }
 
@@ -90,6 +89,15 @@ class AbstractClient
         return $this;
     }
 
+    /**
+     * A unicode safe method for making whois requests.
+     *
+     * The main difference with this method is the benefit of
+     *
+     * @param  string $domain      The domain or IP being looked up.
+     * @param  string $whoisServer The whois server being queried.
+     * @return string              The raw results of the query response.
+     */
     public function makeWhoisRequest($domain, $whoisServer)
     {
         $this->parseWhoisDomain($domain);
@@ -97,15 +105,24 @@ class AbstractClient
         return $this->makeWhoisRawRequest($this->parsedDomain, $whoisServer);
     }
 
+    /**
+     * A function for making a raw Whois request.
+     * @param  string $domain      The domain or IP being looked up.
+     * @param  string $whoisServer The whois server being queried.
+     * @return string              The raw results of the query response.
+     */
     public function makeWhoisRawRequest($domain, $whoisServer)
     {
-        // Form a socket connection to the whois server.
+        // Form a tcp socket connection to the whois server.
         $client = new SocketClient('tcp://' . $whoisServer . ':43', 10);
         $client->connect();
         // Send the domain name requested for whois lookup.
         $client->writeString($domain . $this->clrf);
-        // Read and return the full output of the whois lookup.
+        // Read the full output of the whois lookup.
         $response = $client->readAll();
+        // Disconnect the connections to prevent network/performance issues.
+        // Yes, it's necessary. Without disconnecting I discovered errores when
+        // I began adding tests to the library.
         $client->disconnect();
 
         return $response;
