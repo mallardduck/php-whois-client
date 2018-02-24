@@ -66,7 +66,7 @@ class AbstractClient
         $this->inputDomain = $domain;
 
         // Check domain encoding
-        $encoding = mb_detect_encoding( $domain );
+        $encoding = mb_detect_encoding($domain);
 
         // Attempt to parse the domains Host component and get the registrable parts.
         try {
@@ -75,7 +75,7 @@ class AbstractClient
             $method = (method_exists($host, 'getRegistrableDomain')) ? 'getRegistrableDomain' : 'getRegisterableDomain';
             $processedDomain = $host->$method();
             // Check how the host component was parsed
-            if ( strlen($processedDomain) === 0 && strlen($host) >= 0) {
+            if (strlen($processedDomain) === 0 && strlen($host) >= 0) {
                 $processedDomain = $domain;
             }
         } catch (Exception $e) {
