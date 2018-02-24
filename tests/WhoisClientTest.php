@@ -45,4 +45,21 @@ class WhoisClientTest extends TestCase
         $var->lookup();
         unset($var);
     }
+
+    /**
+    * Just check if the YourClass has no syntax error
+    *
+    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
+    * any typo before you even use this library in a real project.
+    *
+    */
+    public function test_client_lookup_google()
+    {
+        $var = new Client;
+        $results = $var->lookup("google.com");
+        $this->assertTrue(!empty($results));
+        $this->assertTrue(is_string($results));
+        $this->assertTrue(1 <= count(explode("\r\n", $results)));
+        unset($var, $results);
+    }
 }
