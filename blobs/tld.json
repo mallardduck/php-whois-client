@@ -1227,6 +1227,5 @@
     "\\.zip$":"whois.nic.google",
     "\\.zm$":"whois.nic.zm",
     "\\.zone$":"whois.donuts.co",
-    "\\.zuerich$":"whois.ksregistry.net",
-    "^[a-zA-Z][a-zA-Z\\.]+$":"whois.iana.org"
+    "\\.zuerich$":"whois.ksregistry.net"
 }
