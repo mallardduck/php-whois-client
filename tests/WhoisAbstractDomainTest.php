@@ -3,7 +3,6 @@ namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\AbstractClient;
 use MallardDuck\Whois\Exceptions\MissingArgException;
-use League\Uri\Components\Exception as LeagueException;
 
 /**
 *  Corresponding Class to test the Locator class
@@ -89,7 +88,7 @@ class WhoisAbstractDomainTest extends BaseTest
     public function invalidDomainsProvider()
     {
         return [
-            ['президент.рф', LeagueException::class],
+            ['президент.рф', $this->getUriException()],
             ['', MissingArgException::class],
         ];
     }

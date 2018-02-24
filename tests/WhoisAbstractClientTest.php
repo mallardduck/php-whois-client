@@ -33,7 +33,7 @@ class WhoisAbstractClientTest extends BaseTest
         $client = new AbstractClient;
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
-        $this->expectException(LeagueException::class);
+        $this->expectException($this->getUriException());
         $foo->invokeArgs($client, ["президент.рф"]);
         unset($client, $foo);
     }
