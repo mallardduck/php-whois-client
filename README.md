@@ -1,10 +1,11 @@
 Whois Client PHP Library
 =========================
 [![Travis Build Status](https://travis-ci.org/mallardduck/whois-client.svg?branch=master)](https://travis-ci.org/mallardduck/whois-client)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mallardduck/whois-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
-[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/filp/whoops.svg?style=flat-square)]()
-[![Scrutinizer Build](https://img.shields.io/scrutinizer/build/g/mallardduck/whois-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/mallardduck/whois-client/)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mallardduck/whois-client.svg)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mallardduck/whois-client/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/mallardduck/whois-client/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+[![Latest Stable Version](https://poser.pugx.org/mallardduck/whois-client/v/stable)](https://packagist.org/packages/mallardduck/whois-client)
+[![License](https://poser.pugx.org/mallardduck/whois-client/license)](https://packagist.org/packages/mallardduck/whois-client)
 
 If you are working with Whois in PHP this library provides a very basic client.
 
