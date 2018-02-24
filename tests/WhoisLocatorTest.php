@@ -12,7 +12,7 @@ use LucidInternets\Whois\WhoisServerList\Locator;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhodisTest extends TestCase
+class WhoisLocatorTest extends TestCase
 {
 
   /**
