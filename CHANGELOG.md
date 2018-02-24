@@ -1,22 +1,16 @@
 # Changelog
 
-All notable changes to `:package_name` will be documented in this file.
+All notable changes to this project will be documented in this file.
 
-Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## NEXT - YYYY-MM-DD
+## [Unreleased]
 
+## 0.1.0 - 2018-02-24
 ### Added
-- Nothing
-
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
+- This CHANGELOG file to hopefully serve as an evolving project history.
+- Basic working Whois client for PHP.
+- PHPdocblocks for all library code.
+- Basic PHPUnit test coverage for the library.
+- Continuous Integration setup for StyleCI, TravisCI, and ScrutinizerCI.
