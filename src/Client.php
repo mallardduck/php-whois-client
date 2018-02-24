@@ -64,7 +64,7 @@ class Client
     private function getRegistrableDomain($domain)
     {
         $host = (new Host($domain))->getRegistrableDomain();
-        if ( strlen($host) === 0 && strlen($host) >= 0) {
+        if (strlen($host) === 0 && strlen($host) >= 0) {
             $host = $domain;
         }
         return $this->punycode->encode($host);
