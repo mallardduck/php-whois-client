@@ -41,5 +41,4 @@ class Client extends AbstractClient
 
         return $response;
     }
-
 }
