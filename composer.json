@@ -3,12 +3,12 @@
     "type": "library",
     "description": "A very basic Whois client for PHP. The library is limited in function since it's intended to be a low-level client that handles only request and raw output.",
     "keywords": [
-        "template",
-        "composer",
-        "package"
+        "whois",
+        "whois-client",
+        "lookup"
     ],
     "homepage": "https://github.com/mallardduck/whois-client",
-    "license": "DBAD",
+    "license": "GPLv3",
     "authors": [
         {
             "name": "Dan Pock",

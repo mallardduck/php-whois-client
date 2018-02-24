@@ -26,4 +26,4 @@ composer require mallardduck/whois-client:dev-master
 
 License
 =====
-Whois Client PHP Library is open source software licensed under the [DBAD license](LICENSE).
+Whois Client PHP Library is open source software licensed under the [GPLv3 license](LICENSE).
