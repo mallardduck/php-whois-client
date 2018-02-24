@@ -2,7 +2,7 @@
 namespace LucidInternets\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
-use LucidInternets\Whois\TldServerList\TldList;
+use LucidInternets\Whois\WhoisServerList\TldList;
 
 /**
 *  Corresponding Class to test the TldList class
@@ -53,6 +53,7 @@ class WhodisTest extends TestCase
     public function test_find_whois_server()
     {
         $var = new TldList;
+        $var->findWhoisServer("com");
         $match = $var->getLastMatch();
         $this->assertTrue( is_array($match) && !empty($match) && count($match) >= 1 );
         unset($var, $match);

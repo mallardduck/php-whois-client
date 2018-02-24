@@ -1,5 +1,5 @@
 <?php
-namespace LucidInternets\Whois\TldServerList;
+namespace LucidInternets\Whois\WhoisServerList;
 
 /**
  * inline tags demonstration

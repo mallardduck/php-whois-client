@@ -2,7 +2,7 @@
 namespace LucidInternets\Whois;
 
 use Hoa\Socket\Client as SocketClient;
-use LucidInternets\Whois\TldServerList\TldList;
+use LucidInternets\Whois\WhoisServerList\TldList;
 
 class Client
 {
