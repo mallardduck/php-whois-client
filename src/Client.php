@@ -7,12 +7,12 @@ use LucidInternets\Whois\WhoisServerList\Locator;
 class Client
 {
 
-    private $tldList;
+    private $tldLocator;
     private $clrf = "\r\n";
 
     public function __construct()
     {
-            $this->tldList = new Locator;
+            $this->tldLocator = new Locator;
     }
 
     public function lookup($domain = '')
@@ -20,11 +20,15 @@ class Client
         if (empty($domain)) {
             throw new \Exception("Must enter domain name.");
         }
-        $whoisServer = $this->tldList->getWhoisServer($domain);
+        // Get the domains whois server.
+        $whoisServer = $this->tldLocator->getWhoisServer($domain);
+        // Form a socket connection to the whois server.
         $client = new SocketClient('tcp://' . $whoisServer . ':43');
         $client->connect();
+        // Send the domain name requested for whois lookup.
         $client->writeLine($domain . $this->clrf);
 
+        // Read and return the full output of the whois lookup.
         return $client->readAll();
     }
 }
