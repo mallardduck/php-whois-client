@@ -76,7 +76,7 @@ class Locator
      * @param string $domain Either an ID or a username
      * @return self Returns the same instance for fluent usage.
      */
-    public function findWhoisServer(string $domain)
+    public function findWhoisServer($domain)
     {
         if (empty($domain) || is_null($domain)) {
             throw new MissingArgException("Must provide domain argument.");
