@@ -2,6 +2,7 @@
 namespace MallardDuck\Whois\WhoisServerList;
 
 use MallardDuck\Whois\Exceptions\MissingArgException;
+use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
 /**
  * Whois Server List Locator Class
@@ -106,7 +107,10 @@ class Locator
         if (!empty($domain) || empty($this->lastMatch)) {
             $this->findWhoisServer($domain);
         }
-
-        return current($this->lastMatch);
+        $server = current($this->lastMatch);
+        if ('UNKNOWN' == strtoupper($server)) {
+            throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");
+        }
+        return $server;
     }
 }
