@@ -53,12 +53,6 @@ class WhoisLocatorTest extends TestCase
     public function test_find_whois_server()
     {
         $var = new Locator;
-        $var->findWhoisServer("com");
-        $match = $var->getLastMatch();
-        $this->assertTrue(is_array($match) && !empty($match) && count($match) >= 1);
-        unset($var, $match);
-
-        $var = new Locator;
         $var->findWhoisServer("google.com");
         $match = $var->getLastMatch();
         $this->assertTrue(is_array($match) && !empty($match) && count($match) >= 1);
@@ -81,7 +75,7 @@ class WhoisLocatorTest extends TestCase
     public function test_find_server_then_get_whois_server()
     {
         $var = new Locator;
-        $results = $var->findWhoisServer("com")->getWhoisServer();
+        $results = $var->findWhoisServer("com.com")->getWhoisServer();
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.verisign-grs.com" === $results);
         unset($var, $results);
@@ -109,7 +103,7 @@ class WhoisLocatorTest extends TestCase
     public function test_get_whois_server_direct()
     {
         $var = new Locator;
-        $results = $var->getWhoisServer("com");
+        $results = $var->getWhoisServer("com.com");
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.verisign-grs.com" === $results);
         unset($var, $results);

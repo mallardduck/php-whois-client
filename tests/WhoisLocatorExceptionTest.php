@@ -43,7 +43,7 @@ class WhoisLocatorExceptionTest extends TestCase
     public function test_find_server_then_get_whois_server_then_empty()
     {
         $var = new Locator;
-        $results = $var->findWhoisServer("com")->getWhoisServer();
+        $results = $var->findWhoisServer("com.com")->getWhoisServer();
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.verisign-grs.com" === $results);
 
@@ -83,7 +83,7 @@ class WhoisLocatorExceptionTest extends TestCase
     public function test_find_server_then_get_whois_server_then_null()
     {
         $var = new Locator;
-        $results = $var->findWhoisServer("com")->getWhoisServer();
+        $results = $var->findWhoisServer("com.com")->getWhoisServer();
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.verisign-grs.com" === $results);
 

@@ -45,10 +45,10 @@ class WhoisDomainTest extends TestCase
     public function valid_domains_provider()
     {
         return [
-            ['danpock.xyz'],
+            ['danpock.google'],
             ['domain.wedding'],
-            ['sub.domain.space'],
-            ['www.sub.domain.space'],
+            ['sub.domain.club'],
+            ['www.sub.domain.me'],
             ['domain.CO.uk'],
             ['www.domain.co.uk'],
             ['sub.www.domain.co.uk'],
