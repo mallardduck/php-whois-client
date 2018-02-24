@@ -1,4 +1,29 @@
 # language: php
+build:
+    nodes:
+        tests: true
+        analysis:
+            tests:
+                override:
+                    -
+                        command: phpcs-run
+                        use_website_config: true
+
+checks:
+    php:
+        avoid_closing_tag: true
+        assignment_of_null_return: true
+        avoid_duplicate_types: true
+        code_rating: true
+        comparison_always_same_result: true
+        deadlock_detection_in_loops: false
+        deprecated_code_usage: true
+        duplication: true
+        encourage_shallow_comparison: true
+        fix_doc_comments: true
+        no_debug_code: true
+        no_short_open_tag: true
+        simplify_boolean_return: true
 filter:
     excluded_paths:
         - "tests/"
@@ -7,32 +32,6 @@ filter:
         - "vendor/"
         # Everything in a root level "lib" directory will be excluded from analysis
         # but treated as a dependency
-checks:
-    php:
-        remove_extra_empty_lines: true
-        remove_php_closing_tag: true
-        remove_trailing_whitespace: true
-        fix_use_statements:
-            remove_unused: true
-            preserve_multiple: false
-            preserve_blanklines: true
-            order_alphabetically: true
-        fix_php_opening_tag: true
-        fix_linefeed: true
-        fix_line_ending: true
-        fix_identation_4spaces: true
-        fix_doc_comments: true
-        avoid_closing_tag: true
-        assignment_of_null_return: true
-        avoid_duplicate_types: true
-        code_rating: true
-        comparison_always_same_result: true
-        deprecated_code_usage: true
-        duplication: true
-        encourage_shallow_comparison: true
-        no_debug_code: true
-        no_short_open_tag: true
-        simplify_boolean_return: true
 
 tools:
     external_code_coverage:
