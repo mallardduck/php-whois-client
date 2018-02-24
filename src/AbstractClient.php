@@ -59,7 +59,7 @@ class AbstractClient
     /**
      * A unicode safe method for making whois requests.
      *
-     * The main difference with this method is the benefit of
+     * The main difference with this method is the benefit of punycode domains.
      *
      * @param  string $domain      The domain or IP being looked up.
      * @param  string $whoisServer The whois server being queried.
@@ -73,9 +73,9 @@ class AbstractClient
     }
 
     /**
-     * [Short description of the method]
+     * Uses the League Uri Hosts component to get the search able hostname in PHP 5.6 and 7.
      *
-     * @param string $domain          [Description]
+     * @param string $domain          The domain or IP being looked up.
      *
      * @return string
      */
