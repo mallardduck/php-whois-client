@@ -22,8 +22,27 @@ Installation
 
 Installation
 ============
+The best installation method is to simply use composer.
 
-composer require mallardduck/whois-client:dev-master
+#### Stable version
+
+`composer require mallardduck/whois-client`
+
+#### Latest development version
+
+`composer require "mallardduck/whois-client":"dev-master"`
+
+Example usage
+=====
+
+```php
+require 'vendor/autoload.php';
+
+use MallardDuck\Whois\Client;
+
+$client = new Client;
+$results = $client->lookup('google.com');
+```
 
 License
 =====
