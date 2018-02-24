@@ -1,15 +1,29 @@
-Composer Library Template
+Whois Client PHP Library
 =========================
+[![Travis Build Status](https://travis-ci.org/mallardduck/whois-client.svg?branch=master)](https://travis-ci.org/mallardduck/whois-client)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mallardduck/whois-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
+[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/filp/whoops.svg?style=flat-square)]()
+[![Scrutinizer Build](https://img.shields.io/scrutinizer/build/g/mallardduck/whois-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/mallardduck/whois-client/)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/mallardduck/whois-client/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
-If you are trying to create a new PHP Composer library, whether it will be going to submitted to packagist.org or just in your Github account, this template of files will surely help you make the process a lot easier and faster.
+If you are working with Whois in PHP this library provides a very basic client.
 
-Features
---------
+Rather than focus on the user friendly output this library focuses on the raw Whois protocol. The library is limited in function since it's intended to be a low-level client that handles only request and raw output. Basically the package supports the look up of a TLDs primary Whois server and then will do a query of the domain provided.
 
-* PSR-4 autoloading compliant structure
-* Unit-Testing with PHPUnit
-* Comprehensive Guides and tutorial
-* Easy to use to any framework or even a plain php file
+Requirements
+============
+* PHP >= 5.6
 
+Installation
+============
+* Pure PHP based Whois client.
+* Simple API for getting raw Whois results in PHP.
 
-I encourage that you put more information on this readme file instead of leaving it as is. See [How to make a README file](http://www.darwinbiler.com/designing-and-making-the-readme-file-for-your-github-repository/) for more info.
+Installation
+============
+
+composer require mallardduck/whois-client:dev-master
+
+License
+=====
+Whois Client PHP Library is open source software licensed under the [DBAD license](LICENSE).
