@@ -6,13 +6,12 @@ use MallardDuck\Whois\WhoisServerList\Locator;
 
 class Client
 {
-
     private $tldLocator;
     private $clrf = "\r\n";
 
     public function __construct()
     {
-            $this->tldLocator = new Locator;
+        $this->tldLocator = new Locator;
     }
 
     public function lookup($domain = '')
