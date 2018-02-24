@@ -53,7 +53,7 @@ class Locator
      *
      * @return bool The class status of loading the list and decoding the json.
      */
-    public function getLoadStatus() : bool
+    public function getLoadStatus()
     {
         return $this->loadStatus;
     }
@@ -63,7 +63,7 @@ class Locator
      *
      * @return array The results of the last looked up domain.
      */
-    public function getLastMatch() : array
+    public function getLastMatch()
     {
         return $this->lastMatch;
     }
