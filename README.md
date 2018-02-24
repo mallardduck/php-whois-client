@@ -15,10 +15,11 @@ Requirements
 ============
 * PHP >= 5.6
 
-Installation
+Features
 ============
 * Pure PHP based Whois client.
 * Simple API for getting raw Whois results in PHP.
+* Unicode IDN and punycode support.
 
 Installation
 ============
