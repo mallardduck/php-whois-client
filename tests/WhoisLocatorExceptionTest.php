@@ -18,13 +18,9 @@ class WhoisLocatorExceptionTest extends TestCase
 {
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_blank_string_throws_exception()
+     * Test function comment stub.
+     */
+    public function testBlankStringThrowsException()
     {
         $this->expectException(MissingArgException::class);
 
@@ -34,13 +30,9 @@ class WhoisLocatorExceptionTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_find_server_then_get_whois_server_then_empty()
+     * Test function comment stub.
+     */
+    public function testFindServerThenGetWhoisServerThenEmpty()
     {
         $var = new Locator;
         $results = $var->findWhoisServer("com.com")->getWhoisServer();
@@ -54,13 +46,9 @@ class WhoisLocatorExceptionTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_null_string_throws_exception()
+     * Test function comment stub.
+     */
+    public function testNullStringThrowsException()
     {
         if (version_compare(phpversion(), "7.0", ">=")) {
             $this->expectException(MissingArgException::class);
@@ -74,13 +62,9 @@ class WhoisLocatorExceptionTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_find_server_then_get_whois_server_then_null()
+     * Test function comment stub.
+     */
+    public function testFindServerThenGetWhoisServerThenNull()
     {
         $var = new Locator;
         $results = $var->findWhoisServer("com.com")->getWhoisServer();
@@ -98,13 +82,9 @@ class WhoisLocatorExceptionTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_get_whois_server_direct()
+     * Test function comment stub.
+     */
+    public function testGetWhoisServerDirect()
     {
         $var = new Locator;
         $results = $var->getWhoisServer("bing.com");
@@ -120,13 +100,9 @@ class WhoisLocatorExceptionTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_get_whois_server_direct_no_exception()
+     * Test function comment stub.
+     */
+    public function testGetWhoisServerDirectNoException()
     {
         $var = new Locator;
         $results = $var->getWhoisServer("bing.com");
@@ -140,7 +116,10 @@ class WhoisLocatorExceptionTest extends TestCase
         unset($var, $results);
     }
 
-    public function test_get_whois_server_direct_unicode_exception()
+    /**
+     * Test function comment stub.
+     */
+    public function testGetWhoisServerDirectUnicodeException()
     {
         $var = new Locator;
         $this->expectException(UnknownWhoisException::class);

@@ -15,14 +15,10 @@ use MallardDuck\Whois\WhoisServerList\Locator;
 class WhoisLocatorTest extends TestCase
 {
 
-  /**
-  * Just check if the YourClass has no syntax error
-  *
-  * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-  * any typo before you even use this library in a real project.
-  *
-  */
-    public function test_is_there_any_syntax_error()
+    /**
+     * Basic test to check client syntax.
+     */
+    public function testIsThereAnySyntaxError()
     {
         $var = new Locator;
         $this->assertTrue(is_object($var));
@@ -30,13 +26,9 @@ class WhoisLocatorTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_loaded_list_file()
+     * Test function comment stub.
+     */
+    public function testLoadedListFile()
     {
         $var = new Locator;
         $this->assertTrue(is_object($var) && $var->getLoadStatus());
@@ -44,13 +36,9 @@ class WhoisLocatorTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_find_whois_server()
+     * Test function comment stub.
+     */
+    public function testFindWhoisServer()
     {
         $var = new Locator;
         $var->findWhoisServer("google.com");
@@ -66,13 +54,9 @@ class WhoisLocatorTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_find_server_then_get_whois_server()
+     * Test function comment stub.
+     */
+    public function testFindServerThenGetWhoisServer()
     {
         $var = new Locator;
         $results = $var->findWhoisServer("com.com")->getWhoisServer();
@@ -94,13 +78,9 @@ class WhoisLocatorTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_get_whois_server_direct()
+     * Test function comment stub.
+     */
+    public function testGetWhoisServerDirect()
     {
         $var = new Locator;
         $results = $var->getWhoisServer("com.com");

@@ -15,34 +15,43 @@ use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 */
 class WhoisDomainTest extends TestCase
 {
+    /**
+     * The main Whois Client
+     * @var Client
+     */
     protected $client;
 
+    /**
+     * The PHPUnit Setup method to build our client.
+     */
     protected function setUp()
     {
         $this->client = new Client();
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
-    */
-    public function test_is_there_any_syntax_error()
+     * Basic test to check client syntax.
+     */
+    public function testIsThereAnySyntaxError()
     {
         $this->assertTrue(is_object($this->client));
     }
 
     /**
-     * @dataProvider valid_domains_provider
+     * A very basic test to check that the return result is a string.
+     * @param string $domain Test domains!
+     * @dataProvider validDomainsProvider
      */
-    public function test_valid_domains($domain)
+    public function testValidDomains($domain)
     {
         $response = $this->client->lookup($domain);
         $this->assertTrue(1 <= strlen($response));
     }
-    public function valid_domains_provider()
+
+    /**
+     * The data provider for valid domains test.
+     */
+    public function validDomainsProvider()
     {
         return [
             ['danpock.google'],
@@ -59,7 +68,9 @@ class WhoisDomainTest extends TestCase
     }
 
     /**
-     * @dataProvider invalid_domains_provider
+     * A very basic test to check what invalid domains return unknown whois exception.
+     * @param string $domain Test domains!
+     * @dataProvider invalidDomainsProvider
      */
     public function testInvalidDomain($domain)
     {
@@ -67,7 +78,10 @@ class WhoisDomainTest extends TestCase
         $response = $this->client->lookup($domain);
     }
 
-    public function invalid_domains_provider()
+    /**
+    * The data provider for invalid domains test.
+     */
+    public function invalidDomainsProvider()
     {
         return [
             ['domain'],

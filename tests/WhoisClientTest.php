@@ -16,14 +16,10 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
 class WhoisClientTest extends TestCase
 {
 
-  /**
-  * Just check if the YourClass has no syntax error
-  *
-  * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-  * any typo before you even use this library in a real project.
-  *
-  */
-    public function test_is_there_any_syntax_error()
+    /**
+     * Basic test to check client syntax.
+     */
+    public function testIsThereAnySyntaxError()
     {
         $var = new Client;
         $this->assertTrue(is_object($var));
@@ -31,13 +27,9 @@ class WhoisClientTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
+    * Make sure we throw an exception if no domain is given.
     */
-    public function test_empty_lookup_throws_exception()
+    public function testEmptyLookupThrowsException()
     {
         $this->expectException(MissingArgException::class);
         $var = new Client;
@@ -47,13 +39,9 @@ class WhoisClientTest extends TestCase
     }
 
     /**
-    * Just check if the YourClass has no syntax error
-    *
-    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
-    * any typo before you even use this library in a real project.
-    *
+    * Do a basic lookup for google.com.
     */
-    public function test_client_lookup_google()
+    public function testClientLookupGoogle()
     {
         $var = new Client;
         $results = $var->lookup("google.com");
