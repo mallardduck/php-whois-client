@@ -1,5 +1,5 @@
 <?php
-namespace LucidInternets\Whodis\TldServerList;
+namespace LucidInternets\Whois\TldServerList;
 
 /**
 *  A sample class
@@ -12,21 +12,41 @@ namespace LucidInternets\Whodis\TldServerList;
 class TldList
 {
 
-   /**  @var string $m_SampleProperty define here what this variable is for, do this for every instance variable */
-    private $m_SampleProperty = '';
+    /**  @var string $tldListPath The path where the tld json file exists. */
+    private $tldListPath =  __DIR__ . '/../../blobs/tld.json';
 
-  /**
-  * Sample method
-  *
-  * Always create a corresponding docblock for each method, describing what it is for,
-  * this helps the phpdocumentator to properly generator the documentation
-  *
-  * @param string $param1 A string containing the parameter, do this for each parameter to the function, make sure to make it descriptive
-  *
-  * @return string
-  */
-    public function method1($param1)
+    /**  @var string $tldCollection A collection of the TLDs and whois server list. */
+    private $tldCollection;
+
+    /**  @var string $tldCollection A collection of the TLDs and whois server list. */
+    private $lastMatch;
+
+    public function __construct()
     {
-            return "Hello World";
+        $file_data = file_get_contents($this->tldListPath);
+        $tldData = json_decode($file_data);
+        $this->tldCollection = collect( (array) $tldData );
+    }
+
+    public function findWhoisServer($domain = '')
+    {
+        if (empty($domain)) {
+            throw new \Exception("Must enter domain name.");
+        }
+
+        $tldInfo = $this->tldCollection->filter(function ($item, $key) use ($domain) {
+            return preg_match('/'.$key.'/', $domain);
+        });
+        $this->lastMatch = $tldInfo->all();
+        return $this;
+    }
+
+    public function getWhoisServer($domain = '')
+    {
+        if (!empty($domain)) {
+            $this->findWhoisServer($domain);
+        }
+
+        return current($this->lastMatch);
     }
 }

@@ -2,7 +2,7 @@
 namespace LucidInternets\Whodis\Test;
 
 use PHPUnit\Framework\TestCase;
-use LucidInternets\Whodis\Whodis;
+use LucidInternets\Whodis\TldServerList\TldList;
 
 /**
 *  Corresponding Class to test YourClass class
@@ -24,7 +24,7 @@ class WhodisTest extends TestCase
   */
     public function testIsThereAnySyntaxError()
     {
-        $var = new Whodis;
+        $var = new TldList;
         $this->assertTrue(is_object($var));
         unset($var);
     }
@@ -38,8 +38,8 @@ class WhodisTest extends TestCase
   */
     public function testMethod1()
     {
-        $var = new Whodis;
-        $this->assertTrue($var->method1("hey") == 'Hello World');
+        $var = new TldList;
+        $this->assertTrue($var->findWhoisServer("google.com") == 'Hello World');
         unset($var);
     }
 }
