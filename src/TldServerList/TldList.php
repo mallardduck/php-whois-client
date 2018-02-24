@@ -2,32 +2,78 @@
 namespace LucidInternets\Whois\TldServerList;
 
 /**
-*  A sample class
-*
-*  Use this section to define what this class is doing, the PHPDocumentator will use this
-*  to automatically generate an API documentation using this information.
-*
-*  @author yourname
-*/
+ * inline tags demonstration
+ *
+ * This class loads a TLD whois list and allows for easy look up.
+ *
+ * @author mallardduck <dpock32509@gmail.com>
+ * @copyright lucidinternets.com 2018
+ * @version 1.0.0
+ */
 class TldList
 {
 
-    /**  @var string $tldListPath The path where the tld json file exists. */
+     /**
+      * The status of loading the whois server list.
+      *
+      * Potential values are 'good', 'fair', 'poor' and 'unknown'.
+      *
+      * @var bool
+      * @access private
+      */
+    private $loadStatus = false;
+
+    /**
+     * @var string $tldListPath The path where the tld json file exists.
+     */
     private $tldListPath =  __DIR__ . '/../../blobs/tld.json';
 
-    /**  @var string $tldCollection A collection of the TLDs and whois server list. */
+    /**
+     * @var \Tightenco\Collect\Support\Collection $tldCollection A collection of the TLDs and whois server list.
+     */
     private $tldCollection;
 
-    /**  @var string $tldCollection A collection of the TLDs and whois server list. */
+    /**
+     * @var array $lastMatch The results of the last looked up domain.
+     */
     private $lastMatch;
 
     public function __construct()
     {
         $file_data = file_get_contents($this->tldListPath);
         $tldData = json_decode($file_data);
+        if ($tldData !== null && json_last_error() === JSON_ERROR_NONE) {
+            $this->loadStatus = true;
+        }
         $this->tldCollection = collect( (array) $tldData );
     }
 
+    /**
+     * Returns the TLD list load status.
+     *
+     * @return bool The class status of loading the list and decoding the json.
+     */
+    public function getLoadStatus() : bool
+    {
+        return $this->loadStatus;
+    }
+
+    /**
+     * Gets and returns the last match looked up.
+     *
+     * @return array The results of the last looked up domain.
+     */
+    public function getLastMatch() : array
+    {
+        return $this->lastMatch;
+    }
+
+    /**
+     * Finds and returns the last match looked up.
+     *
+     * @param int|string $user Either an ID or a username
+     * @return self Returns the same instance for fluent usage.
+     */
     public function findWhoisServer($domain = '')
     {
         if (empty($domain)) {
