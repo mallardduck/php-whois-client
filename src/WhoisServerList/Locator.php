@@ -85,7 +85,7 @@ class Locator
      */
     public function findWhoisServer($domain)
     {
-        if (empty($domain) || is_null($domain)) {
+        if (empty($domain)) {
             throw new MissingArgException("Must provide domain argument.");
         }
 

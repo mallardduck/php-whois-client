@@ -92,7 +92,7 @@ class AbstractClient
     /**
      * Takes the user provided domain and parses then encodes just the registerable domain.
      * @param  string $domain The user provided domain.
-     * @return string         Just the registrable part of a domain encoded for IDNA.
+     * @return AbstractClient Returns the current client instance.
      */
     protected function parseWhoisDomain($domain)
     {

@@ -15,13 +15,13 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
 class WhoisAbstractDomainTest extends BaseTest
 {
     /**
-     * [protected description]
-     * @var [type]
+     * The abstract client used for testing.
+     * @var AbstractClient
      */
     protected $client;
 
     /**
-     * Test function comment stub.
+     * The PHPUnit Setup method to build our client.
      */
     protected function setUp()
     {
