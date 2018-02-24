@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="LucidInternets Test Suite">
+        <testsuite name="MallardDuck Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

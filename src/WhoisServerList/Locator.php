@@ -1,5 +1,5 @@
 <?php
-namespace LucidInternets\Whois\WhoisServerList;
+namespace MallardDuck\Whois\WhoisServerList;
 
 /**
  * Whois Server List Locator Class

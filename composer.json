@@ -1,5 +1,5 @@
 {
-    "name": "lucidinternets/whois-client",
+    "name": "mallardduck/whois-client",
     "type": "library",
     "description": "A very basic Whois client for PHP. The library is limited in function since it's intended to be a low-level client that handles only request and raw output.",
     "keywords": [
@@ -7,7 +7,7 @@
         "composer",
         "package"
     ],
-    "homepage": "https://github.com/lucidinternets/whois-client",
+    "homepage": "https://github.com/mallardduck/whois-client",
     "license": "MIT",
     "authors": [
         {
@@ -28,12 +28,12 @@
     },
 	"autoload": {
         "psr-4": {
-            "LucidInternets\\Whois\\": "src/"
+            "MallardDuck\\Whois\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "LucidInternets\\Whois\\Test\\": "tests"
+            "MallardDuck\\Whois\\Test\\": "tests"
         }
     },
     "scripts": {

@@ -1,8 +1,8 @@
 <?php
-namespace LucidInternets\Whois\Test;
+namespace MallardDuck\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
-use LucidInternets\Whois\WhoisServerList\Locator;
+use MallardDuck\Whois\WhoisServerList\Locator;
 
 /**
 *  Corresponding Class to test the Locator class

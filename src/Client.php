@@ -1,8 +1,8 @@
 <?php
-namespace LucidInternets\Whois;
+namespace MallardDuck\Whois;
 
 use Hoa\Socket\Client as SocketClient;
-use LucidInternets\Whois\WhoisServerList\Locator;
+use MallardDuck\Whois\WhoisServerList\Locator;
 
 class Client
 {
