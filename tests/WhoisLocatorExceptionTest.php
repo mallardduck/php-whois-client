@@ -4,6 +4,7 @@ namespace MallardDuck\Whois\Test;
 use PHPUnit\Framework\TestCase;
 use MallardDuck\Whois\WhoisServerList\Locator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
+use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
 /**
 *  Corresponding Class to test the Locator class
@@ -136,6 +137,15 @@ class WhoisLocatorExceptionTest extends TestCase
 
         $results = $var->getWhoisServer();
         $this->assertTrue($results === $orgResults);
+        unset($var, $results);
+    }
+
+    public function test_get_whois_server_direct_unicode_exception()
+    {
+        $var = new Locator;
+        $this->expectException(UnknownWhoisException::class);
+
+        $results = $var->getWhoisServer('xn--e1afmkfd.xn--80akhbyknj4f');
         unset($var, $results);
     }
 }
