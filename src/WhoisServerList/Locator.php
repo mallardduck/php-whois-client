@@ -1,6 +1,8 @@
 <?php
 namespace MallardDuck\Whois\WhoisServerList;
 
+use MallardDuck\Whois\Exceptions\MissingArgException;
+
 /**
  * Whois Server List Locator Class
  *
@@ -71,13 +73,13 @@ class Locator
     /**
      * Finds and returns the last match looked up.
      *
-     * @param int|string $user Either an ID or a username
+     * @param string $domain Either an ID or a username
      * @return self Returns the same instance for fluent usage.
      */
-    public function findWhoisServer($domain = '')
+    public function findWhoisServer(string $domain = '')
     {
-        if (empty($domain)) {
-            throw new \Exception("Must enter domain name.");
+        if (empty($domain) || is_null($domain)) {
+            throw new MissingArgException("Must provide domain argument.");
         }
 
         $tldInfo = $this->tldCollection->filter(function ($item, $key) use ($domain) {
@@ -89,7 +91,7 @@ class Locator
 
     public function getWhoisServer($domain = '')
     {
-        if (!empty($domain)) {
+        if (!empty($domain) || empty($this->lastMatch)) {
             $this->findWhoisServer($domain);
         }
 

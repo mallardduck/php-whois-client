@@ -78,7 +78,7 @@ class WhoisLocatorTest extends TestCase
     * any typo before you even use this library in a real project.
     *
     */
-    public function test_get_whois_server()
+    public function test_find_server_then_get_whois_server()
     {
         $var = new Locator;
         $results = $var->findWhoisServer("com")->getWhoisServer();
@@ -94,6 +94,34 @@ class WhoisLocatorTest extends TestCase
 
         $var = new Locator;
         $results = $var->findWhoisServer("danpock.xyz")->getWhoisServer();
+        $this->assertTrue(is_string($results) && !empty($results));
+        $this->assertTrue("whois.nic.xyz" === $results);
+        unset($var, $results);
+    }
+
+    /**
+    * Just check if the YourClass has no syntax error
+    *
+    * This is just a simple check to make sure your library has no syntax error. This helps you troubleshoot
+    * any typo before you even use this library in a real project.
+    *
+    */
+    public function test_get_whois_server_direct()
+    {
+        $var = new Locator;
+        $results = $var->getWhoisServer("com");
+        $this->assertTrue(is_string($results) && !empty($results));
+        $this->assertTrue("whois.verisign-grs.com" === $results);
+        unset($var, $results);
+
+        $var = new Locator;
+        $results = $var->getWhoisServer("google.com");
+        $this->assertTrue(is_string($results) && !empty($results));
+        $this->assertTrue("whois.verisign-grs.com" === $results);
+        unset($var, $results);
+
+        $var = new Locator;
+        $results = $var->getWhoisServer("danpock.xyz");
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.nic.xyz" === $results);
         unset($var, $results);
