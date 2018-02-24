@@ -14,8 +14,6 @@ use League\Uri\Components\Host;
 */
 abstract class BaseTest extends TestCase
 {
-
-
     public function getUriException()
     {
         $host = new Host();
