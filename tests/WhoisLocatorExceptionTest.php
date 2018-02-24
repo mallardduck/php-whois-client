@@ -25,7 +25,6 @@ class WhoisLocatorExceptionTest extends TestCase
     */
     public function test_find_server_then_get_whois_server_then_empty()
     {
-
         $var = new Locator;
         $results = $var->findWhoisServer("com")->getWhoisServer();
         $this->assertTrue(is_string($results) && !empty($results));
@@ -35,7 +34,6 @@ class WhoisLocatorExceptionTest extends TestCase
 
         $results = $var->findWhoisServer();
         unset($var, $results);
-
     }
 
     /**
@@ -47,13 +45,11 @@ class WhoisLocatorExceptionTest extends TestCase
     */
     public function test_blank_string_throws_exception()
     {
-
         $this->expectException(MissingArgException::class);
 
         $var = new Locator;
         $results = $var->findWhoisServer('');
         unset($var, $results);
-
     }
 
     /**
@@ -65,8 +61,7 @@ class WhoisLocatorExceptionTest extends TestCase
     */
     public function test_null_string_throws_exception()
     {
-
-        if ( version_compare(phpversion(), "7.0", ">=") ) {
+        if (version_compare(phpversion(), "7.0", ">=")) {
             $this->expectException(\TypeError::class);
         } else {
             $this->expectException(\Exception::class);
@@ -75,7 +70,6 @@ class WhoisLocatorExceptionTest extends TestCase
         $var = new Locator;
         $results = $var->findWhoisServer(null);
         unset($var, $results);
-
     }
 
     /**
