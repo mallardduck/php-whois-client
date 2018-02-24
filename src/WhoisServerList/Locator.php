@@ -108,7 +108,7 @@ class Locator
             $this->findWhoisServer($domain);
         }
         $server = current($this->lastMatch);
-        if ('UNKNOWN' == strtoupper($server)) {
+        if ('UNKNOWN' == strtoupper($server) || empty($server)) {
             throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");
         }
         return $server;
