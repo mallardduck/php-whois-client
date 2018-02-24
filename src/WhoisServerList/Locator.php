@@ -18,28 +18,34 @@ class Locator
      /**
       * The status of loading the whois server list.
       *
-      * Potential values are 'good', 'fair', 'poor' and 'unknown'.
-      *
       * @var bool
-      * @access private
       */
     private $loadStatus = false;
 
     /**
-     * @var string $tldListPath The path where the tld json file exists.
+     * The path where the tld json file exists.
+     *
+     * @var string
      */
     private $tldListPath =  __DIR__ . '/../../blobs/tld.json';
 
     /**
-     * @var \Tightenco\Collect\Support\Collection $tldCollection A collection of the TLDs and whois server list.
+     * A collection of the TLDs and whois server list.
+     *
+     * @var \Tightenco\Collect\Support\Collection
      */
     private $tldCollection;
 
     /**
-     * @var array $lastMatch The results of the last looked up domain.
+     * The results of the last looked up domain.
+     * 
+     * @var array
      */
     private $lastMatch;
 
+    /**
+     * Build the TLD Whois Server Locator class.
+     */
     public function __construct()
     {
         $file_data = file_get_contents($this->tldListPath);
@@ -89,6 +95,12 @@ class Locator
         return $this;
     }
 
+    /**
+     * Get the Whois server of the domain provided, or previously found domain.
+     *
+     * @param  string $domain The domain being looked up via whois.
+     * @return string         Returns the domain name of the whois server.
+     */
     public function getWhoisServer($domain = '')
     {
         if (!empty($domain) || empty($this->lastMatch)) {
