@@ -45,7 +45,7 @@ class Locator
         if ($tldData !== null && json_last_error() === JSON_ERROR_NONE) {
             $this->loadStatus = true;
         }
-        $this->tldCollection = collect( (array) $tldData );
+        $this->tldCollection = collect((array) $tldData);
     }
 
     /**
