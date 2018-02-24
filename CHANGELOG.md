@@ -14,3 +14,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - PHPdocblocks for all library code.
 - Basic PHPUnit test coverage for the library.
 - Continuous Integration setup for StyleCI, TravisCI, and ScrutinizerCI.
+- Add Punycode for Unicode domain handling.
+- Use League URI package for domain parsing.
