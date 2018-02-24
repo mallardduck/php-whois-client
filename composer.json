@@ -3,9 +3,13 @@
     "type": "library",
     "description": "A very basic Whois client for PHP. The library is limited in function since it's intended to be a low-level client that handles only request and raw output.",
     "keywords": [
+        "domain",
+        "idn",
+        "lookup",
+        "punycode",
         "whois",
         "whois-client",
-        "lookup"
+        "unicode"
     ],
     "homepage": "https://github.com/mallardduck/whois-client",
     "license": "GPL-3.0-or-later",
