@@ -38,7 +38,7 @@ class Locator
 
     /**
      * The results of the last looked up domain.
-     * 
+     *
      * @var array
      */
     private $lastMatch;
