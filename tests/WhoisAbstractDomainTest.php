@@ -58,6 +58,7 @@ class WhoisAbstractDomainTest extends BaseTest
     public function validDomainsProvider()
     {
         return [
+            ['domain', ''],
             ['sub.domain.wedding', 'domain.wedding'],
             ['danpock.me.', 'danpock.me'],
             ['www.sub.domain.xyz', 'domain.xyz'],

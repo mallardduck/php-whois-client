@@ -57,6 +57,22 @@ class AbstractClient
     }
 
     /**
+     * A unicode safe method for making whois requests.
+     *
+     * The main difference with this method is the benefit of
+     *
+     * @param  string $domain      The domain or IP being looked up.
+     * @param  string $whoisServer The whois server being queried.
+     * @return string              The raw results of the query response.
+     */
+    public function makeWhoisRequest($domain, $whoisServer)
+    {
+        $this->parseWhoisDomain($domain);
+        // Form a socket connection to the whois server.
+        return $this->makeWhoisRawRequest($this->parsedDomain, $whoisServer);
+    }
+
+    /**
      * [Short description of the method]
      *
      * @param string $domain          [Description]
@@ -89,10 +105,6 @@ class AbstractClient
         $encoding = mb_detect_encoding($domain);
 
         $processedDomain = $this->getSearchableHostname($domain);
-        // Check how the host component was parsed
-        if (strlen($processedDomain) === 0 && strlen($domain) >= 0) {
-            $processedDomain = $domain;
-        }
 
         // Punycode the domain if it's Unicode
         if ("UTF-8" === $encoding) {
@@ -100,22 +112,6 @@ class AbstractClient
         }
         $this->parsedDomain = $processedDomain;
         return $this;
-    }
-
-    /**
-     * A unicode safe method for making whois requests.
-     *
-     * The main difference with this method is the benefit of
-     *
-     * @param  string $domain      The domain or IP being looked up.
-     * @param  string $whoisServer The whois server being queried.
-     * @return string              The raw results of the query response.
-     */
-    public function makeWhoisRequest($domain, $whoisServer)
-    {
-        $this->parseWhoisDomain($domain);
-        // Form a socket connection to the whois server.
-        return $this->makeWhoisRawRequest($this->parsedDomain, $whoisServer);
     }
 
     /**

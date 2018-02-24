@@ -2,7 +2,6 @@
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\AbstractClient;
-use League\Uri\Components\Exception as LeagueException;
 
 /**
 *  Corresponding Class to test the whois Client class

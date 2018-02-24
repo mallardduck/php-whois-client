@@ -2,7 +2,7 @@
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
-use PHPUnit\Framework\TestCase;
+use MallardDuck\Whois\Exceptions\MissingArgException;
 use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
 /**
@@ -13,7 +13,7 @@ use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisDomainTest extends TestCase
+class WhoisDomainTest extends BaseTest
 {
     /**
      * The main Whois Client
@@ -84,12 +84,35 @@ class WhoisDomainTest extends TestCase
     public function invalidDomainsProvider()
     {
         return [
-            ['domain'],
             ['domain.1com'],
             ['domain.co.u'],
             ['xn--e1afmkfd.xn--80akhb.yknj4f'],
             ['xn--e1afmkfd.xn--80akhbyknj4f.'],
-            ['президент.рф2'],
+        ];
+    }
+
+    /**
+     * Test function comment stub.
+     * @param string $domain Test domains!
+     * @param string $exception Exception class name!
+     * @dataProvider invalidDomainAndExceptionProvider
+     */
+    public function testInvalidParsingDomains($domain, $exception)
+    {
+        $this->expectException($exception);
+        $this->client->lookup($domain);
+    }
+
+    /**
+     * Test function comment stub.
+     */
+    public function invalidDomainAndExceptionProvider()
+    {
+        return [
+            ['', MissingArgException::class],
+            ['domain', MissingArgException::class],
+            ['президент.рф', $this->getUriException()],
+            ['президент.рф2', UnknownWhoisException::class],
         ];
     }
 }
