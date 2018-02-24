@@ -2,7 +2,7 @@
 namespace LucidInternets\Whois\WhoisServerList;
 
 /**
- * inline tags demonstration
+ * Whois Server List Locator Class
  *
  * This class loads a TLD whois list and allows for easy look up.
  *
@@ -10,7 +10,7 @@ namespace LucidInternets\Whois\WhoisServerList;
  * @copyright lucidinternets.com 2018
  * @version 1.0.0
  */
-class TldList
+class Locator
 {
 
      /**

@@ -2,7 +2,7 @@
 namespace LucidInternets\Whois;
 
 use Hoa\Socket\Client as SocketClient;
-use LucidInternets\Whois\WhoisServerList\TldList;
+use LucidInternets\Whois\WhoisServerList\Locator;
 
 class Client
 {
@@ -12,7 +12,7 @@ class Client
 
     public function __construct()
     {
-            $this->tldList = new TldList;
+            $this->tldList = new Locator;
     }
 
     public function lookup($domain = '')

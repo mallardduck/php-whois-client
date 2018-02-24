@@ -2,10 +2,10 @@
 namespace LucidInternets\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
-use LucidInternets\Whois\WhoisServerList\TldList;
+use LucidInternets\Whois\WhoisServerList\Locator;
 
 /**
-*  Corresponding Class to test the TldList class
+*  Corresponding Class to test the Locator class
 *
 *  For each class in your library, there should be a corresponding Unit-Test for it
 *  Unit-Tests should be as much as possible independent from other test going on.
@@ -24,7 +24,7 @@ class WhodisTest extends TestCase
   */
     public function test_is_there_any_syntax_error()
     {
-        $var = new TldList;
+        $var = new Locator;
         $this->assertTrue(is_object($var));
         unset($var);
     }
@@ -38,7 +38,7 @@ class WhodisTest extends TestCase
     */
       public function test_loaded_list_file()
       {
-          $var = new TldList;
+          $var = new Locator;
           $this->assertTrue(is_object($var) && $var->getLoadStatus());
           unset($var);
       }
@@ -52,19 +52,19 @@ class WhodisTest extends TestCase
   */
     public function test_find_whois_server()
     {
-        $var = new TldList;
+        $var = new Locator;
         $var->findWhoisServer("com");
         $match = $var->getLastMatch();
         $this->assertTrue( is_array($match) && !empty($match) && count($match) >= 1 );
         unset($var, $match);
 
-        $var = new TldList;
+        $var = new Locator;
         $var->findWhoisServer("google.com");
         $match = $var->getLastMatch();
         $this->assertTrue( is_array($match) && !empty($match) && count($match) >= 1 );
         unset($var, $match);
 
-        $var = new TldList;
+        $var = new Locator;
         $var->findWhoisServer("danpock.xyz");
         $match = $var->getLastMatch();
         $this->assertTrue( is_array($match) && !empty($match) && count($match) >= 1 );
@@ -80,19 +80,19 @@ class WhodisTest extends TestCase
     */
       public function test_get_whois_server()
       {
-          $var = new TldList;
+          $var = new Locator;
           $results = $var->findWhoisServer("com")->getWhoisServer();
           $this->assertTrue( is_string($results) && !empty($results) );
           $this->assertTrue( "whois.verisign-grs.com" === $results );
           unset($var, $results);
 
-          $var = new TldList;
+          $var = new Locator;
           $results = $var->findWhoisServer("google.com")->getWhoisServer();
           $this->assertTrue( is_string($results) && !empty($results) );
           $this->assertTrue( "whois.verisign-grs.com" === $results );
           unset($var, $results);
 
-          $var = new TldList;
+          $var = new Locator;
           $results = $var->findWhoisServer("danpock.xyz")->getWhoisServer();
           $this->assertTrue( is_string($results) && !empty($results) );
           $this->assertTrue( "whois.nic.xyz" === $results );
