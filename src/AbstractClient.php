@@ -57,6 +57,23 @@ class AbstractClient
     }
 
     /**
+     * [Short description of the method]
+     *
+     * @param string $domain          [Description]
+     *
+     * @return string
+     */
+    protected function getSearchableHostname($domain)
+    {
+        // Attempt to parse the domains Host component and get the registrable parts.
+        $host = new Host($domain);
+        // Get the method by which is supported to maintain PHP 7 and 5.6 compatibility.
+        $method = (method_exists($host, 'getRegistrableDomain')) ? 'getRegistrableDomain' : 'getRegisterableDomain';
+
+        return $host->$method();
+    }
+
+    /**
      * Takes the user provided domain and parses then encodes just the registerable domain.
      * @param  string $domain The user provided domain.
      * @return string         Just the registrable part of a domain encoded for IDNA.
@@ -71,11 +88,7 @@ class AbstractClient
         // Check domain encoding
         $encoding = mb_detect_encoding($domain);
 
-        // Attempt to parse the domains Host component and get the registrable parts.
-        $host = new Host($domain);
-        // Get the method by which is supported to maintain PHP 7 and 5.6 compatibility.
-        $method = (method_exists($host, 'getRegistrableDomain')) ? 'getRegistrableDomain' : 'getRegisterableDomain';
-        $processedDomain = $host->$method();
+        $processedDomain = $this->getSearchableHostname($domain);
         // Check how the host component was parsed
         if (strlen($processedDomain) === 0 && strlen($domain) >= 0) {
             $processedDomain = $domain;
