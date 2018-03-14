@@ -30,7 +30,7 @@ class Locator
      *
      * @var string
      */
-    private $tldListPath =  __DIR__.'/../../blobs/tld.json';
+    private $tldListPath =  __DIR__ . '/../../blobs/tld.json';
 
     /**
      * A collection of the TLDs and whois server list.

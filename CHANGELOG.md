@@ -6,12 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Modified parseWhoisDomain method of AbstractClient to return the results instead of itself.
 
 ## 0.1.3 - 2018-03-13
 ### Added
 - Now include dev only package to check Symfony standards.
 
-###Changed
+### Changed
 - Improved some code comments.
 - Modify comparison symbol used in getWhoisServer method.
 - Updated internal variable name to conform to Symfony standard.
@@ -23,14 +25,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Continue filling in and expanding on comments.
 - Add php dev tool configs.
 
-###Fixed
+### Fixed
 - Removed unnecessary check for is_null.
 
 ## 0.1.1 - 2018-02-24
-###Changed
+### Changed
 - Small refactor for better testing and usage.
 
-###Fixed
+### Fixed
 - Fix read me header.
 - Fix composer dependency issue preventing dual support for php 7.x and 5.6.
 
