@@ -17,6 +17,10 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+branches:
+    except:
+        - /^analysis-.*$/
+
 matrix:
   include:
     - php: 5.6
