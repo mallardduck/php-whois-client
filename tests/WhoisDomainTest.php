@@ -93,7 +93,7 @@ class WhoisDomainTest extends BaseTest
 
     /**
      * Test function comment stub.
-     * @param string $domain Test domains!
+     * @param string $domain    Test domains!
      * @param string $exception Exception class name!
      * @dataProvider invalidDomainAndExceptionProvider
      */

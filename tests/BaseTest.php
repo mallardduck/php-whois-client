@@ -21,6 +21,7 @@ abstract class BaseTest extends TestCase
         if ($isNewLib) {
             return \League\Uri\Components\Exception::class;
         }
+
         return \Exception::class;
     }
 
@@ -35,6 +36,7 @@ abstract class BaseTest extends TestCase
         $class = new \ReflectionClass($class);
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method;
     }
 }

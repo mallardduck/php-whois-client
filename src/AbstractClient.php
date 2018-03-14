@@ -11,7 +11,9 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
  * The Whois Client Class.
  *
  * @author mallardduck <dpock32509@gmail.com>
+ *
  * @copyright lucidinternets.com 2018
+ *
  * @version 1.0.0
  */
 class AbstractClient
@@ -53,7 +55,7 @@ class AbstractClient
     public function __construct()
     {
         $this->punycode = new Punycode();
-        $this->tldLocator = new Locator;
+        $this->tldLocator = new Locator();
     }
 
     /**
@@ -63,6 +65,7 @@ class AbstractClient
      *
      * @param  string $domain      The domain or IP being looked up.
      * @param  string $whoisServer The whois server being queried.
+     *
      * @return string              The raw results of the query response.
      */
     public function makeWhoisRequest($domain, $whoisServer)
@@ -75,7 +78,7 @@ class AbstractClient
     /**
      * Uses the League Uri Hosts component to get the search able hostname in PHP 5.6 and 7.
      *
-     * @param string $domain          The domain or IP being looked up.
+     * @param string $domain The domain or IP being looked up.
      *
      * @return string
      */
@@ -92,6 +95,7 @@ class AbstractClient
     /**
      * Takes the user provided domain and parses then encodes just the registerable domain.
      * @param  string $domain The user provided domain.
+     *
      * @return AbstractClient Returns the current client instance.
      */
     protected function parseWhoisDomain($domain)
@@ -111,6 +115,7 @@ class AbstractClient
             $processedDomain = $this->punycode->encode($processedDomain);
         }
         $this->parsedDomain = $processedDomain;
+
         return $this;
     }
 
@@ -118,15 +123,16 @@ class AbstractClient
      * A function for making a raw Whois request.
      * @param  string $domain      The domain or IP being looked up.
      * @param  string $whoisServer The whois server being queried.
+     *
      * @return string              The raw results of the query response.
      */
     public function makeWhoisRawRequest($domain, $whoisServer)
     {
         // Form a tcp socket connection to the whois server.
-        $client = new SocketClient('tcp://' . $whoisServer . ':43', 10);
+        $client = new SocketClient('tcp://'.$whoisServer.':43', 10);
         $client->connect();
         // Send the domain name requested for whois lookup.
-        $client->writeString($domain . $this->clrf);
+        $client->writeString($domain.$this->clrf);
         // Read the full output of the whois lookup.
         $response = $client->readAll();
         // Disconnect the connections to prevent network/performance issues.

@@ -7,7 +7,9 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
  * The Whois Client Class.
  *
  * @author mallardduck <dpock32509@gmail.com>
+ *
  * @copyright lucidinternets.com 2018
+ *
  * @version 1.0.0
  */
 class Client extends AbstractClient
@@ -24,6 +26,7 @@ class Client extends AbstractClient
     /**
      * Performs a Whois look up on the domain provided.
      * @param  string $domain The domain being looked up via whois.
+     *
      * @return string         The output of the Whois look up.
      */
     public function lookup($domain = '')
