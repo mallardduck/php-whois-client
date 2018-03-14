@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 0.1.3 - 2018-03-13
+### Added
+- Now include dev only package to check Symfony standards.
+
+###Changed
+- Improved some code comments.
+- Modify comparison symbol used in getWhoisServer method.
+- Updated internal variable name to conform to Symfony standard.
+- Refactored/Adjusted some code to better conform to the Symfony standard that extends PSR2
+
 ## 0.1.2 - 2018-02-24
 ### Added
 - Fixed missing extensions in composer require section.
