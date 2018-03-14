@@ -76,6 +76,30 @@ class AbstractClient
     }
 
     /**
+     * A function for making a raw Whois request.
+     * @param  string $domain      The domain or IP being looked up.
+     * @param  string $whoisServer The whois server being queried.
+     *
+     * @return string              The raw results of the query response.
+     */
+    public function makeWhoisRawRequest($domain, $whoisServer)
+    {
+        // Form a tcp socket connection to the whois server.
+        $client = new SocketClient('tcp://'.$whoisServer.':43', 10);
+        $client->connect();
+        // Send the domain name requested for whois lookup.
+        $client->writeString($domain.$this->clrf);
+        // Read the full output of the whois lookup.
+        $response = $client->readAll();
+        // Disconnect the connections to prevent network/performance issues.
+        // Yes, it's necessary. Without disconnecting I discovered errores when
+        // I began adding tests to the library.
+        $client->disconnect();
+
+        return $response;
+    }
+
+    /**
      * Uses the League Uri Hosts component to get the search able hostname in PHP 5.6 and 7.
      *
      * @param string $domain The domain or IP being looked up.
@@ -117,29 +141,5 @@ class AbstractClient
         $this->parsedDomain = $processedDomain;
 
         return $this;
-    }
-
-    /**
-     * A function for making a raw Whois request.
-     * @param  string $domain      The domain or IP being looked up.
-     * @param  string $whoisServer The whois server being queried.
-     *
-     * @return string              The raw results of the query response.
-     */
-    public function makeWhoisRawRequest($domain, $whoisServer)
-    {
-        // Form a tcp socket connection to the whois server.
-        $client = new SocketClient('tcp://'.$whoisServer.':43', 10);
-        $client->connect();
-        // Send the domain name requested for whois lookup.
-        $client->writeString($domain.$this->clrf);
-        // Read the full output of the whois lookup.
-        $response = $client->readAll();
-        // Disconnect the connections to prevent network/performance issues.
-        // Yes, it's necessary. Without disconnecting I discovered errores when
-        // I began adding tests to the library.
-        $client->disconnect();
-
-        return $response;
     }
 }
