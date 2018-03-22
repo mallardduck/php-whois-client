@@ -70,7 +70,7 @@ class AbstractClient
      */
     public function makeWhoisRequest($domain, $whoisServer)
     {
-        $this->parsedDomain = $this->parseWhoisDomain($domain);
+        $this->parseWhoisDomain($domain);
         // Form a socket connection to the whois server.
         return $this->makeWhoisRawRequest($this->parsedDomain, $whoisServer);
     }
@@ -120,7 +120,7 @@ class AbstractClient
      * Takes the user provided domain and parses then encodes just the registerable domain.
      * @param  string $domain The user provided domain.
      *
-     * @return AbstractClient Returns the current client instance.
+     * @return string Returns the parsed domain.
      */
     protected function parseWhoisDomain($domain)
     {
@@ -138,6 +138,7 @@ class AbstractClient
         if ("UTF-8" === $encoding) {
             $processedDomain = $this->punycode->encode($processedDomain);
         }
+        $this->parsedDomain = $processedDomain;
 
         return $processedDomain;
     }

@@ -48,7 +48,7 @@ class WhoisAbstractDomainTest extends BaseTest
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
         $wat = $foo->invokeArgs($client, [$domain]);
-        $this->assertTrue($parsed === $wat->parsedDomain);
+        $this->assertTrue($parsed === $wat);
         unset($client, $foo, $wat);
     }
 
