@@ -40,10 +40,11 @@ $client = new Client;
 $results = $client->lookup('google.com');
 ```
 
-## To-Do Before Stable
+## To-Do
+### Before Stable
 - [ ] Expand the Server List locator to support IPv4
 - [ ] Expand the Server List locator to support IPv6
-- [ ] Add tests for (unlikely) cases where blobs are missing.
+### Before V2/V1.5 (?)
 - [ ] Look into supporting actual TLD lookups. (i.e. looking up "com" tld's whois info)
 
 ## License
