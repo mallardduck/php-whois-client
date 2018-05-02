@@ -6,10 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.1.4] - 2018-05-01
 ### Changed
 - Modified parseWhoisDomain method of AbstractClient to return the results instead of itself.
+- Re-enabled domain test previously causing odd TCP network error.
+- Updated To-Do format in readme.md file
 
-## 0.1.3 - 2018-03-13
+### Removed
+- HHVM from automated testing scripts.
+
+## [0.1.3] - 2018-03-13
 ### Added
 - Now include dev only package to check Symfony standards.
 
@@ -19,7 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated internal variable name to conform to Symfony standard.
 - Refactored/Adjusted some code to better conform to the Symfony standard that extends PSR2
 
-## 0.1.2 - 2018-02-24
+## [0.1.2] - 2018-02-24
 ### Added
 - Fixed missing extensions in composer require section.
 - Continue filling in and expanding on comments.
@@ -28,7 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Removed unnecessary check for is_null.
 
-## 0.1.1 - 2018-02-24
+## [0.1.1] - 2018-02-24
 ### Changed
 - Small refactor for better testing and usage.
 
@@ -36,7 +43,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix read me header.
 - Fix composer dependency issue preventing dual support for php 7.x and 5.6.
 
-## 0.1.0 - 2018-02-24
+## [0.1.0] - 2018-02-24
 ### Added
 - This CHANGELOG file to hopefully serve as an evolving project history.
 - Basic working Whois client for PHP.
