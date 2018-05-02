@@ -11,7 +11,7 @@ If you are working with Whois in PHP this library provides a very basic client.
 Rather than focus on the user friendly output this library focuses on the raw Whois protocol. The library is limited in function since it's intended to be a low-level client that handles only request and raw output. Basically the package supports the look up of a TLDs primary Whois server and then will do a query of the domain provided.
 
 ## Requirements
-* PHP >= 5.6
+* PHP >= 7.0
 
 ## Features
 * Pure PHP based Whois client.

@@ -92,8 +92,6 @@ class AbstractClient
         // Read the full output of the whois lookup.
         $response = $client->readAll();
         // Disconnect the connections to prevent network/performance issues.
-        // Yes, it's necessary. Without disconnecting I discovered errores when
-        // I began adding tests to the library.
         $client->disconnect();
 
         return $response;
@@ -110,10 +108,7 @@ class AbstractClient
     {
         // Attempt to parse the domains Host component and get the registrable parts.
         $host = new Host($domain);
-        // Get the method by which is supported to maintain PHP 7 and 5.6 compatibility.
-        $method = (method_exists($host, 'getRegistrableDomain')) ? 'getRegistrableDomain' : 'getRegisterableDomain';
-
-        return $host->$method();
+        return $host->getRegistrableDomain();
     }
 
     /**
