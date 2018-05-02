@@ -57,7 +57,7 @@ class WhoisDomainTest extends BaseTest
             ['danpock.google'],
             ['domain.wedding'],
             ['sub.domain.club'],
-            // ['www.sub.domain.me'],
+            ['www.sub.domain.me'],
             ['domain.CO.uk'],
             ['www.domain.co.uk'],
             ['sub.www.domain.co.uk'],
