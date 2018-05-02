@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.5] - 2018-05-01
+### Removed
+- Support for PHP 5.6 ending the PHP 5.x support here.
+
 ## [0.1.4] - 2018-05-01
 ### Changed
 - Modified parseWhoisDomain method of AbstractClient to return the results instead of itself.
