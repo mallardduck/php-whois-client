@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 - Cleaned up some more PHP 5.6 support code from tests.
+- Removed old style locator class.
 
 ## [0.1.5] - 2018-05-01
 ### Removed
