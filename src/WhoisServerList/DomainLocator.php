@@ -48,4 +48,24 @@ class DomainLocator extends AbstractLocator
 
         return $this;
     }
+
+    /**
+     * Get the Whois server of the domain provided, or previously found domain.
+     *
+     * @param  string $domain The domain being looked up via whois.
+     *
+     * @return string         Returns the domain name of the whois server.
+     */
+    public function getWhoisServer($domain = '')
+    {
+        if (!empty($domain) || empty($this->lastMatch)) {
+            $this->findWhoisServer($domain);
+        }
+        $server = current($this->lastMatch);
+        if ('UNKNOWN' === strtoupper($server)) {
+            throw new UnknownWhoisException("This domain doesn't have a valid whois server.");
+        }
+
+        return $server;
+    }
 }

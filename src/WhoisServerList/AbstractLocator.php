@@ -1,8 +1,6 @@
 <?php
 namespace MallardDuck\Whois\WhoisServerList;
 
-use MallardDuck\Whois\Exceptions\UnknownWhoisException;
-
 /**
  * Whois Server List Locator Class
  *
@@ -94,16 +92,5 @@ abstract class AbstractLocator
      *
      * @return string         Returns the domain name of the whois server.
      */
-    public function getWhoisServer($domain = '')
-    {
-        if (!empty($domain) || empty($this->lastMatch)) {
-            $this->findWhoisServer($domain);
-        }
-        $server = current($this->lastMatch);
-        if ('UNKNOWN' === strtoupper($server)) {
-            throw new UnknownWhoisException("This domain doesn't have a valid whois server.");
-        }
-
-        return $server;
-    }
+    abstract public function getWhoisServer($domain = '');
 }
