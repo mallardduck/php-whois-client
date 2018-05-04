@@ -37,7 +37,7 @@ class Client extends AbstractClient
         $this->parseWhoisDomain($domain);
 
         // Get the domains whois server.
-        $whoisServer = $this->tldLocator->getWhoisServer($this->parsedDomain);
+        $whoisServer = $this->whoisLocator->getWhoisServer($this->parsedDomain);
 
         // Get the full output of the whois lookup.
         $response = $this->makeWhoisRequest($this->parsedDomain, $whoisServer);

@@ -2,7 +2,7 @@
 namespace MallardDuck\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
-use MallardDuck\Whois\WhoisServerList\Locator;
+use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
 use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
@@ -24,7 +24,7 @@ class WhoisLocatorExceptionTest extends TestCase
     {
         $this->expectException(MissingArgException::class);
 
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->findWhoisServer('');
         unset($var, $results);
     }
@@ -34,7 +34,7 @@ class WhoisLocatorExceptionTest extends TestCase
      */
     public function testFindServerThenGetWhoisServerThenEmpty()
     {
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->findWhoisServer("com.com")->getWhoisServer();
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.verisign-grs.com" === $results);
@@ -56,7 +56,7 @@ class WhoisLocatorExceptionTest extends TestCase
             $this->expectException(\Exception::class);
         }
 
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->findWhoisServer(null);
         unset($var, $results);
     }
@@ -66,7 +66,7 @@ class WhoisLocatorExceptionTest extends TestCase
      */
     public function testFindServerThenGetWhoisServerThenNull()
     {
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->findWhoisServer("com.com")->getWhoisServer();
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.verisign-grs.com" === $results);
@@ -86,7 +86,7 @@ class WhoisLocatorExceptionTest extends TestCase
      */
     public function testGetWhoisServerDirect()
     {
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->getWhoisServer("bing.com");
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue("whois.verisign-grs.com" === $results);
@@ -94,7 +94,7 @@ class WhoisLocatorExceptionTest extends TestCase
 
         $this->expectException(MissingArgException::class);
 
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->getWhoisServer();
         unset($var, $results);
     }
@@ -104,7 +104,7 @@ class WhoisLocatorExceptionTest extends TestCase
      */
     public function testGetWhoisServerDirectNoException()
     {
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->getWhoisServer("bing.com");
         $orgResults = $results;
         $this->assertTrue(is_string($results) && !empty($results));
@@ -121,7 +121,7 @@ class WhoisLocatorExceptionTest extends TestCase
      */
     public function testGetWhoisServerDirectUnicodeException()
     {
-        $var = new Locator;
+        $var = new DomainLocator;
         $this->expectException(UnknownWhoisException::class);
 
         $results = $var->getWhoisServer('xn--e1afmkfd.xn--80akhbyknj4f');

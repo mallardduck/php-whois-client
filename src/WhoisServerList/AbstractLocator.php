@@ -1,7 +1,6 @@
 <?php
 namespace MallardDuck\Whois\WhoisServerList;
 
-use MallardDuck\Whois\Exceptions\MissingArgException;
 use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
 /**
@@ -15,7 +14,7 @@ use MallardDuck\Whois\Exceptions\UnknownWhoisException;
  *
  * @version 1.0.0
  */
-class Locator
+abstract class AbstractLocator
 {
 
      /**
@@ -30,33 +29,33 @@ class Locator
      *
      * @var string
      */
-    private $tldListPath =  __DIR__ . '/../../blobs/tld.json';
+    protected $whoisListPath;
 
     /**
      * A collection of the TLDs and whois server list.
      *
      * @var \Tightenco\Collect\Support\Collection
      */
-    private $tldCollection;
+    protected $whoisCollection;
 
     /**
      * The results of the last looked up domain.
      *
      * @var array
      */
-    private $lastMatch;
+    protected $lastMatch;
 
     /**
      * Build the TLD Whois Server Locator class.
      */
     public function __construct()
     {
-        $fileData = file_get_contents($this->tldListPath);
+        $fileData = file_get_contents($this->whoisListPath);
         $tldData = json_decode($fileData);
         if (null !== $tldData && json_last_error() === JSON_ERROR_NONE) {
             $this->loadStatus = true;
         }
-        $this->tldCollection = collect((array) $tldData);
+        $this->whoisCollection = collect((array) $tldData);
     }
 
     /**
@@ -86,22 +85,7 @@ class Locator
      *
      * @return self Returns the same instance for fluent usage.
      */
-    public function findWhoisServer($domain)
-    {
-        if (empty($domain)) {
-            throw new MissingArgException("Must provide domain argument.");
-        }
-
-        $tldInfo = $this->tldCollection->filter(function ($item, $key) use ($domain) {
-            return preg_match('/'.$key.'/', $domain);
-        });
-        if (empty($tldInfo->all())) {
-            throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");
-        }
-        $this->lastMatch = $tldInfo->all();
-
-        return $this;
-    }
+    abstract public function findWhoisServer($domain);
 
     /**
      * Get the Whois server of the domain provided, or previously found domain.
@@ -117,7 +101,7 @@ class Locator
         }
         $server = current($this->lastMatch);
         if ('UNKNOWN' === strtoupper($server)) {
-            throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");
+            throw new UnknownWhoisException("This domain doesn't have a valid whois server.");
         }
 
         return $server;

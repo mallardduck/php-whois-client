@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Improved the flexibility of the WhoisServerList tests.
+- Refactor AbstractClient and client to use the AbstractLocator and DomainLocator.
+- Update AbstractClient property name - from tldLocator to whoisLocator  - to better reflect usage.
+- Refactor tests to use DomainLocator instead of removed Locator class.
+
+### Added
+- Create an AbstractLocator and DomainLocator for more flexibility!
+
+### Removed
+- Cleaned up some more PHP 5.6 support code from tests.
+- Removed old style locator class.
 
 ## [0.1.5] - 2018-05-01
 ### Removed
