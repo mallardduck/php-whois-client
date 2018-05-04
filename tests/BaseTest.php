@@ -2,7 +2,6 @@
 namespace MallardDuck\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
-use League\Uri\Components\Host;
 
 /**
 *  Corresponding Class to test the whois Client class

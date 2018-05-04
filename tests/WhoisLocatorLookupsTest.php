@@ -2,7 +2,7 @@
 namespace MallardDuck\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
-use MallardDuck\Whois\WhoisServerList\Locator;
+use MallardDuck\Whois\WhoisServerList\DomainLocator;
 
 /**
 *  Corresponding Class to test the Locator class
@@ -24,7 +24,7 @@ class WhoisLocatorLookupsTest extends TestCase
      */
     public function testFindAndGetCorrectDomainWhoisServer($domain, $server)
     {
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->findWhoisServer($domain)->getWhoisServer();
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue($server === $results);
@@ -39,7 +39,7 @@ class WhoisLocatorLookupsTest extends TestCase
      */
     public function testGetCorrectDomainWhoisServer($domain, $server)
     {
-        $var = new Locator;
+        $var = new DomainLocator;
         $results = $var->getWhoisServer($domain);
         $this->assertTrue(is_string($results) && !empty($results));
         $this->assertTrue($server === $results);
