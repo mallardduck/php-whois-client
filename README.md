@@ -5,6 +5,7 @@
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/mallardduck/whois-client/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Latest Stable Version](https://poser.pugx.org/mallardduck/whois-client/v/stable)](https://packagist.org/packages/mallardduck/whois-client)
 [![License](https://poser.pugx.org/mallardduck/whois-client/license)](https://packagist.org/packages/mallardduck/whois-client)
+[![Coverage Status](https://coveralls.io/repos/github/mallardduck/whois-client/badge.svg?branch=master)](https://coveralls.io/github/mallardduck/whois-client?branch=master)
 
 If you are working with Whois in PHP this library provides a very basic client.
 
