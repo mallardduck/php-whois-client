@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Improved the flexibility of the WhoisServerList tests.
+- Refactor AbstractClient and client to use the AbstractLocator and DomainLocator.
+- Update AbstractClient property name - from tldLocator to whoisLocator  - to better reflect usage.
+
 
 ### Added
 - Create an AbstractLocator and DomainLocator for more flexibility!

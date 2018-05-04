@@ -4,7 +4,8 @@ namespace MallardDuck\Whois;
 use TrueBV\Punycode;
 use League\Uri\Components\Host;
 use Hoa\Socket\Client as SocketClient;
-use MallardDuck\Whois\WhoisServerList\Locator;
+use MallardDuck\Whois\WhoisServerList\AbstractLocator;
+use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
 
 /**
@@ -21,9 +22,9 @@ class AbstractClient
 
     /**
      * The TLD Whois locator class.
-     * @var Locator
+     * @var AbstractLocator
      */
-    protected $tldLocator;
+    protected $whoisLocator;
 
     /**
      * The Unicode for IDNA.
@@ -55,7 +56,7 @@ class AbstractClient
     public function __construct()
     {
         $this->punycode = new Punycode();
-        $this->tldLocator = new Locator();
+        $this->whoisLocator = new DomainLocator();
     }
 
     /**
