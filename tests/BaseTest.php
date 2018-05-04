@@ -14,15 +14,14 @@ use League\Uri\Components\Host;
 */
 abstract class BaseTest extends TestCase
 {
+
+    /**
+     * [getMethod description]
+     * @return \League\Uri\Components\Exception         [description]
+     */
     public function getUriException()
     {
-        $host = new Host();
-        $isNewLib = (method_exists($host, 'getRegistrableDomain')) ? true : false;
-        if ($isNewLib) {
-            return \League\Uri\Components\Exception::class;
-        }
-
-        return \Exception::class;
+        return \League\Uri\Components\Exception::class;
     }
 
     /**

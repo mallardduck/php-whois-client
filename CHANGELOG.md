@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Create an AbstractLocator and DomainLocator for more flexibility!
 
+### Removed
+- Cleaned up some more PHP 5.6 support code from tests.
+
 ## [0.1.5] - 2018-05-01
 ### Removed
 - Support for PHP 5.6 ending the PHP 5.x support here.
