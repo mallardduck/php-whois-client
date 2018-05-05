@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2018-05-04
+### Changed
+- Made getWhoisServer abstract in AbstractLocator and implemented in the concrete class.
+- Renamed AbstractClient to BaseClient since that's more accurate.
+
+
 ## [0.2.0] - 2018-05-03
 ### Changed
 - Improved the flexibility of the WhoisServerList tests.
