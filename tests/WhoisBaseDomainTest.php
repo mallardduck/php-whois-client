@@ -1,7 +1,7 @@
 <?php
 namespace MallardDuck\Whois\Test;
 
-use MallardDuck\Whois\AbstractClient;
+use MallardDuck\Whois\BaseClient;
 use MallardDuck\Whois\Exceptions\MissingArgException;
 
 /**
@@ -12,11 +12,11 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisAbstractDomainTest extends BaseTest
+class WhoisBaseDomainTest extends BaseTest
 {
     /**
      * The abstract client used for testing.
-     * @var AbstractClient
+     * @var BaseClient
      */
     protected $client;
 
@@ -25,7 +25,7 @@ class WhoisAbstractDomainTest extends BaseTest
      */
     protected function setUp()
     {
-        $this->client = new AbstractClient();
+        $this->client = new BaseClient();
     }
 
     /**
@@ -44,7 +44,7 @@ class WhoisAbstractDomainTest extends BaseTest
      */
     public function testValidParsingDomains($domain, $parsed)
     {
-        $client = new AbstractClient;
+        $client = new BaseClient;
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
         $wat = $foo->invokeArgs($client, [$domain]);
@@ -75,7 +75,7 @@ class WhoisAbstractDomainTest extends BaseTest
      */
     public function testInvalidParsingDomains($domain, $exception)
     {
-        $client = new AbstractClient;
+        $client = new BaseClient;
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
         $this->expectException($exception);

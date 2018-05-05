@@ -1,7 +1,7 @@
 <?php
 namespace MallardDuck\Whois\Test;
 
-use MallardDuck\Whois\AbstractClient;
+use MallardDuck\Whois\BaseClient;
 
 /**
 *  Corresponding Class to test the whois Client class
@@ -11,7 +11,7 @@ use MallardDuck\Whois\AbstractClient;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisAbstractClientTest extends BaseTest
+class WhoisBaseClientTest extends BaseTest
 {
 
     /**
@@ -19,7 +19,7 @@ class WhoisAbstractClientTest extends BaseTest
      */
     public function testIsThereAnySyntaxError()
     {
-        $client = new AbstractClient;
+        $client = new BaseClient;
         $this->assertTrue(is_object($client));
         unset($client);
     }
@@ -29,7 +29,7 @@ class WhoisAbstractClientTest extends BaseTest
     */
     public function testParseWhoisDomainFunction()
     {
-        $client = new AbstractClient;
+        $client = new BaseClient;
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
         $this->expectException($this->getUriException());

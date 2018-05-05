@@ -12,7 +12,7 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
  *
  * @version 1.0.0
  */
-class Client extends AbstractClient
+class Client extends BaseClient
 {
 
     /**
