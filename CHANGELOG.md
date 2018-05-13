@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added makeSafeWhoisRequest to the Client class.
 
 ### Removed
-- CLRF property no longer needed on base client.
+- CLRF property no longer needed in BaseClient.
 - No longer need makeWhoisRequest and makeWhoisRawRequest in BaseClient.
 - Removed concrete BaseClient class - merged functionality with the Client class.
 
