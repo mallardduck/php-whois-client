@@ -47,5 +47,4 @@ interface WhoisClientInterface
      * @return string   The raw results of the query response.
      */
     public function getResponseAndClose();
-
 }

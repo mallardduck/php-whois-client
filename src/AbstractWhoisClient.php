@@ -87,5 +87,4 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
         $this->connection->disconnect();
         return $response;
     }
-
 }
