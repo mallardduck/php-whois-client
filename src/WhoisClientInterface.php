@@ -3,6 +3,12 @@ namespace MallardDuck\Whois;
 
 /**
  * WhoisClientInterface defines an interface for basic Whois lookup in PHP.
+ *
+ * @author mallardduck <dpock32509@gmail.com>
+ *
+ * @copyright lucidinternets.com 2018
+ *
+ * @version 0.4.0
  */
 interface WhoisClientInterface
 {

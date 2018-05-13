@@ -3,6 +3,12 @@ namespace MallardDuck\Whois\Exceptions;
 
 /**
  * A basic exception for Missing Arguments.
+ *
+ * @author mallardduck <dpock32509@gmail.com>
+ *
+ * @copyright lucidinternets.com 2018
+ *
+ * @version 0.1.3
  */
 class MissingArgException extends \Exception
 {
