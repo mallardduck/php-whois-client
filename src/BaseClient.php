@@ -3,7 +3,6 @@ namespace MallardDuck\Whois;
 
 use TrueBV\Punycode;
 use League\Uri\Components\Host;
-use Hoa\Socket\Client as SocketClient;
 use MallardDuck\Whois\WhoisServerList\AbstractLocator;
 use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
@@ -17,7 +16,7 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
  *
  * @version 1.0.0
  */
-class BaseClient
+class BaseClient extends AbstractWhoisClient
 {
 
     /**
@@ -31,12 +30,6 @@ class BaseClient
      * @var \TrueBV\Punycode
      */
     protected $punycode;
-
-    /**
-     * The carriage return line feed character comobo.
-     * @var string
-     */
-    protected $clrf = "\r\n";
 
     /**
      * The input domain provided by the user.
@@ -69,33 +62,11 @@ class BaseClient
      *
      * @return string              The raw results of the query response.
      */
-    public function makeWhoisRequest($domain, $whoisServer)
+    public function makeSafeWhoisRequest($domain, $whoisServer)
     {
         $this->parseWhoisDomain($domain);
         // Form a socket connection to the whois server.
-        return $this->makeWhoisRawRequest($this->parsedDomain, $whoisServer);
-    }
-
-    /**
-     * A function for making a raw Whois request.
-     * @param  string $domain      The domain or IP being looked up.
-     * @param  string $whoisServer The whois server being queried.
-     *
-     * @return string              The raw results of the query response.
-     */
-    public function makeWhoisRawRequest($domain, $whoisServer)
-    {
-        // Form a tcp socket connection to the whois server.
-        $client = new SocketClient('tcp://'.$whoisServer.':43', 10);
-        $client->connect();
-        // Send the domain name requested for whois lookup.
-        $client->writeString($domain.$this->clrf);
-        // Read the full output of the whois lookup.
-        $response = $client->readAll();
-        // Disconnect the connections to prevent network/performance issues.
-        $client->disconnect();
-
-        return $response;
+        return $this->makeWhoisRequest($this->parsedDomain, $whoisServer);
     }
 
     /**
