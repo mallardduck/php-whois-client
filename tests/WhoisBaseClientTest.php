@@ -30,10 +30,9 @@ class WhoisBaseClientTest extends BaseTest
     public function testParseWhoisDomainFunction()
     {
         $client = new BaseClient;
-        $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
-        $foo = self::getMethod($client, 'parseWhoisDomain');
-        $this->expectException($this->getUriException());
-        $foo->invokeArgs($client, ["президент.рф"]);
+        $this->assertTrue(method_exists($client, 'makeSafeWhoisRequest'));
+        $foo = self::getMethod($client, 'makeSafeWhoisRequest');
+        $foo->invokeArgs($client, ["danpock.me", "whois.nic.me"]);
         unset($client, $foo);
     }
 }
