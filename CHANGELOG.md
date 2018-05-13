@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.0] - 2018-05-13
+### Added
+- New WhoisClientInterface to define basic whois client request function.
+- New AbstractWhoisClient that implements just the barebones of the interface.
+- Added makeSafeWhoisRequest to the Client class.
+
+### Removed
+- CLRF property no longer needed on base client.
+- No longer need makeWhoisRequest and makeWhoisRawRequest in BaseClient.
+- Removed concrete BaseClient class - merged functionality with the Client class.
+
+### Changed
+- Update BaseClient to extend the new AbstractWhoisClient
+- Moved the following methods to Client from BaseClient:
+    - getSearchableHostname
+    - parseWhoisDomain
+    - and class constructor.
+- Merged some tests together to update for structure chanages.
+
 ## [0.3.0] - 2018-05-04
 ### Changed
 - Made getWhoisServer abstract in AbstractLocator and implemented in the concrete class.
