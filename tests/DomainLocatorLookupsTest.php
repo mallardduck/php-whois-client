@@ -12,7 +12,7 @@ use MallardDuck\Whois\WhoisServerList\DomainLocator;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisLocatorLookupsTest extends TestCase
+class DomainLocatorLookupsTest extends TestCase
 {
 
 
