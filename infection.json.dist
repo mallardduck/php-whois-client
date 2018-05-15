@@ -1,0 +1,13 @@
+{
+    "timeout": 60,
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "logs": {
+        "text": "build/infection/infection-log.txt",
+        "summary": "build/infection/summary-log.txt",
+        "debug": "build/infection/debug-log.txt"
+    }
+}
