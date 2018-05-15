@@ -57,7 +57,7 @@ class WhoisClientTest extends BaseTest
     {
         $client = new Client;
         $rawResults = $client->makeSafeWhoisRequest("danpock.me", "whois.nic.me");
-        $this->assertTrue(strstr($rawResults,"\r\n",true) === "Domain Name: DANPOCK.ME");
+        $this->assertTrue(strstr($rawResults, "\r\n", true) === "Domain Name: DANPOCK.ME");
         unset($client, $rawResults);
     }
 

@@ -34,9 +34,8 @@ class WhoisClientRawTest extends BaseTest
         $var->createConnection("whois.nic.me");
         $status = $var->makeRequest("danpock.me");
         $response = $var->getResponseAndClose();
-        $this->assertTrue(strstr($response,"\r\n",true) === "Domain Name: DANPOCK.ME");
+        $this->assertTrue(strstr($response, "\r\n", true) === "Domain Name: DANPOCK.ME");
 
         unset($response, $status, $var);
     }
-
 }
