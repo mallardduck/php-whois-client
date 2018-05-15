@@ -53,15 +53,13 @@ class WhoisClientTest extends BaseTest
     /**
     * Test function comment stub.
     */
-    public function testParseWhoisDomainFunction()
+    public function testMakeSafeWhoisRequest()
     {
         $client = new Client;
-        $this->assertTrue(method_exists($client, 'makeSafeWhoisRequest'));
-        $foo = self::getMethod($client, 'makeSafeWhoisRequest');
-        $foo->invokeArgs($client, ["danpock.me", "whois.nic.me"]);
-        unset($client, $foo);
+        $rawResults = $client->makeSafeWhoisRequest("danpock.me", "whois.nic.me");
+        $this->assertTrue(strstr($rawResults,"\r\n",true) === "Domain Name: DANPOCK.ME");
+        unset($client, $rawResults);
     }
-
 
     /**
      * Test function comment stub.

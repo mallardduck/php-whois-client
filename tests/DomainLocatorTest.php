@@ -28,16 +28,6 @@ class DomainLocatorTest extends TestCase
     /**
      * Test function comment stub.
      */
-    public function testLoadedListFile()
-    {
-        $var = new DomainLocator;
-        $this->assertTrue(is_object($var) && $var->getLoadStatus());
-        unset($var);
-    }
-
-    /**
-     * Test function comment stub.
-     */
     public function testFindWhoisServer()
     {
         $var = new DomainLocator;
