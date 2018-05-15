@@ -15,13 +15,6 @@ namespace MallardDuck\Whois\WhoisServerList;
 abstract class AbstractLocator
 {
 
-     /**
-      * The status of loading the whois server list.
-      *
-      * @var bool
-      */
-    private $loadStatus = false;
-
     /**
      * The path where the tld json file exists.
      *
@@ -50,20 +43,7 @@ abstract class AbstractLocator
     {
         $fileData = file_get_contents($this->whoisListPath);
         $tldData = json_decode($fileData);
-        if (null !== $tldData && json_last_error() === JSON_ERROR_NONE) {
-            $this->loadStatus = true;
-        }
         $this->whoisCollection = collect((array) $tldData);
-    }
-
-    /**
-     * Returns the TLD list load status.
-     *
-     * @return bool The class status of loading the list and decoding the json.
-     */
-    public function getLoadStatus()
-    {
-        return $this->loadStatus;
     }
 
     /**
