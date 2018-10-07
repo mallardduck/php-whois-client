@@ -43,7 +43,7 @@ abstract class AbstractLocator
     {
         $fileData = file_get_contents($this->whoisListPath);
         $tldData = json_decode($fileData);
-        $this->whoisCollection = collect((array) $tldData);
+        $this->whoisCollection = collect($tldData);
     }
 
     /**
