@@ -18,6 +18,24 @@ class DomainLocatorTest extends TestCase
     /**
      * Basic test to check client syntax.
      */
+    public function testConstruction()
+    {
+        $var = new DomainLocator;
+        // Reflect the class to get the value of the whois list.
+        $reflection = new \ReflectionClass($var);
+        $reflection_property = $reflection->getProperty('whoisCollection');
+        $reflection_property->setAccessible(true);
+        // Using this value we'll do a few assertions.
+        $whoisCollection = $reflection_property->getValue($var);
+        $this->assertTrue(is_object($var));
+        $this->assertTrue("Tightenco\\Collect\\Support\\Collection" === get_class($whoisCollection));
+        $this->assertTrue(1229 === $whoisCollection->count(), "The whois domain count is off.");
+        unset($var);
+    }
+
+    /**
+     * Basic test to check client syntax.
+     */
     public function testIsThereAnySyntaxError()
     {
         $var = new DomainLocator;

@@ -23,6 +23,12 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     protected $clrf = "\r\n";
 
     /**
+     * The timeout duration used for WhoIs server lookups.
+     * @var int
+     */
+    const TIMEOUT = 10;
+
+    /**
      * The input domain provided by the user.
      * @var SocketClient
      */
@@ -43,20 +49,18 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     {
         $this->createConnection($whoisServer);
         $this->makeRequest($lookupValue);
-        $response = $this->getResponseAndClose();
-
-        return $response;
+        return $this->getResponseAndClose();
     }
 
     /**
-     * Creates the connection to the whois server.
+     * Creates a socket connection to the whois server and activates it.
      *
-     * @param string $whoisServer The whois server being queried.
+     * @param string $whoisServer The whois server domain or IP being queried.
      */
-    final public function createConnection(string $whoisServer)
+    final public function createConnection(string $whoisServer) : void
     {
-        // Form a tcp socket connection to the whois server.
-        $this->connection = new SocketClient('tcp://'.$whoisServer.':43', 10);
+        // Form a TCP socket connection to the whois server.
+        $this->connection = new SocketClient('tcp://'.$whoisServer.':43', self::TIMEOUT);
         $this->connection->connect();
     }
 
@@ -68,7 +72,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @return bool True if all not-yet-saved items were successfully saved or
      * there were none. False otherwise.
      */
-    final public function makeRequest(string $lookupValue)
+    final public function makeRequest(string $lookupValue) : bool
     {
         // Send the domain name requested for whois lookup.
         return $this->connection->writeString($lookupValue.$this->clrf);
@@ -83,7 +87,8 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     {
         // Read the full output of the whois lookup.
         $response = $this->connection->readAll();
-        // Disconnect the connections to prevent network/performance issues.
+        // Disconnect the connections after use in order to prevent observed
+        // network & performance issues. Not doing this caused mild trottling.
         $this->connection->disconnect();
         return $response;
     }

@@ -6,13 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support for running mutation/infection tests via the PHP infection tool.
+- New test case ensuring Whois Locator list is primed properly. (only for domains)
+
 ### Removed
+- Support for PHP 7.0
 - Completely removed load status related code from AbstractLocator.
     - AbstractLocator::getLoadStatus
     - AbstractLocator::$loadStatus
 
 ### Changed
-- Modified contructor implementation for AbstractLocator to remove loadstatus.
+- Modified constructor implementation for AbstractLocator to remove loadstatus.
 
 ## [0.4.0] - 2018-05-13
 ### Added
