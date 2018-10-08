@@ -12,5 +12,4 @@ namespace MallardDuck\Whois;
  */
 class SimpleClient extends AbstractWhoisClient
 {
-
 }
