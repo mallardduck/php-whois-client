@@ -51,13 +51,13 @@ class DomainLocatorTest extends TestCase
         $var = new DomainLocator;
         $var->findWhoisServer("google.com");
         $match = $var->getLastMatch();
-        $this->assertTrue(is_array($match) && !empty($match) && count($match) >= 1);
+        $this->assertTrue(is_string($match) && !empty($match) && strlen($match) >= 1);
         unset($var, $match);
 
         $var = new DomainLocator;
         $var->findWhoisServer("danpock.xyz");
         $match = $var->getLastMatch();
-        $this->assertTrue(is_array($match) && !empty($match) && count($match) >= 1);
+        $this->assertTrue(is_string($match) && !empty($match) && strlen($match) >= 1);
         unset($var, $match);
     }
 }

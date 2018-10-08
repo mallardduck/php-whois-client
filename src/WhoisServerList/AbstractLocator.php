@@ -32,7 +32,7 @@ abstract class AbstractLocator
     /**
      * The results of the last looked up domain.
      *
-     * @var array
+     * @var string
      */
     protected $lastMatch;
 
@@ -49,7 +49,7 @@ abstract class AbstractLocator
     /**
      * Gets and returns the last match looked up.
      *
-     * @return array The results of the last looked up domain.
+     * @return string The results of the last looked up domain.
      */
     public function getLastMatch()
     {

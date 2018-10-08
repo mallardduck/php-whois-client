@@ -44,7 +44,7 @@ class DomainLocator extends AbstractLocator
         if (empty($tldInfo->all())) {
             throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");
         }
-        $this->lastMatch = $tldInfo->all();
+        $this->lastMatch = $tldInfo->first();
 
         return $this;
     }
@@ -61,11 +61,10 @@ class DomainLocator extends AbstractLocator
         if (!empty($domain) || empty($this->lastMatch)) {
             $this->findWhoisServer($domain);
         }
-        $server = current($this->lastMatch);
-        if ('UNKNOWN' === strtoupper($server)) {
+        if ('UNKNOWN' === strtoupper($this->lastMatch)) {
             throw new UnknownWhoisException("This domain doesn't have a valid whois server.");
         }
 
-        return $server;
+        return $this->lastMatch;
     }
 }
