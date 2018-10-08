@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Fixed issues with PHPunit XML config.
+- Modify $lastMatch to be the exact match, rather than an array containing it.
 
 ## [0.5.0] - 2018-10-07
 ### Added
