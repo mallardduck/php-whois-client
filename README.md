@@ -47,7 +47,7 @@ $results = $client->lookup('google.com');
 ### Before V2
 This library will take a more minimalistc direction and a secondary library will provide a more guided experience. So anything in here that complicates the 'problem' of being a RFC 3912 client for PHP will be removed.
 - [ ] Rip out anything that's not about being a thin RFC 3912 client.
-- [] Consider removing IDN/punny support in favor of implementing in secondary library.
+- [ ] Consider removing IDN/punny support in favor of implementing in secondary library.
 
 ## License
 
