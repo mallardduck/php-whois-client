@@ -44,11 +44,10 @@ $results = $client->lookup('google.com');
 ```
 
 ## To-Do
-### Before Stable
-- [ ] Expand the Server List locator to support IPv4
-- [ ] Expand the Server List locator to support IPv6
-### Before V2/V1.5 (?)
-- [ ] Look into supporting actual TLD lookups. (i.e. looking up "com" tld's whois info)
+### Before V2
+This library will take a more minimalistc direction and a secondary library will provide a more guided experience. So anything in here that complicates the 'problem' of being a RFC 3912 client for PHP will be removed.
+- [ ] Rip out anything that's not about being a thin RFC 3912 client.
+- [] Consider removing IDN/punny support in favor of implementing in secondary library.
 
 ## License
 
