@@ -8,7 +8,7 @@ namespace MallardDuck\Whois\Exceptions;
  *
  * @copyright lucidinternets.com 2018
  *
- * @version 0.1.3
+ * @version 1.0.0
  */
 class MissingArgException extends \Exception
 {

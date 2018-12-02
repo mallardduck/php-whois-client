@@ -10,7 +10,7 @@ namespace MallardDuck\Whois\WhoisServerList;
  *
  * @copyright lucidinternets.com 2018
  *
- * @version 0.3.0
+ * @version 1.0.0
  */
 abstract class AbstractLocator
 {
