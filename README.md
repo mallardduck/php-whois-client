@@ -1,8 +1,8 @@
 # Whois Client PHP Library
-[![Travis Build Status](https://travis-ci.org/mallardduck/whois-client.svg?branch=master)](https://travis-ci.org/mallardduck/whois-client)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mallardduck/whois-client.svg)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/mallardduck/whois-client/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/mallardduck/whois-client/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+[![Travis Build Status](https://travis-ci.org/mallardduck/php-whois-client.svg?branch=master)](https://travis-ci.org/mallardduck/whois-client)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mallardduck/php-whois-client.svg)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mallardduck/whois-client/?branch=master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Latest Stable Version](https://poser.pugx.org/mallardduck/whois-client/v/stable)](https://packagist.org/packages/mallardduck/whois-client)
 [![License](https://poser.pugx.org/mallardduck/whois-client/license)](https://packagist.org/packages/mallardduck/whois-client)
 [![Coverage Status](https://coveralls.io/repos/github/mallardduck/whois-client/badge.svg?branch=master)](https://coveralls.io/github/mallardduck/whois-client?branch=master)
