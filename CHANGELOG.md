@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.1] - 2020-02-24
+### Changed
+- Locked `league/uri` and `league/uri-components` to fix breaking upstream changes.
+
 ## [1.0.0] - 2018-12-01
 ### Added
 - New basic version of client as SimpleClient. Just a concrete version of the AbstractWhoisClient.
