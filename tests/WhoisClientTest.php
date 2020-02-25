@@ -84,7 +84,9 @@ class WhoisClientTest extends BaseTest
     {
         return [
                 ['domain', ''],
-                ['sub.domain.wedding', 'domain.wedding'],
+                ['ns1.google.com', 'ns1.google.com'],
+                ['sub.domain.wedding', 'sub.domain.wedding'],
+                ['subsub.sub.domain.wedding', 'domain.wedding'],
                 ['danpock.me.', 'danpock.me'],
                 ['www.sub.domain.xyz', 'domain.xyz'],
                 ['президент.рф', 'xn--d1abbgf6aiiy.xn--p1ai'],

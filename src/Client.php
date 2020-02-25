@@ -80,6 +80,12 @@ class Client extends AbstractWhoisClient
     {
         // Attempt to parse the domains Host component and get the registrable parts.
         $host = new Host($domain);
+        if (
+          false === empty($host->getSubdomain()) &&
+          false === strpos($host->getSubdomain(), '.')
+        ) {
+          return (string) $host;
+        }
         return $host->getRegistrableDomain();
     }
 
