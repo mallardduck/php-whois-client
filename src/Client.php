@@ -85,7 +85,7 @@ class Client extends AbstractWhoisClient
             false === empty($host->getSubdomain()) &&
             false === strpos($host->getSubdomain(), '.')
         ) {
-            return (string) $host;
+            return $host->getContent();
         }
         return $host->getRegistrableDomain();
     }
