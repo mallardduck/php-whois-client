@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
@@ -20,7 +21,7 @@ class DomainLocatorTest extends TestCase
      */
     public function testConstruction()
     {
-        $var = new DomainLocator;
+        $var = new DomainLocator();
         // Reflect the class to get the value of the whois list.
         $reflection = new \ReflectionClass($var);
         $reflection_property = $reflection->getProperty('whoisCollection');
@@ -38,7 +39,7 @@ class DomainLocatorTest extends TestCase
      */
     public function testIsThereAnySyntaxError()
     {
-        $var = new DomainLocator;
+        $var = new DomainLocator();
         $this->assertTrue(is_object($var));
         unset($var);
     }
@@ -48,13 +49,13 @@ class DomainLocatorTest extends TestCase
      */
     public function testFindWhoisServer()
     {
-        $var = new DomainLocator;
+        $var = new DomainLocator();
         $var->findWhoisServer("google.com");
         $match = $var->getLastMatch();
         $this->assertTrue(is_string($match) && !empty($match) && strlen($match) >= 1);
         unset($var, $match);
 
-        $var = new DomainLocator;
+        $var = new DomainLocator();
         $var->findWhoisServer("danpock.xyz");
         $match = $var->getLastMatch();
         $this->assertTrue(is_string($match) && !empty($match) && strlen($match) >= 1);

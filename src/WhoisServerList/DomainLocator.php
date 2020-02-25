@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\WhoisServerList;
 
 use MallardDuck\Whois\Exceptions\MissingArgException;
@@ -39,7 +40,7 @@ class DomainLocator extends AbstractLocator
         }
 
         $tldInfo = $this->whoisCollection->filter(function ($item, $key) use ($domain) {
-            return preg_match('/'.$key.'/', $domain);
+            return preg_match('/' . $key . '/', $domain);
         });
         if (empty($tldInfo->all())) {
             throw new UnknownWhoisException("This domain doesn't have a valid TLD whois server.");

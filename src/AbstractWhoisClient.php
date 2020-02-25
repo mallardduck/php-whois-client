@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois;
 
 use Hoa\Socket\Client as SocketClient;
@@ -57,10 +58,10 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      *
      * @param string $whoisServer The whois server domain or IP being queried.
      */
-    final public function createConnection(string $whoisServer) : void
+    final public function createConnection(string $whoisServer): void
     {
         // Form a TCP socket connection to the whois server.
-        $this->connection = new SocketClient('tcp://'.$whoisServer.':43', self::TIMEOUT);
+        $this->connection = new SocketClient('tcp://' . $whoisServer . ':43', self::TIMEOUT);
         $this->connection->connect();
     }
 
@@ -72,10 +73,10 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @return bool True if all not-yet-saved items were successfully saved or
      * there were none. False otherwise.
      */
-    final public function makeRequest(string $lookupValue) : bool
+    final public function makeRequest(string $lookupValue): bool
     {
         // Send the domain name requested for whois lookup.
-        return $this->connection->writeString($lookupValue.$this->clrf);
+        return $this->connection->writeString($lookupValue . $this->clrf);
     }
 
     /**

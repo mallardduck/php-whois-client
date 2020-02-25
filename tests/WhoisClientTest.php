@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
@@ -20,7 +21,7 @@ class WhoisClientTest extends BaseTest
      */
     public function testIsThereAnySyntaxError()
     {
-        $var = new Client;
+        $var = new Client();
         $this->assertTrue(is_object($var));
         unset($var);
     }
@@ -31,7 +32,7 @@ class WhoisClientTest extends BaseTest
     public function testEmptyLookupThrowsException()
     {
         $this->expectException(MissingArgException::class);
-        $var = new Client;
+        $var = new Client();
         $this->assertTrue(is_object($var));
         $var->lookup();
         unset($var);
@@ -42,7 +43,7 @@ class WhoisClientTest extends BaseTest
     */
     public function testClientLookupGoogle()
     {
-        $var = new Client;
+        $var = new Client();
         $results = $var->lookup("google.com");
         $this->assertTrue(!empty($results));
         $this->assertTrue(is_string($results));
@@ -55,7 +56,7 @@ class WhoisClientTest extends BaseTest
     */
     public function testMakeSafeWhoisRequest()
     {
-        $client = new Client;
+        $client = new Client();
         $rawResults = $client->makeSafeWhoisRequest("danpock.me", "whois.nic.me");
         $this->assertTrue(strstr($rawResults, "\r\n", true) === "Domain Name: DANPOCK.ME");
         unset($client, $rawResults);
@@ -69,7 +70,7 @@ class WhoisClientTest extends BaseTest
      */
     public function testValidParsingDomains($domain, $parsed)
     {
-        $client = new Client;
+        $client = new Client();
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
         $wat = $foo->invokeArgs($client, [$domain]);
@@ -102,7 +103,7 @@ class WhoisClientTest extends BaseTest
      */
     public function testInvalidParsingDomains($domain, $exception)
     {
-        $client = new Client;
+        $client = new Client();
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
         $this->expectException($exception);

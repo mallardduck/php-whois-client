@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois;
 
 use TrueBV\Punycode;
@@ -62,7 +63,7 @@ class Client extends AbstractWhoisClient
      *
      * @return string              The raw results of the query response.
      */
-    public function makeSafeWhoisRequest($domain, $whoisServer) : string
+    public function makeSafeWhoisRequest($domain, $whoisServer): string
     {
         $this->parseWhoisDomain($domain);
         // Form a socket connection to the whois server.
@@ -76,12 +77,13 @@ class Client extends AbstractWhoisClient
      *
      * @return string
      */
-    protected function getSearchableHostname($domain) : string
+    protected function getSearchableHostname($domain): string
     {
         // Attempt to parse the domains Host component and get the registrable parts.
         $host = new Host($domain);
-        if (false === empty($host->getSubdomain()) &&
-          false === strpos($host->getSubdomain(), '.')
+        if (
+            false === empty($host->getSubdomain()) &&
+            false === strpos($host->getSubdomain(), '.')
         ) {
             return (string) $host;
         }
@@ -94,7 +96,7 @@ class Client extends AbstractWhoisClient
      *
      * @return string Returns the parsed domain.
      */
-    protected function parseWhoisDomain($domain) : string
+    protected function parseWhoisDomain($domain): string
     {
         if (empty($domain)) {
             throw new MissingArgException("Must provide a domain name when using lookup method.");
@@ -121,7 +123,7 @@ class Client extends AbstractWhoisClient
      *
      * @return string         The output of the Whois look up.
      */
-    public function lookup($domain = '') : string
+    public function lookup($domain = ''): string
     {
         if (empty($domain)) {
             throw new MissingArgException("Must provide a domain name when using lookup method.");

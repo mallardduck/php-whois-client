@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
@@ -19,7 +20,7 @@ class WhoisClientRawTest extends BaseTest
      */
     public function testIsThereAnySyntaxError()
     {
-        $var = new Client;
+        $var = new Client();
         $this->assertTrue(is_object($var));
         unset($var);
     }
@@ -29,7 +30,7 @@ class WhoisClientRawTest extends BaseTest
      */
     public function testBasicRequestConcepts()
     {
-        $var = new Client;
+        $var = new Client();
         $this->assertTrue(is_object($var));
         $var->createConnection("whois.nic.me");
         $status = $var->makeRequest("danpock.me");

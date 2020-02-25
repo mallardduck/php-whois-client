@@ -1,4 +1,5 @@
 <?php
+
 namespace MallardDuck\Whois\WhoisServerList;
 
 /**
