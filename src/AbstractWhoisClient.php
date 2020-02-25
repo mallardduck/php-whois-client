@@ -27,7 +27,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * The timeout duration used for WhoIs server lookups.
      * @var int
      */
-    const TIMEOUT = 10;
+    public const TIMEOUT = 10;
 
     /**
      * The input domain provided by the user.

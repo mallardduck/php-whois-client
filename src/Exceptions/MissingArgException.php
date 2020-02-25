@@ -15,7 +15,7 @@ class MissingArgException extends \Exception
 {
 
     /** @var int    An integer code for the exception. */
-    const CODE = 0;
+    public const CODE = 0;
 
     /**
      * Basic Exception Constructor
