@@ -3,6 +3,7 @@
 namespace MallardDuck\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
+use Tightenco\Collect\Support\Collection;
 use MallardDuck\Whois\WhoisServerList\DomainLocator;
 
 /**
@@ -28,9 +29,9 @@ class DomainLocatorTest extends TestCase
         $reflection_property->setAccessible(true);
         // Using this value we'll do a few assertions.
         $whoisCollection = $reflection_property->getValue($var);
-        $this->assertTrue(is_object($var));
-        $this->assertTrue("Tightenco\\Collect\\Support\\Collection" === get_class($whoisCollection));
-        $this->assertTrue(1229 === $whoisCollection->count(), "The whois domain count is off.");
+        $this->assertIsObject($var);
+        $this->assertInstanceOf(Collection::class, $whoisCollection);
+        $this->assertSame(1229, $whoisCollection->count(), "The whois domain count is off.");
         unset($var);
     }
 
@@ -40,7 +41,7 @@ class DomainLocatorTest extends TestCase
     public function testIsThereAnySyntaxError()
     {
         $var = new DomainLocator();
-        $this->assertTrue(is_object($var));
+        $this->assertIsObject($var);
         unset($var);
     }
 
@@ -52,13 +53,17 @@ class DomainLocatorTest extends TestCase
         $var = new DomainLocator();
         $var->findWhoisServer("google.com");
         $match = $var->getLastMatch();
-        $this->assertTrue(is_string($match) && !empty($match) && strlen($match) >= 1);
+        $this->assertIsString($match);
+        $this->assertNotEmpty($match);
+        $this->assertGreaterThanOrEqual(1, strlen($match));
         unset($var, $match);
 
         $var = new DomainLocator();
         $var->findWhoisServer("danpock.xyz");
         $match = $var->getLastMatch();
-        $this->assertTrue(is_string($match) && !empty($match) && strlen($match) >= 1);
+        $this->assertIsString($match);
+        $this->assertNotEmpty($match);
+        $this->assertGreaterThanOrEqual(1, strlen($match));
         unset($var, $match);
     }
 }

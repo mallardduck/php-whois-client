@@ -22,7 +22,7 @@ class WhoisClientTest extends BaseTest
     public function testIsThereAnySyntaxError()
     {
         $var = new Client();
-        $this->assertTrue(is_object($var));
+        $this->assertIsObject($var);
         unset($var);
     }
 
@@ -33,7 +33,7 @@ class WhoisClientTest extends BaseTest
     {
         $this->expectException(MissingArgException::class);
         $var = new Client();
-        $this->assertTrue(is_object($var));
+        $this->assertIsObject($var);
         $var->lookup();
         unset($var);
     }
@@ -45,9 +45,9 @@ class WhoisClientTest extends BaseTest
     {
         $var = new Client();
         $results = $var->lookup("google.com");
-        $this->assertTrue(!empty($results));
-        $this->assertTrue(is_string($results));
-        $this->assertTrue(1 <= count(explode("\r\n", $results)));
+        $this->assertNotEmpty($results);
+        $this->assertIsString($results);
+        $this->assertGreaterThanOrEqual(1, count(explode("\r\n", $results)));
         unset($var, $results);
     }
 
@@ -58,7 +58,8 @@ class WhoisClientTest extends BaseTest
     {
         $client = new Client();
         $rawResults = $client->makeSafeWhoisRequest("danpock.me", "whois.nic.me");
-        $this->assertTrue(strstr($rawResults, "\r\n", true) === "Domain Name: DANPOCK.ME");
+        $rawContainedResults = strstr($rawResults, "\r\n", true);
+        $this->assertSame("Domain Name: DANPOCK.ME", $rawContainedResults);
         unset($client, $rawResults);
     }
 
@@ -74,7 +75,7 @@ class WhoisClientTest extends BaseTest
         $this->assertTrue(method_exists($client, 'parseWhoisDomain'));
         $foo = self::getMethod($client, 'parseWhoisDomain');
         $wat = $foo->invokeArgs($client, [$domain]);
-        $this->assertTrue($parsed === $wat);
+        $this->assertSame($parsed, $wat);
         unset($client, $foo, $wat);
     }
 
