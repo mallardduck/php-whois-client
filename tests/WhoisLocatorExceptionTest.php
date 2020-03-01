@@ -37,8 +37,9 @@ class WhoisLocatorExceptionTest extends TestCase
     {
         $var = new DomainLocator();
         $results = $var->findWhoisServer("com.com")->getWhoisServer();
-        $this->assertTrue(is_string($results) && !empty($results));
-        $this->assertTrue("whois.verisign-grs.com" === $results);
+        $this->assertIsString($results);
+        $this->assertNotEmpty($results);
+        $this->assertSame("whois.verisign-grs.com", $results);
 
         $this->expectException(MissingArgException::class);
 
@@ -69,8 +70,9 @@ class WhoisLocatorExceptionTest extends TestCase
     {
         $var = new DomainLocator();
         $results = $var->findWhoisServer("com.com")->getWhoisServer();
-        $this->assertTrue(is_string($results) && !empty($results));
-        $this->assertTrue("whois.verisign-grs.com" === $results);
+        $this->assertIsString($results);
+        $this->assertNotEmpty($results);
+        $this->assertSame("whois.verisign-grs.com", $results);
 
         if (version_compare(phpversion(), "7.0", ">=")) {
             $this->expectException(MissingArgException::class);
@@ -89,8 +91,9 @@ class WhoisLocatorExceptionTest extends TestCase
     {
         $var = new DomainLocator();
         $results = $var->getWhoisServer("bing.com");
-        $this->assertTrue(is_string($results) && !empty($results));
-        $this->assertTrue("whois.verisign-grs.com" === $results);
+        $this->assertIsString($results);
+        $this->assertNotEmpty($results);
+        $this->assertSame("whois.verisign-grs.com", $results);
         unset($var, $results);
 
         $this->expectException(MissingArgException::class);
@@ -108,8 +111,9 @@ class WhoisLocatorExceptionTest extends TestCase
         $var = new DomainLocator();
         $results = $var->getWhoisServer("bing.com");
         $orgResults = $results;
-        $this->assertTrue(is_string($results) && !empty($results));
-        $this->assertTrue("whois.verisign-grs.com" === $results);
+        $this->assertIsString($results);
+        $this->assertNotEmpty($results);
+        $this->assertSame("whois.verisign-grs.com", $results);
         unset($results);
 
         $results = $var->getWhoisServer();

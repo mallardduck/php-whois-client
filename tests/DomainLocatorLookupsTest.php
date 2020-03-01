@@ -27,8 +27,9 @@ class DomainLocatorLookupsTest extends TestCase
     {
         $var = new DomainLocator();
         $results = $var->findWhoisServer($domain)->getWhoisServer();
-        $this->assertTrue(is_string($results) && !empty($results));
-        $this->assertTrue($server === $results);
+        $this->assertIsString($results);
+        $this->assertNotEmpty($results);
+        $this->assertSame($server, $results);
         unset($var, $results);
     }
 
@@ -42,8 +43,9 @@ class DomainLocatorLookupsTest extends TestCase
     {
         $var = new DomainLocator();
         $results = $var->getWhoisServer($domain);
-        $this->assertTrue(is_string($results) && !empty($results));
-        $this->assertTrue($server === $results);
+        $this->assertIsString($results);
+        $this->assertNotEmpty($results);
+        $this->assertSame($server, $results);
         unset($var, $results);
     }
 

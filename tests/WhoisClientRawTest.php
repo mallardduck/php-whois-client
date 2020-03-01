@@ -21,7 +21,7 @@ class WhoisClientRawTest extends BaseTest
     public function testIsThereAnySyntaxError()
     {
         $var = new Client();
-        $this->assertTrue(is_object($var));
+        $this->assertIsObject($var);
         unset($var);
     }
 
@@ -31,11 +31,12 @@ class WhoisClientRawTest extends BaseTest
     public function testBasicRequestConcepts()
     {
         $var = new Client();
-        $this->assertTrue(is_object($var));
+        $this->assertIsObject($var);
         $var->createConnection("whois.nic.me");
         $status = $var->makeRequest("danpock.me");
         $response = $var->getResponseAndClose();
-        $this->assertTrue(strstr($response, "\r\n", true) === "Domain Name: DANPOCK.ME");
+        $containedResponse = strstr($response, "\r\n", true);
+        $this->assertSame("Domain Name: DANPOCK.ME", $containedResponse);
 
         unset($response, $status, $var);
     }
