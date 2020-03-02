@@ -22,24 +22,8 @@ class SocketClient
 
     public function __construct(string $socketUri, int $timeout = 30)
     {
-        $this->setSocketUri($socketUri);
-        $this->setTimeout($timeout);
-    }
-
-    protected function setSocketUri(string $socketUri): string
-    {
-        $current = $this->socketUri;
         $this->socketUri = $socketUri;
-
-        return $current ?? '';
-    }
-
-    protected function setTimeout(int $timeout): int
-    {
-        $current = $this->timeout;
         $this->timeout = $timeout;
-
-        return $current;
     }
 
     public function connect(): self
