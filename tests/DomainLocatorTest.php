@@ -22,13 +22,17 @@ class DomainLocatorTest extends TestCase
      */
     public function testConstruction()
     {
+        $reader = function & ($object, $property) {
+            $value = & \Closure::bind(function & () use ($property) {
+                return $this->$property;
+            }, $object, $object)->__invoke();
+
+            return $value;
+        };
+
         $var = new DomainLocator();
         // Reflect the class to get the value of the whois list.
-        $reflection = new \ReflectionClass($var);
-        $reflection_property = $reflection->getProperty('whoisCollection');
-        $reflection_property->setAccessible(true);
-        // Using this value we'll do a few assertions.
-        $whoisCollection = $reflection_property->getValue($var);
+        $whoisCollection = $reader($var, 'whoisCollection');
         $this->assertIsObject($var);
         $this->assertInstanceOf(Collection::class, $whoisCollection);
         $this->assertSame(1229, $whoisCollection->count(), "The whois domain count is off.");
