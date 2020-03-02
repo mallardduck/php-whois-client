@@ -88,7 +88,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
         // Read the full output of the whois lookup.
         $response = $this->connection->readAll();
         // Disconnect the connections after use in order to prevent observed
-        // network & performance issues. Not doing this caused mild trottling.
+        // network & performance issues. Not doing this caused mild throttling.
         $this->connection->disconnect();
         return $response;
     }
