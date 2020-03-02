@@ -44,7 +44,6 @@ class SocketClient
 
     public function connect(): self
     {
-
         $fp = stream_socket_client($this->socketUri, $errno, $errstr, $this->timeout);
         if (!$fp) {
             $message = sprintf("Stream Connection Failed: %s", $errstr);
