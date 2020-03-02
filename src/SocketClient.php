@@ -13,7 +13,7 @@ use MallardDuck\Whois\Exceptions\SocketClientException;
  *
  * @version ?.?.?
  */
-class SocketClient
+final class SocketClient
 {
     protected $socketUri = null;
     protected $socket = null;
