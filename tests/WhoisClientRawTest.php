@@ -46,7 +46,6 @@ class WhoisClientRawTest extends BaseTest
      */
     public function testConnectionDisconnects()
     {
-
         $reader = function & ($object, $property) {
             $value = & \Closure::bind(function & () use ($property) {
                 return $this->$property;
