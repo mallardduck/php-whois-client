@@ -29,6 +29,31 @@ class WhoisSocketClientTest extends BaseTest
     /**
      * Basic test to check client syntax.
      */
+    public function testSettingTimeoutValue()
+    {
+        $reader = function & ($object, $property) {
+            $value = & \Closure::bind(function & () use ($property) {
+                return $this->$property;
+            }, $object, $object)->__invoke();
+
+            return $value;
+        };
+
+        $var = new SocketClient("tcp://whois.nic.me:43");
+        $this->assertIsObject($var);
+        $timeout = $reader($var, 'timeout');
+        $this->assertSame($timeout, 30);
+
+        $var = new SocketClient("tcp://whois.nic.me:43", 10);
+        $timeout = $reader($var, 'timeout');
+        $this->assertSame($timeout, 10);
+
+        unset($timeout, $var);
+    }
+
+    /**
+     * Basic test to check client syntax.
+     */
     public function testBasicRequestConcepts()
     {
         $var = new SocketClient("tcp://whois.nic.me:43", 10);
