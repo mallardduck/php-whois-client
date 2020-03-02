@@ -2,7 +2,6 @@
 
 namespace MallardDuck\Whois;
 
-use Hoa\Socket\Client as SocketClient;
 use MallardDuck\Whois\WhoisClientInterface;
 
 /**
