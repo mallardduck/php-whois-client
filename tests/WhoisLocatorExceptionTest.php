@@ -52,11 +52,7 @@ class WhoisLocatorExceptionTest extends TestCase
      */
     public function testNullStringThrowsException()
     {
-        if (version_compare(phpversion(), "7.0", ">=")) {
-            $this->expectException(MissingArgException::class);
-        } else {
-            $this->expectException(\Exception::class);
-        }
+        $this->expectException(MissingArgException::class);
 
         $var = new DomainLocator();
         $results = $var->findWhoisServer(null);
@@ -74,11 +70,7 @@ class WhoisLocatorExceptionTest extends TestCase
         $this->assertNotEmpty($results);
         $this->assertSame("whois.verisign-grs.com", $results);
 
-        if (version_compare(phpversion(), "7.0", ">=")) {
-            $this->expectException(MissingArgException::class);
-        } else {
-            $this->expectException(\Exception::class);
-        }
+        $this->expectException(MissingArgException::class);
 
         $results = $var->findWhoisServer(null);
         unset($var, $results);
