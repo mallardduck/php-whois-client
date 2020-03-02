@@ -63,8 +63,7 @@ class SocketClient
 
     public function writeString(string $string)
     {
-        if (!$this->connected)
-        {
+        if (!$this->connected) {
             $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
             throw new SocketClientException($message);
         }
@@ -73,8 +72,7 @@ class SocketClient
 
     public function readAll(): string
     {
-        if (!$this->connected)
-        {
+        if (!$this->connected) {
             $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
             throw new SocketClientException($message);
         }
@@ -84,8 +82,8 @@ class SocketClient
     public function disconnect(): self
     {
         if (!is_null($this->socket)) {
-          stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
-          fclose($this->socket);
+            stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
+            fclose($this->socket);
         }
         $this->socket = null;
         $this->connected = false;
@@ -97,5 +95,4 @@ class SocketClient
     {
         $this->disconnect();
     }
-
 }
