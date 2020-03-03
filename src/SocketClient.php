@@ -11,7 +11,7 @@ use MallardDuck\Whois\Exceptions\SocketClientException;
  *
  * @copyright lucidinternets.com 2020
  *
- * @version ?.?.?
+ * @version 1.1.0
  */
 final class SocketClient
 {
