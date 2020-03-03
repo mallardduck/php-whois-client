@@ -33,7 +33,7 @@ final class SocketClient
             $message = sprintf("Stream Connection Failed: %s unable to connect to %s", $errstr, $this->socketUri);
             throw new SocketClientException($message, $errno);
         }
-        
+
         $this->socket = $fp;
         $this->connected = true;
         return $this;
