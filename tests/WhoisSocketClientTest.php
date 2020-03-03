@@ -29,6 +29,18 @@ class WhoisSocketClientTest extends BaseTest
     /**
      * Basic test to check client syntax.
      */
+    public function testIntentionalSyntaxError()
+    {
+        $var = new SocketClient("ztcpz://127.0.0.1:43", 10);
+        $this->assertIsObject($var);
+        $this->expectException(SocketClientException::class);
+        $var->connect();
+        unset($var);
+    }
+
+    /**
+     * Basic test to check client syntax.
+     */
     public function testSettingTimeoutValue()
     {
         $reader = function & ($object, $property) {

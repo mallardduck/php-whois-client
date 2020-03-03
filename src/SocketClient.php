@@ -28,12 +28,12 @@ final class SocketClient
 
     public function connect(): self
     {
-        $fp = stream_socket_client($this->socketUri, $errno, $errstr, $this->timeout);
+        $fp = @stream_socket_client($this->socketUri, $errno, $errstr, $this->timeout);
         if (!is_resource($fp) && false === $fp) {
-            $message = sprintf("Stream Connection Failed: %s", $errstr);
+            $message = sprintf("Stream Connection Failed: %s unable to connect to %s", $errstr, $this->socketUri);
             throw new SocketClientException($message, $errno);
         }
-
+        
         $this->socket = $fp;
         $this->connected = true;
         return $this;
