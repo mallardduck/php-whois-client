@@ -6,8 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.1.0] - 2020-03-02
+### Added
+- Added a local `SocketClient` as a thin wrapper for PHP stream sockets.
+- Added exception for new `SocketClient` for when things go wrong.
+
 ### Changed
+- Modified how `AbstractWhoisClient::createConnection` works internally by swapping `SocketClient`.
 - Tweaked how `getSearchableHostname()` functions to allow host/glue record look up.
+
+### Removed
+- Dependency on `hoa/socket` library.
 
 ## [1.0.1] - 2020-02-24
 ### Changed
