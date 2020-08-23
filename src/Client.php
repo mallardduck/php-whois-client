@@ -7,6 +7,7 @@ use League\Uri\Components\Host;
 use MallardDuck\Whois\WhoisServerList\AbstractLocator;
 use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
+use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
 /**
  * The Whois Client Class.
@@ -107,6 +108,9 @@ class Client extends AbstractWhoisClient
         $this->inputDomain = $domain;
 
         $processedDomain = $this->getSearchableHostname($domain);
+        if ('' === $processedDomain) {
+            throw new UnknownWhoisException("Unable to parse input to searchable hostname.");
+        }
 
         // Punycode the domain if it's Unicode
         if ("UTF-8" === mb_detect_encoding($domain)) {
