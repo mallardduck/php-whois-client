@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.1.1] - 2020-03-02
+## [1.5.0] - 2020-08-23
+### Added
+- Increase PHP minimum version to 7.2 removing EOL versions support.
+
+## [1.1.1] - 2020-08-23
 ### Added
 - Additional DocBlock completion - mostly added @throws and such.
 
