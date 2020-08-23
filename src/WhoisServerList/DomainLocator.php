@@ -35,7 +35,7 @@ class DomainLocator extends AbstractLocator
      * @throws MissingArgException
      * @throws UnknownWhoisException
      */
-    public function findWhoisServer($domain)
+    public function findWhoisServer($domain): self
     {
         if (empty($domain)) {
             throw new MissingArgException("Must provide domain argument.");
@@ -61,7 +61,7 @@ class DomainLocator extends AbstractLocator
      * @throws MissingArgException
      * @throws UnknownWhoisException
      */
-    public function getWhoisServer($domain = '')
+    public function getWhoisServer($domain = ''): string
     {
         if (!empty($domain) || empty($this->lastMatch)) {
             $this->findWhoisServer($domain);

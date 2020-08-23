@@ -54,7 +54,7 @@ abstract class AbstractLocator
      *
      * @return string The results of the last looked up domain.
      */
-    public function getLastMatch()
+    public function getLastMatch(): string
     {
         return $this->lastMatch;
     }
@@ -66,7 +66,7 @@ abstract class AbstractLocator
      *
      * @return self Returns the same instance for fluent usage.
      */
-    abstract public function findWhoisServer($domain);
+    abstract public function findWhoisServer($domain): self;
 
     /**
      * Get the Whois server of the domain provided, or previously found domain.
@@ -75,5 +75,5 @@ abstract class AbstractLocator
      *
      * @return string         Returns the domain name of the whois server.
      */
-    abstract public function getWhoisServer($domain = '');
+    abstract public function getWhoisServer($domain = ''): string;
 }
