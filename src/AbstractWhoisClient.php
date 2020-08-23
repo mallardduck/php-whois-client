@@ -46,7 +46,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @return string               The raw text results of the query response.
      * @throws Exceptions\SocketClientException
      */
-    public function makeWhoisRequest(string $lookupValue, string $whoisServer)
+    public function makeWhoisRequest(string $lookupValue, string $whoisServer): string
     {
         $this->createConnection($whoisServer);
         $this->makeRequest($lookupValue);
@@ -88,7 +88,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * @return string   The raw results of the query response.
      * @throws Exceptions\SocketClientException
      */
-    final public function getResponseAndClose()
+    final public function getResponseAndClose(): string
     {
         // Read the full output of the whois lookup.
         $response = $this->connection->readAll();

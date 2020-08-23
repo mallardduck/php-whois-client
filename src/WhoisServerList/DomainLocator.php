@@ -35,13 +35,13 @@ class DomainLocator extends AbstractLocator
      * @throws MissingArgException
      * @throws UnknownWhoisException
      */
-    public function findWhoisServer($domain)
+    public function findWhoisServer($domain): self
     {
         if (empty($domain)) {
             throw new MissingArgException("Must provide domain argument.");
         }
 
-        $tldInfo = $this->whoisCollection->filter(function ($item, $key) use ($domain) {
+        $tldInfo = $this->whoisCollection->filter(static function ($item, $key) use ($domain) {
             return preg_match('/' . $key . '/', $domain);
         });
         if (empty($tldInfo->all())) {
@@ -61,7 +61,7 @@ class DomainLocator extends AbstractLocator
      * @throws MissingArgException
      * @throws UnknownWhoisException
      */
-    public function getWhoisServer($domain = '')
+    public function getWhoisServer($domain = ''): string
     {
         if (!empty($domain) || empty($this->lastMatch)) {
             $this->findWhoisServer($domain);
