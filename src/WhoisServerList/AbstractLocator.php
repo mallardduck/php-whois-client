@@ -17,7 +17,6 @@ use Tightenco\Collect\Support\Collection;
  */
 abstract class AbstractLocator
 {
-
     /**
      * The path where the tld json file exists.
      *

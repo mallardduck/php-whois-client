@@ -19,7 +19,6 @@ use MallardDuck\Whois\Exceptions\MissingArgException;
  */
 class Client extends AbstractWhoisClient
 {
-
     /**
      * The TLD Whois locator class.
      * @var AbstractLocator

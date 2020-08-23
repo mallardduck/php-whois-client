@@ -15,7 +15,6 @@ use League\Uri\Components\Exception;
 */
 abstract class BaseTest extends TestCase
 {
-
     /**
      * [getMethod description]
      * @return \League\Uri\Components\Exception         [description]
