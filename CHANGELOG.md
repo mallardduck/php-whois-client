@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.1] - 2020-03-02
+### Added
+- Additional DocBlock completion - mostly added @throws and such.
+
+### Modified
+- Slight refactor of a few areas for readability, no functional changes tho.
+
 ## [1.1.0] - 2020-03-02
 ### Added
 - Added a local `SocketClient` as a thin wrapper for PHP stream sockets.
