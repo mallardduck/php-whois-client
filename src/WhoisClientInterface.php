@@ -13,7 +13,6 @@ namespace MallardDuck\Whois;
  */
 interface WhoisClientInterface
 {
-
     /**
      * Perform a Whois lookup.
      *

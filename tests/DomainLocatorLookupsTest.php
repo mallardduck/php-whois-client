@@ -15,8 +15,6 @@ use MallardDuck\Whois\WhoisServerList\DomainLocator;
 */
 class DomainLocatorLookupsTest extends TestCase
 {
-
-
     /**
      * Test the ability to call the locators find function and get function fluently.
      * @param string $domain Test domains!

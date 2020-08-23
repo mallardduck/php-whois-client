@@ -16,7 +16,6 @@ use MallardDuck\Whois\WhoisServerList\DomainLocator;
 */
 class DomainLocatorTest extends TestCase
 {
-
     /**
      * Basic test to check client syntax.
      */

@@ -15,7 +15,6 @@ use Exception;
  */
 class MissingArgException extends Exception
 {
-
     /** @var int    An integer code for the exception. */
     public const CODE = 0;
 

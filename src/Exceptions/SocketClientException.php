@@ -15,7 +15,6 @@ use Exception;
  */
 class SocketClientException extends Exception
 {
-
     /** @var int    An integer code for the exception. */
     public const CODE = 0;
 

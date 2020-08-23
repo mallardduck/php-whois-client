@@ -18,7 +18,6 @@ use MallardDuck\Whois\Exceptions\UnknownWhoisException;
  */
 class DomainLocator extends AbstractLocator
 {
-
     /**
      * The path where the tld json file exists.
      *

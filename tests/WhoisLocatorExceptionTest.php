@@ -17,7 +17,6 @@ use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 */
 class WhoisLocatorExceptionTest extends TestCase
 {
-
     /**
      * Test function comment stub.
      */

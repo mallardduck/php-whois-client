@@ -15,7 +15,6 @@ use MallardDuck\Whois\WhoisClientInterface;
  */
 abstract class AbstractWhoisClient implements WhoisClientInterface
 {
-
     /**
      * The carriage return line feed character combo.
      * @var string
