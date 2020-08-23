@@ -65,7 +65,7 @@ abstract class AbstractLocator
      *
      * @return self Returns the same instance for fluent usage.
      */
-    abstract public function findWhoisServer(string $domain);
+    abstract public function findWhoisServer($domain);
 
     /**
      * Get the Whois server of the domain provided, or previously found domain.
@@ -74,5 +74,5 @@ abstract class AbstractLocator
      *
      * @return string         Returns the domain name of the whois server.
      */
-    abstract public function getWhoisServer(string $domain): string;
+    abstract public function getWhoisServer($domain = ''): string;
 }
