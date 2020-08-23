@@ -60,13 +60,16 @@ class DomainLocator extends AbstractLocator
      * @throws MissingArgException
      * @throws UnknownWhoisException
      */
-    public function getWhoisServer($domain = ''): string
+    public function getWhoisServer(string $domain = ''): string
     {
-        if (!empty($domain) || empty($this->lastMatch)) {
+        if ('' === $domain && empty($this->lastMatch)) {
+            throw new MissingArgException("Input not parsable to determine whois server.");
+        }
+        if ('' !== $domain) {
             $this->findWhoisServer($domain);
         }
         if ('UNKNOWN' === strtoupper($this->lastMatch)) {
-            throw new UnknownWhoisException("This domain doesn't have a valid whois server.");
+            throw new UnknownWhoisException("Unable to determine valid whois server for this domain.");
         }
 
         return $this->lastMatch;
