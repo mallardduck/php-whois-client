@@ -4,6 +4,7 @@ namespace MallardDuck\Whois\Test;
 
 use MallardDuck\Whois\Client;
 use MallardDuck\Whois\Exceptions\MissingArgException;
+use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
 /**
 *  Corresponding Class to test the whois Client class
@@ -84,7 +85,6 @@ class WhoisClientTest extends BaseTest
     public function validDomainsProvider()
     {
         return [
-                ['domain', ''],
                 ['ns1.google.com', 'ns1.google.com'],
                 ['sub.domain.wedding', 'sub.domain.wedding'],
                 ['subsub.sub.domain.wedding', 'domain.wedding'],
@@ -117,6 +117,8 @@ class WhoisClientTest extends BaseTest
     public function invalidDomainsProvider()
     {
         return [
+                ['domain', UnknownWhoisException::class],
+                ['google.', UnknownWhoisException::class],
                 ['президент.рф', $this->getUriException()],
                 ['', MissingArgException::class],
             ];

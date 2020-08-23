@@ -111,7 +111,8 @@ class WhoisDomainTest extends BaseTest
     {
         return [
             ['', MissingArgException::class],
-            ['domain', MissingArgException::class],
+            ['domain', UnknownWhoisException::class],
+            ['google.', UnknownWhoisException::class],
             ['президент.рф', $this->getUriException()],
             ['президент.рф2', UnknownWhoisException::class],
         ];
