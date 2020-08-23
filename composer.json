@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": "~7.1",
+        "php": "~7.2",
         "ext-json": "*",
         "ext-mbstring": "*",
         "league/uri": "5.2",
@@ -56,7 +56,7 @@
         "fix-style": "./vendor/bin/phpcbf -p --standard=PSR12 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
         "semver": "php-semver-checker-git suggest --allow-detached -vvv --details --include-before=src --include-after=src",
         "infect": "./vendor/bin/infection --threads=4 --configuration=./infection.json.dist",
-        "versions": "./vendor/bin/phpcs -p ./src/ ./tests/ --standard=PHPCompatibility --runtime-set testVersion 7.1"
+        "versions": "./vendor/bin/phpcs -p ./src/ ./tests/ --standard=PHPCompatibility --runtime-set testVersion 7.2"
     },
     "config": {
         "sort-packages": true
