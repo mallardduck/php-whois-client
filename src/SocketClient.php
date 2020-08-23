@@ -36,7 +36,11 @@ final class SocketClient
     {
         $fp = @stream_socket_client($this->socketUri, $errno, $errstr, $this->timeout);
         if (!is_resource($fp) && false === $fp) {
-            $message = sprintf("Stream Connection Failed: %s unable to connect to %s", $errstr, $this->socketUri);
+            $message = sprintf(
+                "Stream Connection Failed: unable to connect to %s. System Error: %s ",
+                $this->socketUri,
+                $errstr
+            );
             throw new SocketClientException($message, $errno);
         }
 
