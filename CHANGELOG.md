@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.5.0] - 2020-08-23
+## [1.2.1] - 2020-08-23
+### Modified
+- Catch errors sooner than before and give more accurate error text.
+
+## [1.2.0] - 2020-08-23
 ### Added
 - Increase PHP minimum version to 7.2 removing EOL versions support.
 
