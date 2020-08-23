@@ -28,7 +28,7 @@ class Client extends AbstractWhoisClient
 
     /**
      * The Unicode for IDNA.
-     * @var \TrueBV\Punycode
+     * @var Punycode
      */
     protected $punycode;
 
@@ -58,10 +58,12 @@ class Client extends AbstractWhoisClient
      *
      * The main difference with this method is the benefit of punycode domains.
      *
-     * @param  string $domain      The domain or IP being looked up.
-     * @param  string $whoisServer The whois server being queried.
+     * @param string $domain      The domain or IP being looked up.
+     * @param string $whoisServer The whois server being queried.
      *
      * @return string              The raw results of the query response.
+     * @throws Exceptions\SocketClientException
+     * @throws MissingArgException
      */
     public function makeSafeWhoisRequest($domain, $whoisServer): string
     {
@@ -92,9 +94,11 @@ class Client extends AbstractWhoisClient
 
     /**
      * Takes the user provided domain and parses then encodes just the registerable domain.
-     * @param  string $domain The user provided domain.
+     *
+     * @param string $domain The user provided domain.
      *
      * @return string Returns the parsed domain.
+     * @throws MissingArgException
      */
     protected function parseWhoisDomain($domain): string
     {
@@ -103,13 +107,10 @@ class Client extends AbstractWhoisClient
         }
         $this->inputDomain = $domain;
 
-        // Check domain encoding
-        $encoding = mb_detect_encoding($domain);
-
         $processedDomain = $this->getSearchableHostname($domain);
 
         // Punycode the domain if it's Unicode
-        if ("UTF-8" === $encoding) {
+        if ("UTF-8" === mb_detect_encoding($domain)) {
             $processedDomain = $this->punycode->encode($processedDomain);
         }
         $this->parsedDomain = $processedDomain;
@@ -119,9 +120,13 @@ class Client extends AbstractWhoisClient
 
     /**
      * Performs a Whois look up on the domain provided.
-     * @param  string $domain The domain being looked up via whois.
+     *
+     * @param string $domain The domain being looked up via whois.
      *
      * @return string         The output of the Whois look up.
+     * @throws Exceptions\SocketClientException
+     * @throws Exceptions\UnknownWhoisException
+     * @throws MissingArgException
      */
     public function lookup($domain = ''): string
     {
@@ -134,8 +139,6 @@ class Client extends AbstractWhoisClient
         $whoisServer = $this->whoisLocator->getWhoisServer($this->parsedDomain);
 
         // Get the full output of the whois lookup.
-        $response = $this->makeWhoisRequest($this->parsedDomain, $whoisServer);
-
-        return $response;
+        return $this->makeWhoisRequest($this->parsedDomain, $whoisServer);
     }
 }

@@ -32,6 +32,8 @@ class DomainLocator extends AbstractLocator
      * @param string $domain Either an ID or a username.
      *
      * @return self Returns the same instance for fluent usage.
+     * @throws MissingArgException
+     * @throws UnknownWhoisException
      */
     public function findWhoisServer($domain)
     {
@@ -53,9 +55,11 @@ class DomainLocator extends AbstractLocator
     /**
      * Get the Whois server of the domain provided, or previously found domain.
      *
-     * @param  string $domain The domain being looked up via whois.
+     * @param string $domain The domain being looked up via whois.
      *
      * @return string         Returns the domain name of the whois server.
+     * @throws MissingArgException
+     * @throws UnknownWhoisException
      */
     public function getWhoisServer($domain = '')
     {

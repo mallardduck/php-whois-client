@@ -26,6 +26,12 @@ final class SocketClient
         $this->timeout = $timeout;
     }
 
+    /**
+     * Fluent method to connect to the socket via the URI set at construction time.
+     *
+     * @return $this
+     * @throws SocketClientException
+     */
     public function connect(): self
     {
         $fp = @stream_socket_client($this->socketUri, $errno, $errstr, $this->timeout);
@@ -39,11 +45,24 @@ final class SocketClient
         return $this;
     }
 
+    /**
+     * Check if the current status shows as connected.
+     *
+     * @return bool
+     */
     public function isConnected(): bool
     {
         return $this->connected;
     }
 
+    /**
+     * Write (or send) the string to the current socket stream.
+     *
+     * @param string $string
+     *
+     * @return false|int
+     * @throws SocketClientException
+     */
     public function writeString(string $string)
     {
         if (!$this->connected) {
@@ -53,6 +72,12 @@ final class SocketClient
         return stream_socket_sendto($this->socket, $string);
     }
 
+    /**
+     * Get all the response data from the socket stream.
+     *
+     * @return string
+     * @throws SocketClientException
+     */
     public function readAll(): string
     {
         if (!$this->connected) {
@@ -62,6 +87,11 @@ final class SocketClient
         return stream_get_contents($this->socket);
     }
 
+    /**
+     * Fluent method to disconnect from the whois socket.
+     *
+     * @return $this
+     */
     public function disconnect(): self
     {
         if (!is_null($this->socket)) {

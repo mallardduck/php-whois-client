@@ -17,7 +17,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
 {
 
     /**
-     * The carriage return line feed character comobo.
+     * The carriage return line feed character combo.
      * @var string
      */
     protected $clrf = "\r\n";
@@ -40,10 +40,11 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * Performs a Whois request using the given input for lookup and the Whois
      * server values.
      *
-     * @param  string $lookupValue  The domain or IP being looked up.
-     * @param  string $whoisServer  The whois server being queried.
+     * @param string $lookupValue The domain or IP being looked up.
+     * @param string $whoisServer The whois server being queried.
      *
      * @return string               The raw text results of the query response.
+     * @throws Exceptions\SocketClientException
      */
     public function makeWhoisRequest(string $lookupValue, string $whoisServer)
     {
@@ -56,6 +57,8 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * Creates a socket connection to the whois server and activates it.
      *
      * @param string $whoisServer The whois server domain or IP being queried.
+     *
+     * @throws Exceptions\SocketClientException
      */
     final public function createConnection(string $whoisServer): void
     {
@@ -71,6 +74,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      *
      * @return bool True if all not-yet-saved items were successfully saved or
      * there were none. False otherwise.
+     * @throws Exceptions\SocketClientException
      */
     final public function makeRequest(string $lookupValue): bool
     {
@@ -82,6 +86,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * A function for making a raw Whois request.
      *
      * @return string   The raw results of the query response.
+     * @throws Exceptions\SocketClientException
      */
     final public function getResponseAndClose()
     {

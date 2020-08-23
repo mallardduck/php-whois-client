@@ -2,6 +2,8 @@
 
 namespace MallardDuck\Whois\WhoisServerList;
 
+use Tightenco\Collect\Support\Collection;
+
 /**
  * Whois Server List Locator Class
  *
@@ -26,7 +28,7 @@ abstract class AbstractLocator
     /**
      * A collection of the TLDs and whois server list.
      *
-     * @var \Tightenco\Collect\Support\Collection
+     * @var Collection
      */
     protected $whoisCollection;
 
@@ -43,7 +45,7 @@ abstract class AbstractLocator
     public function __construct()
     {
         $fileData = file_get_contents($this->whoisListPath);
-        $tldData = json_decode($fileData);
+        $tldData = json_decode($fileData, true);
         $this->whoisCollection = collect($tldData);
     }
 
