@@ -31,9 +31,10 @@
         "true/punycode": "^2.1.1"
     },
 	"require-dev": {
+        "composer/package-versions-deprecated": "1.11.99.1",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "escapestudios/symfony2-coding-standard": "3.x-dev",
-        "infection/infection": "^0.10.5",
+        "infection/infection": "^0.15.1",
         "php-coveralls/php-coveralls": "^2.0",
         "phpcompatibility/php-compatibility": "*",
         "phpstan/phpstan": "^0.12.11",
