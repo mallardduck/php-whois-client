@@ -34,6 +34,8 @@ supports the look up of a TLDs primary Whois server and then will do a query of 
 ## Installation
 The best installation method is to simply use composer.
 
+https://packagist.org/packages/mallardduck/whois-client
+
 #### Stable version
 
 ```bash
