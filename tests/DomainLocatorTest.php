@@ -2,8 +2,8 @@
 
 namespace MallardDuck\Whois\Test;
 
+use Illuminate\Support\Collection;
 use PHPUnit\Framework\TestCase;
-use Tightenco\Collect\Support\Collection;
 use MallardDuck\Whois\WhoisServerList\DomainLocator;
 
 /**
