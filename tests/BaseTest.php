@@ -3,7 +3,6 @@
 namespace MallardDuck\Whois\Test;
 
 use PHPUnit\Framework\TestCase;
-use League\Uri\Components\Exception;
 
 /**
 *  Corresponding Class to test the whois Client class
@@ -15,15 +14,6 @@ use League\Uri\Components\Exception;
 */
 abstract class BaseTest extends TestCase
 {
-    /**
-     * [getMethod description]
-     * @return \League\Uri\Components\Exception         [description]
-     */
-    public function getUriException()
-    {
-        return Exception::class;
-    }
-
     /**
      * [getMethod description]
      * @param  mixed  $class [description]

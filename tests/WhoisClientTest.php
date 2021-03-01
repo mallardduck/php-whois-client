@@ -2,6 +2,7 @@
 
 namespace MallardDuck\Whois\Test;
 
+use ArgumentCountError;
 use MallardDuck\Whois\Client;
 use MallardDuck\Whois\Exceptions\MissingArgException;
 use MallardDuck\Whois\Exceptions\UnknownWhoisException;
@@ -31,7 +32,7 @@ class WhoisClientTest extends BaseTest
     */
     public function testEmptyLookupThrowsException()
     {
-        $this->expectException(MissingArgException::class);
+        $this->expectException(ArgumentCountError::class);
         $var = new Client();
         $this->assertIsObject($var);
         $var->lookup();
@@ -119,8 +120,8 @@ class WhoisClientTest extends BaseTest
         return [
                 ['domain', UnknownWhoisException::class],
                 ['google.', UnknownWhoisException::class],
-                ['президент.рф', $this->getUriException()],
-                ['', MissingArgException::class],
+                ['президент.рф', UnknownWhoisException::class],
+                ['', UnknownWhoisException::class],
             ];
     }
 }

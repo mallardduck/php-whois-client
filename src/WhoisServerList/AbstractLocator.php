@@ -22,21 +22,21 @@ abstract class AbstractLocator
      *
      * @var string
      */
-    protected $whoisListPath;
+    protected string $whoisListPath;
 
     /**
      * A collection of the TLDs and whois server list.
      *
      * @var Collection
      */
-    protected $whoisCollection;
+    protected Collection $whoisCollection;
 
     /**
      * The results of the last looked up domain.
      *
      * @var string
      */
-    protected $lastMatch;
+    protected string $lastMatch;
 
     /**
      * Build the TLD Whois Server Locator class.
@@ -65,7 +65,7 @@ abstract class AbstractLocator
      *
      * @return self Returns the same instance for fluent usage.
      */
-    abstract public function findWhoisServer($domain);
+    abstract public function findWhoisServer(string $domain): self;
 
     /**
      * Get the Whois server of the domain provided, or previously found domain.
@@ -74,5 +74,5 @@ abstract class AbstractLocator
      *
      * @return string         Returns the domain name of the whois server.
      */
-    abstract public function getWhoisServer($domain = ''): string;
+    abstract public function getWhoisServer(string $domain = ''): string;
 }

@@ -23,7 +23,13 @@ class DomainLocator extends AbstractLocator
      *
      * @var string
      */
-    protected $whoisListPath =  __DIR__ . '/../../blobs/tld.json';
+    protected string $whoisListPath;
+
+    public function __construct()
+    {
+        $this->whoisListPath = dirname(__DIR__, 2) . '/blobs/tld.json';
+        parent::__construct();
+    }
 
     /**
      * Finds and returns the last match looked up.
@@ -31,15 +37,13 @@ class DomainLocator extends AbstractLocator
      * @param string $domain Either an ID or a username.
      *
      * @return self Returns the same instance for fluent usage.
-     * @throws MissingArgException
      * @throws UnknownWhoisException
      */
-    public function findWhoisServer($domain): self
+    public function findWhoisServer(string $domain): self
     {
-        if (empty($domain)) {
-            throw new MissingArgException("Must provide domain argument.");
+        if ('' === $domain) {
+            throw new MissingArgException("Input domain must be provided and cannot be an empty string.");
         }
-
         $tldInfo = $this->whoisCollection->filter(static function ($item, $key) use ($domain) {
             return preg_match('/' . $key . '/', $domain);
         });
@@ -54,13 +58,13 @@ class DomainLocator extends AbstractLocator
     /**
      * Get the Whois server of the domain provided, or previously found domain.
      *
-     * @param string $domain The domain being looked up via whois.
+     * @param ?string $domain The domain being looked up via whois.
      *
      * @return string         Returns the domain name of the whois server.
      * @throws MissingArgException
      * @throws UnknownWhoisException
      */
-    public function getWhoisServer($domain = ''): string
+    public function getWhoisServer(?string $domain = ''): string
     {
         if ('' === $domain && empty($this->lastMatch)) {
             throw new MissingArgException("Input not parsable to determine whois server.");

@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
 use MallardDuck\Whois\Exceptions\UnknownWhoisException;
+use TypeError;
 
 /**
 *  Corresponding Class to test the Locator class
@@ -51,7 +52,7 @@ class WhoisLocatorExceptionTest extends TestCase
      */
     public function testNullStringThrowsException()
     {
-        $this->expectException(MissingArgException::class);
+        $this->expectException(TypeError::class);
 
         $var = new DomainLocator();
         $results = $var->findWhoisServer(null);
@@ -69,7 +70,7 @@ class WhoisLocatorExceptionTest extends TestCase
         $this->assertNotEmpty($results);
         $this->assertSame("whois.verisign-grs.com", $results);
 
-        $this->expectException(MissingArgException::class);
+        $this->expectException(TypeError::class);
 
         $results = $var->findWhoisServer(null);
         unset($var, $results);

@@ -2,8 +2,11 @@
 
 namespace MallardDuck\Whois;
 
-use TrueBV\Punycode;
+use League\Uri\Components\Domain;
 use League\Uri\Components\Host;
+use League\Uri\Components\UserInfo;
+use Pdp\Rules;
+use TrueBV\Punycode;
 use MallardDuck\Whois\WhoisServerList\AbstractLocator;
 use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
@@ -65,7 +68,7 @@ class Client extends AbstractWhoisClient
      * @throws Exceptions\SocketClientException
      * @throws MissingArgException
      */
-    public function makeSafeWhoisRequest($domain, $whoisServer): string
+    public function makeSafeWhoisRequest(string $domain, string $whoisServer): string
     {
         $this->parseWhoisDomain($domain);
         // Form a socket connection to the whois server.
@@ -79,17 +82,21 @@ class Client extends AbstractWhoisClient
      *
      * @return string
      */
-    protected function getSearchableHostname($domain): string
+    protected function getSearchableHostname(string $domain): string
     {
-        // Attempt to parse the domains Host component and get the registrable parts.
-        $host = new Host($domain);
+        $publicSuffixList = Rules::fromPath(dirname(__DIR__) . '/blobs/public_suffix_list.dat');
+        $domain = $publicSuffixList->resolve(trim($domain, '.'));
+
         if (
-            false === empty($host->getSubdomain()) &&
-            false === strpos($host->getSubdomain(), '.')
+            true !== empty($domain->subDomain()->toString()) &&
+            false === strpos($domain->subDomain()->toString(), '.')
         ) {
-            return $host->getContent();
+            return $domain->domain()->toString();
         }
-        return $host->getRegistrableDomain();
+
+
+        // Attempt to parse the domains Host component and get the registrable parts.
+        return $domain->registrableDomain()->toString();
     }
 
     /**
@@ -100,11 +107,8 @@ class Client extends AbstractWhoisClient
      * @return string Returns the parsed domain.
      * @throws MissingArgException
      */
-    protected function parseWhoisDomain($domain): string
+    protected function parseWhoisDomain(string $domain): string
     {
-        if (empty($domain)) {
-            throw new MissingArgException("Must provide a domain name when using lookup method.");
-        }
         $this->inputDomain = $domain;
 
         $processedDomain = $this->getSearchableHostname($domain);
@@ -124,17 +128,17 @@ class Client extends AbstractWhoisClient
     /**
      * Performs a Whois look up on the domain provided.
      *
-     * @param string $domain The domain being looked up via whois.
+     * @param ?string $domain The domain being looked up via whois.
      *
      * @return string         The output of the Whois look up.
      * @throws Exceptions\SocketClientException
      * @throws Exceptions\UnknownWhoisException
      * @throws MissingArgException
      */
-    public function lookup($domain = ''): string
+    public function lookup(string $domain): string
     {
-        if (empty($domain)) {
-            throw new MissingArgException("Must provide a domain name when using lookup method.");
+        if ('' === $domain) {
+            throw new MissingArgException("Input domain must be provided and cannot be an empty string.");
         }
         $this->parseWhoisDomain($domain);
 
