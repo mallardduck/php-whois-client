@@ -37,7 +37,7 @@ class DomainLocator extends AbstractLocator
      * @param string $domain Either an ID or a username.
      *
      * @return self Returns the same instance for fluent usage.
-     * @throws UnknownWhoisException
+     * @throws UnknownWhoisException|MissingArgException
      */
     public function findWhoisServer(string $domain): self
     {

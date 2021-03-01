@@ -2,7 +2,7 @@
 
 namespace MallardDuck\Whois\WhoisServerList;
 
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * Whois Server List Locator Class
