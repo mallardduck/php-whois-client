@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.0] - 2021-03-01
+### Added
+- Types to almost all method parameters and returns.
+
+### Changed
+- Removed nullable and default parameters where possible.
+- Modified public methods on DomainLocator and Client.
+- Updated blobs for the public suffix list.
+
 ## [1.2.1] - 2020-08-23
 ### Modified
 - Catch errors sooner than before and give more accurate error text.
