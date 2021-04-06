@@ -15,7 +15,7 @@ use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisClientTest extends BaseTest
+class WhoisClientTest extends BaseTestCase
 {
     /**
      * Basic test to check client syntax.

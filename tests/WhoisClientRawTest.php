@@ -12,7 +12,7 @@ use MallardDuck\Whois\SimpleClient;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisClientRawTest extends BaseTest
+class WhoisClientRawTest extends BaseTestCase
 {
     /**
      * Basic test to check client syntax.

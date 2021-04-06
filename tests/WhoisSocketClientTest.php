@@ -13,7 +13,7 @@ use MallardDuck\Whois\Exceptions\SocketClientException;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisSocketClientTest extends BaseTest
+class WhoisSocketClientTest extends BaseTestCase
 {
     /**
      * Basic test to check client syntax.

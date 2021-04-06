@@ -14,7 +14,7 @@ use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 *
 * @author mallardduck <dpock32509@gmail.com>
 */
-class WhoisDomainTest extends BaseTest
+class WhoisDomainTest extends BaseTestCase
 {
     /**
      * The main Whois Client
@@ -55,14 +55,14 @@ class WhoisDomainTest extends BaseTest
     public function validDomainsProvider()
     {
         return [
+            ['domain.CO.uk'],
             ['danpock.google'],
             ['domain.wedding'],
+            ['www.domain.co.uk'],
             ['sub.domain.club'],
             ['www.sub.domain.me'],
-            ['domain.CO.uk'],
-            ['www.domain.co.uk'],
-            ['sub.www.domain.co.uk'],
             ['президент.рф'],
+            ['sub.www.domain.co.uk'],
             ['президент.рф.'],
             ['www.ПРЕЗИДЕНТ.рф'],
         ];
