@@ -19,7 +19,7 @@ supports the look up of a TLDs primary Whois server and then will do a query of 
 ### Past PHP version support
 | PHP | Package |
 |-----|---------|
-| 7.4|8.0 | Current |
+| 7.4 or 8.0 | Current |
 | 7.3 | 1.2.1   |
 | 7.2 | 1.2.1   |
 | 7.1 | 1.1.1   |
