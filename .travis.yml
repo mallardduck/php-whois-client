@@ -20,10 +20,10 @@ before_script:
 
 script:
   - vendor/bin/phpcs --standard=psr12 src/
-  - vendor/bin/phpunit --coverage-text --coverage-clover=build/logs/clover.xml
+  - composer para
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+  - php ocular.phar code-coverage:upload --format=php-clover build/clover.xml
   - bash <(curl -s https://codecov.io/bash)
