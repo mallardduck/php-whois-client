@@ -11,6 +11,6 @@ namespace MallardDuck\Whois;
  *
  * @version 1.0.0
  */
-class SimpleClient extends AbstractWhoisClient
+class Client extends AbstractWhoisClient
 {
 }

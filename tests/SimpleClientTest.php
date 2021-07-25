@@ -1,16 +1,16 @@
 <?php
 
-use MallardDuck\Whois\SimpleClient;
+use MallardDuck\Whois\Client;
 use MallardDuck\Whois\Test\PrivatePropertyReader;
 
 it('can create a socket client', function () {
-    $client = new SimpleClient();
+    $client = new Client();
     $this->assertIsObject($client);
     unset($client);
 });
 
 it('can preform basic request for danpock.me domain', function () {
-    $client = new SimpleClient();
+    $client = new Client();
     $this->assertIsObject($client);
     $client->createConnection('whois.nic.me');
     $status = $client->makeRequest('danpock.me');
@@ -27,7 +27,7 @@ it('can properly disconnect the socket', function () {
      */
     $propReader = getReader();
 
-    $client = new SimpleClient();
+    $client = new Client();
     $this->assertIsObject($client);
     $client->createConnection("whois.nic.me");
 
@@ -56,7 +56,7 @@ it('can properly disconnect the socket', function () {
 });
 
 it('can make a whois request', function () {
-    $client = new SimpleClient();
+    $client = new Client();
     $this->assertIsObject($client);
     $comTldLookup = $client->makeWhoisRequest(".com", "192.0.32.59");
     unset($var);
