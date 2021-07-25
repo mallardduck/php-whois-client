@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- String helpers class to prepare strings and store constants.
+
+### Removed
+- Removed original implementation of `Client` class.
+- Removed the `SimpleClient` class path.
+- Removed the `MissingArgException` class.
+- Removed the `UnknownWhoisException` class.
+- Removed both the classes for whois server locating.
+- Replaced the `AbstractWhoisClient::$clrf` with `StrHelper::CRLF`.
+
+### Replaced
+- Changed the `SimpleClient` implementation to exist as `Client`.
 
 ## [2.0.4] - 2021-03-01
 - Add PHP 8.X support
