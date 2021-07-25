@@ -2,8 +2,5 @@
 <ruleset>
     <file>src</file>
     <file>tests</file>
-    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
-        <exclude-pattern>./tests/Pest.php</exclude-pattern>
-    </rule>
     <rule ref="PSR12" />
 </ruleset>
