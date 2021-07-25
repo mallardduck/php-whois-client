@@ -15,10 +15,13 @@ use MallardDuck\Whois\Exceptions\SocketClientException;
  */
 final class SocketClient
 {
-    protected $socketUri = null;
+    protected ?string $socketUri = null;
+    /**
+     * @var null|resource
+     */
     protected $socket = null;
-    protected $timeout = 30;
-    protected $connected = false;
+    protected int $timeout = 30;
+    protected bool $connected = false;
 
     public function __construct(string $socketUri, int $timeout = 30)
     {

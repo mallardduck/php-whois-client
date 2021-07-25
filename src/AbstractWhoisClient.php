@@ -16,22 +16,15 @@ use MallardDuck\Whois\WhoisClientInterface;
 abstract class AbstractWhoisClient implements WhoisClientInterface
 {
     /**
-     * The carriage return line feed character combo.
-     * @var string
-     */
-    protected $clrf = "\r\n";
-
-    /**
-     * The timeout duration used for WhoIs server lookups.
+     * The timeout duration used for whois server lookups.
      * @var int
      */
-    public const TIMEOUT = 10;
+    public static int $timeout = 10;
 
     /**
-     * The input domain provided by the user.
-     * @var SocketClient
+     * The SocketClient used to connect to the whois server.
      */
-    protected $connection;
+    protected ?SocketClient $connection;
 
     /**
      * Perform a Whois lookup.
@@ -62,7 +55,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     final public function createConnection(string $whoisServer): void
     {
         // Form a TCP socket connection to the whois server.
-        $this->connection = new SocketClient('tcp://' . $whoisServer . ':43', self::TIMEOUT);
+        $this->connection = new SocketClient(StrHelpers::prepareSocketUri($whoisServer), self::$timeout);
         $this->connection->connect();
     }
 
@@ -78,7 +71,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     final public function makeRequest(string $lookupValue): bool
     {
         // Send the domain name requested for whois lookup.
-        return $this->connection->writeString($lookupValue . $this->clrf);
+        return $this->connection->writeString(StrHelpers::prepareWhoisLookupValue($lookupValue));
     }
 
     /**
@@ -94,6 +87,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
         // Disconnect the connections after use in order to prevent observed
         // network & performance issues. Not doing this caused mild throttling.
         $this->connection->disconnect();
+        $this->connection = null;
         return $response;
     }
 }

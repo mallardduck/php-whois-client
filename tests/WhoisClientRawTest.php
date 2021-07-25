@@ -72,12 +72,27 @@ class WhoisClientRawTest extends BaseTestCase
 
         // Check our refernces again...
         $this->assertNull($socket);
-        $this->assertIsObject($socketClient);
+        $this->assertNull($socketClient);
 
         // Check our response data...
         $containedResponse = strstr($response, "\r\n", true);
         $this->assertSame("Domain Name: DANPOCK.ME", $containedResponse);
 
         unset($response, $status, $var);
+    }
+
+    /**
+     * Basic test to check client syntax.
+     */
+    public function testThatMakeWHoisRequestWorks()
+    {
+        $client = new SimpleClient();
+        $this->assertIsObject($client);
+        $comTldLookup = $client->makeWhoisRequest(".com", "192.0.32.59");
+        unset($var);
+        $this->assertIsString($comTldLookup);
+
+        $expectedResults = file_get_contents(__DIR__ . '/com-tld.txt');
+        $this->assertSame($expectedResults, $comTldLookup);
     }
 }
