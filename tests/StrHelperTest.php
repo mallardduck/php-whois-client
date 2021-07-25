@@ -1,35 +1,28 @@
 <?php
 
-namespace MallardDuck\Whois\Test;
-
 use MallardDuck\Whois\StrHelpers;
 
-/**
- *  Corresponding Class to test the whois Client class
- *
- *  For each class in your library, there should be a corresponding Unit-Test for it
- *  Unit-Tests should be as much as possible independent from other test going on.
- *
- * @author mallardduck <dpock32509@gmail.com>
- */
-class StrHelperTest extends BaseTestCase
-{
-    public function testVerifiesCRLFexists()
-    {
-        $this->assertTrue(
-            defined('MallardDuck\Whois\StrHelpers::CRLF'),
-            "The carriage return line feed const is not defined."
-        );
-        $this->assertSame("\r\n", StrHelpers::CRLF);
-    }
+test('that the CRLF const exists', function () {
+    $this->assertTrue(
+        defined('MallardDuck\Whois\StrHelpers::CRLF'),
+        "The carriage return line feed const is not defined."
+    );
+});
 
-    public function testCanPrepareLookupValue()
-    {
-        $this->assertSame(".com\r\n", StrHelpers::prepareWhoisLookupValue(".com"));
-    }
+test('that the CRLF const value is accurate', function () {
+    expect(StrHelpers::CRLF)
+        ->toBeString()
+        ->toBe("\r\n");
+});
 
-    public function testCanPrepareSocketUri()
-    {
-        $this->assertSame('tcp://192.0.32.59:43', StrHelpers::prepareSocketUri("192.0.32.59"));
-    }
-}
+it('can prepare a lookup value', function () {
+    expect(StrHelpers::prepareWhoisLookupValue(".com"))
+        ->toBeString()
+        ->toBe(".com\r\n");
+});
+
+it('can prepare a socket URI', function () {
+    expect(StrHelpers::prepareSocketUri("192.0.32.59"))
+        ->toBeString()
+        ->toBe('tcp://192.0.32.59:43');
+});
