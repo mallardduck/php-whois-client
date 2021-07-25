@@ -10,7 +10,7 @@
 When you need to work with Whois lookups in PHP this library provides a very basic client!
 
 Rather than focus on the user-friendly output this library focuses on the raw Whois protocol. The library is limited in
-function since it's intended to be a low-level client that handles only request and raw output. Basically the package
+function since its intended to be a low-level client that handles only request and raw output. Basically the package
 supports the look up of a TLDs primary Whois server and then will do a query of the domain provided.
 
 ## Requirements
@@ -34,19 +34,19 @@ The best installation method is to simply use composer.
 
 https://packagist.org/packages/mallardduck/whois-client
 
-#### Stable version
+### Stable version
 
 ```bash
 composer require mallardduck/whois-client
 ```
 
-#### Latest development version
+### Latest development version
 
 ```bash
-composer require "mallardduck/whois-client":"dev-master"
+composer require "mallardduck/whois-client":"dev-3.0-main"
 ```
 
-### Example usage
+## Example usage
 
 ```php
 require 'vendor/autoload.php';
@@ -56,13 +56,6 @@ use MallardDuck\Whois\Client;
 $client = new Client;
 $results = $client->lookup('google.com');
 ```
-
-## To-Do
-### Before V3
-This library will take a more minimalistic direction, and a secondary library will provide a more guided experience.
-So anything in here that complicates the 'problem' of being an RFC 3912 client for PHP will be removed.
-- [ ] Rip out anything that's not about being a thin RFC 3912 client.
-- [ ] Consider removing IDN/puny support in favor of implementing in secondary library.
 
 ## License
 
