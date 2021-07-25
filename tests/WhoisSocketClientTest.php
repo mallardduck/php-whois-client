@@ -10,17 +10,13 @@ it('can create a socket client', function () {
 });
 
 it('can set the timeout value', function () {
-    /**
-     * @var PrivatePropertyReader $propReader
-     */
-    $propReader = getReader();
     $client = new SocketClient("tcp://whois.iana.org:43");
     $this->assertIsObject($client);
-    $timeout = $propReader($client, 'timeout');
+    $timeout = getProperty($client, 'timeout');
     $this->assertSame($timeout, 30);
 
     $client = new SocketClient("tcp://whois.iana.org:43", 10);
-    $timeout = $propReader($client, 'timeout');
+    $timeout = getProperty($client, 'timeout');
     $this->assertSame($timeout, 10);
 
     unset($timeout, $client);

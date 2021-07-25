@@ -54,29 +54,17 @@ function getMethod($class, $name)
     return $method;
 }
 
-/**
- * Returns the magical private property reader closure.
- *
- * The magic here is that we return a static closure that takes an object and property name.
- * This static closure will then bind an internal (non-static) closure to the object passed.
- * This second internal closure simply return the value of passesd property name on '$this'.
- * The context of '$this' being defined by the object that the closure is being bound to.
- *
- * @return PrivatePropertyReader|Closure
- */
-function getReader(): Closure
+function getProperty(object $object, string $property)
 {
-    /**
-     * @param object $object
-     * @param string $property
-     *
-     * @return mixed
-     */
-    return static function & ($object, $property) {
-        $value = & \Closure::bind(function & () use ($property) {
-            return $this->$property;
-        }, $object, $object)->__invoke();
+    $reflection = new \ReflectionObject($object);
+    $reflectionProperty = $reflection->getProperty($property);
+    if (!$reflectionProperty->isPublic()) {
+        $reflectionProperty->setAccessible(true);
+    }
 
-        return $value;
-    };
+    if (!$reflectionProperty->isInitialized($object)) {
+        return null;
+    }
+
+    return $reflectionProperty->getValue($object);
 }

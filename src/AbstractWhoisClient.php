@@ -2,8 +2,6 @@
 
 namespace MallardDuck\Whois;
 
-use MallardDuck\Whois\WhoisClientInterface;
-
 /**
  * The Whois Client Class.
  *
@@ -24,7 +22,18 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     /**
      * The SocketClient used to connect to the whois server.
      */
-    protected ?SocketClient $connection;
+    protected SocketClient $connection;
+
+    /**
+     * Creates a socket connection to the whois server and activates it.
+     *
+     * @param string $whoisServer The whois server domain or IP being queried.
+     */
+    final public function __construct(string $whoisServer)
+    {
+        // Form a TCP socket connection to the whois server.
+        $this->connection = new SocketClient(StrHelpers::prepareSocketUri($whoisServer), self::$timeout);
+    }
 
     /**
      * Perform a Whois lookup.
@@ -33,30 +42,15 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * server values.
      *
      * @param string $lookupValue The domain or IP being looked up.
-     * @param string $whoisServer The whois server being queried.
      *
      * @return string               The raw text results of the query response.
      * @throws Exceptions\SocketClientException
      */
-    public function makeWhoisRequest(string $lookupValue, string $whoisServer): string
+    public function makeRequest(string $lookupValue): string
     {
-        $this->createConnection($whoisServer);
-        $this->makeRequest($lookupValue);
-        return $this->getResponseAndClose();
-    }
-
-    /**
-     * Creates a socket connection to the whois server and activates it.
-     *
-     * @param string $whoisServer The whois server domain or IP being queried.
-     *
-     * @throws Exceptions\SocketClientException
-     */
-    final public function createConnection(string $whoisServer): void
-    {
-        // Form a TCP socket connection to the whois server.
-        $this->connection = new SocketClient(StrHelpers::prepareSocketUri($whoisServer), self::$timeout);
         $this->connection->connect();
+        $this->makeWhoisRequest($lookupValue);
+        return $this->getResponseAndClose();
     }
 
     /**
@@ -64,11 +58,10 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      *
      * @param string $lookupValue The cache item to save.
      *
-     * @return bool True if all not-yet-saved items were successfully saved or
-     * there were none. False otherwise.
+     * @return bool|int True if all not-yet-saved items were successfully saved or there were none. False otherwise.
      * @throws Exceptions\SocketClientException
      */
-    final public function makeRequest(string $lookupValue): bool
+    final protected function makeWhoisRequest(string $lookupValue)
     {
         // Send the domain name requested for whois lookup.
         return $this->connection->writeString(StrHelpers::prepareWhoisLookupValue($lookupValue));
@@ -78,16 +71,22 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * A function for making a raw Whois request.
      *
      * @return string   The raw results of the query response.
-     * @throws Exceptions\SocketClientException
      */
-    final public function getResponseAndClose(): string
+    final protected function getResponseAndClose(): string
     {
+        if (!$this->connection->hasSentRequest()) {
+            throw new \RuntimeException('The whois request string has not been sent.');
+        }
         // Read the full output of the whois lookup.
         $response = $this->connection->readAll();
         // Disconnect the connections after use in order to prevent observed
         // network & performance issues. Not doing this caused mild throttling.
-        $this->connection->disconnect();
-        $this->connection = null;
+        unset($this->connection);
         return $response;
+    }
+
+    final public function __destruct()
+    {
+        unset($this->connection);
     }
 }

@@ -4,62 +4,50 @@ use MallardDuck\Whois\Client;
 use MallardDuck\Whois\Test\PrivatePropertyReader;
 
 it('can create a socket client', function () {
-    $client = new Client();
+    $client = new Client('127.0.0.1');
     $this->assertIsObject($client);
     unset($client);
 });
 
 it('can preform basic request for danpock.me domain', function () {
-    $client = new Client();
+    $client = new Client('whois.nic.me');
     $this->assertIsObject($client);
-    $client->createConnection('whois.nic.me');
-    $status = $client->makeRequest('danpock.me');
-    $response = $client->getResponseAndClose();
+    $response = $client->makeRequest('danpock.me');
     $containedResponse = strstr($response, "\r\n", true);
     $this->assertSame('Domain Name: DANPOCK.ME', $containedResponse);
 
-    unset($response, $status, $client);
+    unset($response, $containedResponse, $client);
 });
 
 it('can properly disconnect the socket', function () {
-    /**
-     * @var PrivatePropertyReader $propReader
-     */
-    $propReader = getReader();
-
-    $client = new Client();
+    $client = new Client('whois.nic.me');
     $this->assertIsObject($client);
-    $client->createConnection("whois.nic.me");
 
-    // Grab a reference to the client and socket
-    $socketClient = & $propReader($client, 'connection');
-    $socket = & $propReader($socketClient, 'socket');
-
-    // Check our references once...
-    $this->assertIsObject($socketClient);
-    $this->assertIsResource($socket);
+    // Verify client porperties
+    expect(getProperty($client, 'connection'))
+        ->toBeObject()
+        ->toBeInstanceOf(\MallardDuck\Whois\SocketClient::class);
+    $this->assertNull(getProperty(getProperty($client, 'connection'), 'socket'));
 
     // Make the request and grab the data...
-    $status = $client->makeRequest("danpock.me");
-    $response = $client->getResponseAndClose();
+    $response = $client->makeRequest("danpock.me");
 
-    // Check our refernces again...
-    $this->assertNull($socket);
-    $this->assertNull($socketClient);
+    // Check our references again...
+    $this->assertNull(getProperty($client, 'connection'));
 
     // Check our response data...
     expect(strstr($response, "\r\n", true))
         ->toBeString()
         ->toBe("Domain Name: DANPOCK.ME");
 
-    unset($response, $status, $client);
+    unset($response, $client);
 });
 
 it('can make a whois request', function () {
-    $client = new Client();
+    $client = new Client('192.0.32.59');
     $this->assertIsObject($client);
-    $comTldLookup = $client->makeWhoisRequest(".com", "192.0.32.59");
-    unset($var);
+    $comTldLookup = $client->makeRequest('.com');
+    unset($client);
     $this->assertIsString($comTldLookup);
 
     $expectedResults = file_get_contents(__DIR__ . '/com-tld.txt');

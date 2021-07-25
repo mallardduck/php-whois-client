@@ -1,5 +1,6 @@
 <?php
 
+use MallardDuck\Whois\Client;
 use MallardDuck\Whois\Exceptions\SocketClientException;
 use MallardDuck\Whois\SocketClient;
 
@@ -57,3 +58,11 @@ it('verify exception code', function () {
             ->toBe('The calling method writeString requires the socket to be connected');
     }
 });
+
+it('will throw exception if request not sent', function () {
+    $client = new Client('whois.nic.me');
+    $relfection = new \ReflectionObject($client);
+    $method = $relfection->getMethod('getResponseAndClose');
+    $method->setAccessible(true);
+    $method->invoke($client);
+})->throws(\RuntimeException::class);
