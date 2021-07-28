@@ -15,10 +15,13 @@ use MallardDuck\Whois\Exceptions\SocketClientException;
  */
 final class SocketClient
 {
-    protected $socketUri = null;
-    protected $socket = null;
-    protected $timeout = 30;
-    protected $connected = false;
+    protected string $socketUri = '';
+    /**
+     * @var null|resource
+     */
+    protected $socket;
+    protected int $timeout = 30;
+    protected bool $connected = false;
 
     public function __construct(string $socketUri, int $timeout = 30)
     {
@@ -35,7 +38,7 @@ final class SocketClient
     public function connect(): self
     {
         $fp = @stream_socket_client($this->socketUri, $errno, $errstr, $this->timeout);
-        if (!is_resource($fp) && false === $fp) {
+        if (false === $fp) {
             $message = sprintf(
                 "Stream Connection Failed: unable to connect to %s. System Error: %s ",
                 $this->socketUri,
@@ -69,7 +72,7 @@ final class SocketClient
      */
     public function writeString(string $string)
     {
-        if (!$this->connected) {
+        if (!$this->connected || null === $this->socket) {
             $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
             throw new SocketClientException($message);
         }
@@ -84,7 +87,7 @@ final class SocketClient
      */
     public function readAll(): string
     {
-        if (!$this->connected) {
+        if (!$this->connected || null === $this->socket) {
             $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
             throw new SocketClientException($message);
         }
@@ -98,8 +101,9 @@ final class SocketClient
      */
     public function disconnect(): self
     {
-        if (!is_null($this->socket)) {
+        if ($this->socket !== null) {
             stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
+            /** @psalm-suppress InvalidPropertyAssignmentValue **/
             fclose($this->socket);
         }
         $this->socket = null;

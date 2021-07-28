@@ -78,7 +78,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
     final public function makeRequest(string $lookupValue): bool
     {
         // Send the domain name requested for whois lookup.
-        return $this->connection->writeString($lookupValue . $this->clrf);
+        return (bool) $this->connection->writeString($lookupValue . $this->clrf);
     }
 
     /**

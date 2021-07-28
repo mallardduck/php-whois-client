@@ -2,6 +2,8 @@
 
 namespace MallardDuck\Whois;
 
+use MallardDuck\Whois\Exceptions\SocketClientException;
+use MallardDuck\WhoisDomainList\Exceptions\UnknownTopLevelDomain;
 use MallardDuck\WhoisDomainList\PslServerLocator;
 use MallardDuck\WhoisDomainList\ServerLocator;
 use Pdp\ResolvedDomainName;
@@ -139,12 +141,11 @@ class Client extends AbstractWhoisClient
     /**
      * Performs a Whois look up on the domain provided.
      *
-     * @param ?string $domain The domain being looked up via whois.
+     * @param string $domain
      *
      * @return string         The output of the Whois look up.
-     * @throws Exceptions\SocketClientException
-     * @throws Exceptions\UnknownWhoisException
-     * @throws MissingArgException
+     *
+     * @throws SocketClientException|MissingArgException|UnknownTopLevelDomain
      */
     public function lookup(string $domain): string
     {
