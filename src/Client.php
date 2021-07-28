@@ -102,7 +102,7 @@ class Client extends AbstractWhoisClient
         return $domain->registrableDomain()->toString();
     }
 
-    protected function getTopLevelDomain(string $domain): string
+    private function getTopLevelDomain(string $domain): string
     {
         /**
          * @var ResolvedDomainName $domain
