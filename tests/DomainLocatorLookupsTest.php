@@ -2,8 +2,10 @@
 
 namespace MallardDuck\Whois\Test;
 
+use MallardDuck\WhoisDomainList\IanaServerLocator;
+use MallardDuck\WhoisDomainList\PslServerLocator;
+use MallardDuck\WhoisDomainList\ServerLocator;
 use PHPUnit\Framework\TestCase;
-use MallardDuck\Whois\WhoisServerList\DomainLocator;
 
 /**
 *  Corresponding Class to test the Locator class
@@ -16,30 +18,13 @@ use MallardDuck\Whois\WhoisServerList\DomainLocator;
 class DomainLocatorLookupsTest extends TestCase
 {
     /**
-     * Test the ability to call the locators find function and get function fluently.
      * @param string $domain Test domains!
      * @param string $server Whois Server domains!
      * @dataProvider validDomainPairsProvider
      */
-    public function testFindAndGetCorrectDomainWhoisServer($domain, $server)
+    public function testPslServerLookup($domain, $server)
     {
-        $var = new DomainLocator();
-        $results = $var->findWhoisServer($domain)->getWhoisServer();
-        $this->assertIsString($results);
-        $this->assertNotEmpty($results);
-        $this->assertSame($server, $results);
-        unset($var, $results);
-    }
-
-    /**
-    * Test the ability to call the locators get function directly.
-     * @param string $domain Test domains!
-     * @param string $server Whois Server domains!
-     * @dataProvider validDomainPairsProvider
-     */
-    public function testGetCorrectDomainWhoisServer($domain, $server)
-    {
-        $var = new DomainLocator();
+        $var = new PslServerLocator();
         $results = $var->getWhoisServer($domain);
         $this->assertIsString($results);
         $this->assertNotEmpty($results);
@@ -53,12 +38,11 @@ class DomainLocatorLookupsTest extends TestCase
     public function validDomainPairsProvider()
     {
         return [
-            ['google.com', 'whois.verisign-grs.com'],
-            ['google.net', 'whois.verisign-grs.com'],
-            ['liquidweb.com', 'whois.verisign-grs.com'],
-            ['danpock.xyz', 'whois.nic.xyz'],
-            ['bbc.co.uk', 'whois.nic.uk'],
-            ['goober.biz', 'whois.biz'], // literally a made up domain - but it does exist lul
+            ['com', 'whois.verisign-grs.com'],
+            ['net', 'whois.verisign-grs.com'],
+            ['xyz', 'whois.nic.xyz'],
+            ['co.uk', 'whois.nic.uk'],
+            ['biz', 'whois.nic.biz'],
         ];
     }
 }

@@ -2,13 +2,11 @@
 
 namespace MallardDuck\Whois;
 
-use League\Uri\Components\Domain;
-use League\Uri\Components\Host;
-use League\Uri\Components\UserInfo;
+use MallardDuck\WhoisDomainList\PslServerLocator;
+use MallardDuck\WhoisDomainList\ServerLocator;
+use Pdp\ResolvedDomainName;
 use Pdp\Rules;
 use TrueBV\Punycode;
-use MallardDuck\Whois\WhoisServerList\AbstractLocator;
-use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\Whois\Exceptions\MissingArgException;
 use MallardDuck\Whois\Exceptions\UnknownWhoisException;
 
@@ -25,7 +23,7 @@ class Client extends AbstractWhoisClient
 {
     /**
      * The TLD Whois locator class.
-     * @var AbstractLocator
+     * @var ServerLocator
      */
     protected $whoisLocator;
 
@@ -46,6 +44,7 @@ class Client extends AbstractWhoisClient
      * @var string
      */
     public $parsedDomain;
+    private Rules $domainParser;
 
     /**
      * Construct the Whois Client Class.
@@ -53,7 +52,8 @@ class Client extends AbstractWhoisClient
     public function __construct()
     {
         $this->punycode = new Punycode();
-        $this->whoisLocator = new DomainLocator();
+        $this->domainParser = Rules::fromPath(dirname(__DIR__) . '/blobs/public_suffix_list.dat');
+        $this->whoisLocator = new PslServerLocator();
     }
 
     /**
@@ -84,8 +84,10 @@ class Client extends AbstractWhoisClient
      */
     protected function getSearchableHostname(string $domain): string
     {
-        $publicSuffixList = Rules::fromPath(dirname(__DIR__) . '/blobs/public_suffix_list.dat');
-        $domain = $publicSuffixList->resolve(trim($domain, '.'));
+        /**
+         * @var ResolvedDomainName $domain
+         */
+        $domain = $this->domainParser->resolve(trim($domain, '.'));
 
         if (
             true !== empty($domain->subDomain()->toString()) &&
@@ -94,9 +96,18 @@ class Client extends AbstractWhoisClient
             return $domain->domain()->toString();
         }
 
-
         // Attempt to parse the domains Host component and get the registrable parts.
         return $domain->registrableDomain()->toString();
+    }
+
+    protected function getTopLevelDomain(string $domain): string
+    {
+        /**
+         * @var ResolvedDomainName $domain
+         */
+        $domain = $this->domainParser->resolve(trim($domain, '.'));
+
+        return $domain->suffix()->toString();
     }
 
     /**
@@ -143,7 +154,7 @@ class Client extends AbstractWhoisClient
         $this->parseWhoisDomain($domain);
 
         // Get the domains whois server.
-        $whoisServer = $this->whoisLocator->getWhoisServer($this->parsedDomain);
+        $whoisServer = $this->whoisLocator->getWhoisServer($this->getTopLevelDomain($this->parsedDomain));
 
         // Get the full output of the whois lookup.
         return $this->makeWhoisRequest($this->parsedDomain, $whoisServer);

@@ -5,6 +5,7 @@ namespace MallardDuck\Whois\Test;
 use MallardDuck\Whois\Client;
 use MallardDuck\Whois\Exceptions\MissingArgException;
 use MallardDuck\Whois\Exceptions\UnknownWhoisException;
+use MallardDuck\WhoisDomainList\Exceptions\UnknownTopLevelDomain;
 
 /**
 *  Corresponding Class to test the Locator class
@@ -75,7 +76,7 @@ class WhoisDomainTest extends BaseTestCase
      */
     public function testInvalidDomain($domain)
     {
-        $this->expectException(UnknownWhoisException::class);
+        $this->expectException(UnknownTopLevelDomain::class);
         $response = $this->client->lookup($domain);
     }
 
@@ -114,7 +115,7 @@ class WhoisDomainTest extends BaseTestCase
             ['domain', UnknownWhoisException::class],
             ['google.', UnknownWhoisException::class],
             ['президент.рф', UnknownWhoisException::class],
-            ['президент.рф2', UnknownWhoisException::class],
+            ['президент.рф2', UnknownTopLevelDomain::class],
         ];
     }
 }

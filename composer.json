@@ -25,8 +25,9 @@
         "php": "^7.4|^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "jeremykendall/php-domain-parser": "^6.0",
         "illuminate/collections": "^8.0",
+        "jeremykendall/php-domain-parser": "^6.0",
+        "mallardduck/whois-server-list": "^0.0.2",
         "true/punycode": "^2.1.1"
     },
 	"require-dev": {
@@ -34,7 +35,7 @@
         "composer/package-versions-deprecated": "1.11.99.1",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "escapestudios/symfony2-coding-standard": "3.x-dev",
-        "infection/infection": "^0.21",
+        "infection/infection": "^0.23",
         "php-coveralls/php-coveralls": "^2.0",
         "phpcompatibility/php-compatibility": "*",
         "phpstan/phpstan": "^0.12.77",
