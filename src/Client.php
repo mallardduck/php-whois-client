@@ -3,9 +3,8 @@
 namespace MallardDuck\Whois;
 
 use MallardDuck\Whois\Exceptions\SocketClientException;
+use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use MallardDuck\WhoisDomainList\Exceptions\UnknownTopLevelDomain;
-use MallardDuck\WhoisDomainList\PslServerLocator;
-use MallardDuck\WhoisDomainList\ServerLocator;
 use Pdp\ResolvedDomainName;
 use Pdp\Rules;
 use TrueBV\Punycode;
@@ -25,7 +24,7 @@ class Client extends AbstractWhoisClient
 {
     /**
      * The TLD Whois locator class.
-     * @var ServerLocator
+     * @var DomainLocator
      */
     protected $whoisLocator;
 
@@ -55,7 +54,7 @@ class Client extends AbstractWhoisClient
     {
         $this->punycode = new Punycode();
         $this->domainParser = Rules::fromPath(dirname(__DIR__) . '/blobs/public_suffix_list.dat');
-        $this->whoisLocator = new PslServerLocator();
+        $this->whoisLocator = new DomainLocator();
     }
 
     /**

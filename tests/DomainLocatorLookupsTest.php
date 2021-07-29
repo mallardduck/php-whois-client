@@ -2,19 +2,9 @@
 
 namespace MallardDuck\Whois\Test;
 
-use MallardDuck\WhoisDomainList\IanaServerLocator;
-use MallardDuck\WhoisDomainList\PslServerLocator;
-use MallardDuck\WhoisDomainList\ServerLocator;
+use MallardDuck\Whois\WhoisServerList\DomainLocator;
 use PHPUnit\Framework\TestCase;
 
-/**
-*  Corresponding Class to test the Locator class
-*
-*  For each class in your library, there should be a corresponding Unit-Test for it
-*  Unit-Tests should be as much as possible independent from other test going on.
-*
-* @author mallardduck <dpock32509@gmail.com>
-*/
 class DomainLocatorLookupsTest extends TestCase
 {
     /**
@@ -24,11 +14,12 @@ class DomainLocatorLookupsTest extends TestCase
      */
     public function testPslServerLookup($domain, $server)
     {
-        $var = new PslServerLocator();
+        $var = new DomainLocator();
         $results = $var->getWhoisServer($domain);
         $this->assertIsString($results);
         $this->assertNotEmpty($results);
         $this->assertSame($server, $results);
+        $this->assertSame($results, $var->getLastMatch());
         unset($var, $results);
     }
 

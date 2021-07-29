@@ -72,9 +72,6 @@ class DomainLocator extends AbstractLocator
         if ('' !== $domain) {
             $this->findWhoisServer($domain);
         }
-        if ('UNKNOWN' === strtoupper($this->lastMatch)) {
-            throw new UnknownWhoisException("Unable to determine valid whois server for this domain.");
-        }
 
         return $this->lastMatch;
     }
