@@ -1,11 +1,13 @@
 # Whois Client PHP Library
-[![Travis Build Status](https://travis-ci.org/mallardduck/php-whois-client.svg?branch=master)](https://travis-ci.org/mallardduck/php-whois-client)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mallardduck/php-whois-client.svg)](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-[![Latest Stable Version](https://poser.pugx.org/mallardduck/whois-client/v/stable)](https://packagist.org/packages/mallardduck/whois-client)
-[![License](https://poser.pugx.org/mallardduck/whois-client/license)](https://packagist.org/packages/mallardduck/whois-client)
-[![Coverage Status](https://coveralls.io/repos/github/mallardduck/php-whois-client/badge.svg?branch=master)](https://coveralls.io/github/mallardduck/php-whois-client?branch=master)
+[![Source Code](https://img.shields.io/static/v1?label=source&message=mallardduck/php-whois-client&color=blue&style=for-the-badge)](https://packagist.org/packages/mallardduck/whois-client)
+[![License](https://img.shields.io/packagist/l/mallardduck/whois-client?style=for-the-badge)](https://packagist.org/packages/mallardduck/whois-client)
+[![PHP Version](https://img.shields.io/packagist/php-v/mallardduck/whois-client.svg?style=for-the-badge)](https://packagist.org/packages/mallardduck/whois-client)
+[![Latest Stable Version](https://img.shields.io/packagist/v/mallardduck/whois-client?logo=packagist&label=Release&style=for-the-badge)](https://packagist.org/packages/mallardduck/whois-client)
+[![Total Download Count](https://img.shields.io/packagist/dt/mallardduck/whois-client?logo=packagist&style=for-the-badge)](https://packagist.org/packages/mallardduck/whois-client/stats)
+[![Travis Build Status](https://img.shields.io/travis/mallardduck/php-whois-client?logo=travis&style=for-the-badge)](https://travis-ci.org/mallardduck/php-whois-client)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/quality/g/mallardduck/php-whois-client?logo=scrutinizer&style=for-the-badge)](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/?branch=master)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/mallardduck/php-whois-client?logo=scrutinizer&style=for-the-badge)](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/github/mallardduck/php-whois-client?logo=coveralls&style=for-the-badge)](https://coveralls.io/github/mallardduck/php-whois-client?branch=master)
 
 When you need to work with Whois lookups in PHP this library provides a very basic client!
 

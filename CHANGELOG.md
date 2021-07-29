@@ -20,13 +20,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Replaced
 - Changed the `SimpleClient` implementation to exist as `Client`.
 
+## [2.0.6] - 2021-07-29
+### Modified
+- Back ported some changes being made for version 3.0 to 2.0.
+
+### Added
+- New package to look up whois-servers by TLD using IANA or PSL lists.
+
+### Changed
+- Removed local whois server locator, but left as a shim to prevent BC break.
+
+### Removed
+- This packages dependency on `illuminate/collect`
+
+## [2.0.5] - 2021-07-29
+Purely a docs update...
+
 ## [2.0.4] - 2021-03-01
 - Add PHP 8.X support
 
 ## [2.0.3] - 2021-03-01
 ## [2.0.2] - 2021-03-01
 ### Changed
-- Swap to `illuminate/collections` instead of `tightenco/collect`.
+- Swap to `illuminate/collections` instead of `tightenco/collections`.
 - Collections version tag for better use.
 
 ## [2.0.0] - 2021-03-01
@@ -179,3 +195,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Continuous Integration setup for StyleCI, TravisCI, and ScrutinizerCI.
 - Add Punycode for Unicode domain handling.
 - Use League URI package for domain parsing.
+
+[Unreleased]: https://github.com/mallardduck/php-whois-client/compare/2.0.6...main
+[2.0.6]: https://github.com/mallardduck/php-whois-client/compare/2.0.5...2.0.6
+[2.0.5]: https://github.com/mallardduck/php-whois-client/compare/2.0.4...2.0.5
+[2.0.4]: https://github.com/mallardduck/php-whois-client/compare/2.0.3...2.0.4
+[2.0.3]: https://github.com/mallardduck/php-whois-client/compare/2.0.2...2.0.3
+[2.0.2]: https://github.com/mallardduck/php-whois-client/compare/2.0.1...2.0.2
+[2.0.1]: https://github.com/mallardduck/php-whois-client/compare/2.0.0...2.0.1
+[2.0.0]: https://github.com/mallardduck/php-whois-client/compare/1.2.1...2.0.0
+[1.2.1]: https://github.com/mallardduck/php-whois-client/compare/1.2.0...1.2.1
+[1.2.0]: https://github.com/mallardduck/php-whois-client/compare/1.1.1...1.2.0
+[1.1.1]: https://github.com/mallardduck/php-whois-client/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/mallardduck/php-whois-client/compare/1.0.1...1.1.0
+[1.0.1]: https://github.com/mallardduck/php-whois-client/compare/1.0.0...1.0.1
+[1.0.0]: https://github.com/mallardduck/php-whois-client/compare/0.5.0...1.0.0
