@@ -27,7 +27,7 @@
         "ext-mbstring": "*",
         "illuminate/collections": "^8.0",
         "jeremykendall/php-domain-parser": "^6.0",
-        "mallardduck/whois-server-list": "^0.0.2",
+        "mallardduck/whois-server-list": "^1.0.0",
         "true/punycode": "^2.1.1"
     },
 	"require-dev": {
