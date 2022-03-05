@@ -13,7 +13,7 @@
 
 If you currently live in Russia, please read [this message](./ToRussianPeople.md).
 
-### Purpose
+## Purpose
 
 When you need to work with Whois lookups in PHP this library provides a very basic client!
 
