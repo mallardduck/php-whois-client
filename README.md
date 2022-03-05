@@ -9,6 +9,12 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/mallardduck/php-whois-client?logo=scrutinizer&style=for-the-badge)](https://scrutinizer-ci.com/g/mallardduck/php-whois-client/?branch=master)
 [![Coverage Status](https://img.shields.io/coveralls/github/mallardduck/php-whois-client?logo=coveralls&style=for-the-badge)](https://coveralls.io/github/mallardduck/php-whois-client?branch=master)
 
+## A message to Russian 🇷🇺 people
+
+If you currently live in Russia, please read [this message](./ToRussianPeople.md).
+
+### Purpose
+
 When you need to work with Whois lookups in PHP this library provides a very basic client!
 
 Rather than focus on the user-friendly output this library focuses on the raw Whois protocol. The library is limited in
