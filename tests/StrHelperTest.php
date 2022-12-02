@@ -3,10 +3,8 @@
 use MallardDuck\Whois\StrHelpers;
 
 test('that the CRLF const exists', function () {
-    $this->assertTrue(
-        defined('MallardDuck\Whois\StrHelpers::CRLF'),
-        "The carriage return line feed const is not defined."
-    );
+    expect(defined('MallardDuck\Whois\StrHelpers::CRLF'))
+        ->toBeTrue();
 });
 
 test('that the CRLF const value is accurate', function () {
