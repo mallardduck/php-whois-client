@@ -19,16 +19,16 @@ When you need to work with Whois lookups in PHP this library provides a very bas
 
 Rather than focus on the user-friendly output this library focuses on the raw Whois protocol. The library is limited in
 function since its intended to be a low-level client that handles only request and raw output. Basically the package
-supports the look up of a TLDs primary Whois server and then will do a query of the domain provided.
+supports the look-up of a TLDs primary Whois server and then will do a query of the domain provided.
 
 ## Requirements
-* PHP >= 7.4
+* PHP >= 8.0
 
 ### Past PHP version support
 | PHP | Package |
 |-----|---------|
 | 8.0 | Current |
-| 7.4 | Current |
+| 7.4 | 2.0.7   |
 | 7.3 | 1.2.1   |
 
 
@@ -48,21 +48,16 @@ https://packagist.org/packages/mallardduck/whois-client
 composer require mallardduck/whois-client
 ```
 
-### Latest development version
-
-```bash
-composer require "mallardduck/whois-client":"dev-3.0-main"
-```
-
 ## Example usage
 
 ```php
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use MallardDuck\Whois\Client;
 
-$client = new Client;
-$results = $client->lookup('google.com');
+$client = new Client('whois.nic.me');
+$response = $client->makeRequest('danpock.me');
+echo $response;
 ```
 
 ## License
