@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MallardDuck\Whois;
 
 use MallardDuck\Whois\Exceptions\SocketClientException;
@@ -20,11 +22,11 @@ final class SocketClient
      * @var null|resource|closed-resource
      */
     protected $socket = null;
-    protected int $timeout = 30;
+    protected int $timeout = 15;
     protected bool $connected = false;
     protected bool $requestSent = false;
 
-    public function __construct(string $socketUri, int $timeout = 30)
+    public function __construct(string $socketUri, int $timeout = 15)
     {
         $this->socketUri = $socketUri;
         $this->timeout = $timeout;

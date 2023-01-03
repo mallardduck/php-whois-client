@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MallardDuck\Whois;
 
 /**
@@ -17,7 +19,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * The timeout duration used for whois server lookups.
      * @var int
      */
-    public static int $timeout = 10;
+    public static int $timeout = 15;
 
     /**
      * The SocketClient used to connect to the whois server.
