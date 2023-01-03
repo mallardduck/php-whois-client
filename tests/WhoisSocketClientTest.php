@@ -2,7 +2,7 @@
 
 use MallardDuck\Whois\SocketClient;
 use MallardDuck\Whois\Test\PrivatePropertyReader;
-use \Roave\BetterReflection\Reflection\ReflectionProperty;
+use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 it('can create a socket client', function () {
     $client = new SocketClient("tcp://whois.nic.me:43", 10);
