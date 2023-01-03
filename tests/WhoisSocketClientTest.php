@@ -2,6 +2,7 @@
 
 use MallardDuck\Whois\SocketClient;
 use MallardDuck\Whois\Test\PrivatePropertyReader;
+use \Roave\BetterReflection\Reflection\ReflectionProperty;
 
 it('can create a socket client', function () {
     $client = new SocketClient("tcp://whois.nic.me:43", 10);
@@ -43,4 +44,24 @@ it('can properly track connection state', function () {
     expect($client->isConnected())->toBeFalse();
 
     unset($client);
+});
+
+it('will clean up socket on destruction', function () {
+    $client = new SocketClient("tcp://whois.iana.org:43", 10);
+    expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
+    $reflectionProperty = ReflectionProperty::createFromInstance($client, 'socket');
+    expect($reflectionProperty->getValue($client))->toBeNull();
+
+    $client->connect();
+    $socket = $reflectionProperty->getValue($client);
+    expect($socket)->toBeResource();
+
+    $status = $client->writeString("danpock.me\r\n");
+    $response = $client->readAll();
+    expect($socket)->toBeResource();
+
+    expect(gettype($socket))->toBe('resource');
+    unset($response, $status, $client);
+    expect(gettype($socket))->toBe('resource (closed)');
+    expect($socket)->toBeResource();
 });

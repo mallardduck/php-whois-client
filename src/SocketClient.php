@@ -81,10 +81,10 @@ final class SocketClient
      *
      * @param string $string
      *
-     * @return SocketClient
+     * @return false|int
      * @throws SocketClientException
      */
-    public function writeString(string $string): self
+    public function writeString(string $string)
     {
         if (!$this->isConnected()) {
             throw new SocketClientException('Cannot read, the socket is not yet connected; call `connect()` first.');
@@ -98,7 +98,7 @@ final class SocketClient
             throw new SocketClientException('Error writing to socket');
         }
         $this->requestSent = true;
-        return $this;
+        return $results;
     }
 
     /**

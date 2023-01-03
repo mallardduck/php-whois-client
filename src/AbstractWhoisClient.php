@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace MallardDuck\Whois;
 
+use MallardDuck\Whois\Exceptions\SocketClientException;
+
 /**
  * The Whois Client Class.
  *
@@ -60,7 +62,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      *
      * @param string $lookupValue The cache item to save.
      *
-     * @return bool|int True if all not-yet-saved items were successfully saved or there were none. False otherwise.
+     * @return bool|int
      * @throws Exceptions\SocketClientException
      */
     final protected function makeWhoisRequest(string $lookupValue)
@@ -73,6 +75,7 @@ abstract class AbstractWhoisClient implements WhoisClientInterface
      * A function for making a raw Whois request.
      *
      * @return string   The raw results of the query response.
+     * @throws SocketClientException
      */
     final protected function getResponseAndClose(): string
     {
