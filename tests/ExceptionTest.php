@@ -3,7 +3,7 @@
 use MallardDuck\Whois\Client;
 use MallardDuck\Whois\Exceptions\SocketClientException;
 use MallardDuck\Whois\SocketClient;
-use \Roave\BetterReflection\Reflection\ReflectionProperty;
+use Roave\BetterReflection\Reflection\ReflectionProperty;
 
 test('that the CODE const exists', function () {
     expect(defined('MallardDuck\Whois\Exceptions\SocketClientException::CODE'))->toBeTrue();
