@@ -81,18 +81,24 @@ final class SocketClient
      *
      * @param string $string
      *
-     * @return false|int
+     * @return SocketClient
      * @throws SocketClientException
      */
-    public function writeString(string $string)
+    public function writeString(string $string): self
     {
-        if (!$this->connected || !is_resource($this->socket)) {
-            $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
-            throw new SocketClientException($message);
+        if (!$this->isConnected()) {
+            throw new SocketClientException('Cannot read, the socket is not yet connected; call `connect()` first.');
+        }
+
+        if (!is_resource($this->socket)) {
+            throw new SocketClientException('The socket resource is not valid for sending data');
         }
         $results = stream_socket_sendto($this->socket, $string);
+        if ($results === 0) {
+            throw new SocketClientException('Error writing to socket');
+        }
         $this->requestSent = true;
-        return $results;
+        return $this;
     }
 
     /**
@@ -103,11 +109,23 @@ final class SocketClient
      */
     public function readAll(): string
     {
-        if (!$this->connected || !is_resource($this->socket)) {
-            $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
-            throw new SocketClientException($message);
+        if (!$this->isConnected()) {
+            throw new SocketClientException('Cannot read, the socket is not yet connected; call `connect()` first.');
         }
-        return stream_get_contents($this->socket);
+
+        if (!$this->hasSentRequest()) {
+            throw new SocketClientException('Cannot read before sending data; call `writeString()` first.');
+        }
+
+        if (!is_resource($this->socket)) {
+            throw new SocketClientException('The socket resource is not valid when reading');
+        }
+
+        $response = stream_get_contents($this->socket);
+        if ($response === false) {
+            throw new SocketClientException('Error while reading from socket');
+        }
+        return $response;
     }
 
     /**

@@ -41,7 +41,7 @@ it('will throw exceptions when reading socket without a valid connection', funct
     $client->readAll();
 })->throws(SocketClientException::class);
 
-it('verify exception code', function () {
+it('verify exception code when not calling connect', function () {
     $client = new SocketClient("tcp://whois.nic.me:43", 10);
     expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
     try {
@@ -52,7 +52,7 @@ it('verify exception code', function () {
             ->toBe(1);
         expect($throw->getMessage())
             ->toBeString()
-            ->toBe('The calling method writeString requires the socket to be connected');
+            ->toBe('Cannot read, the socket is not yet connected; call `connect()` first.');
     }
 });
 
