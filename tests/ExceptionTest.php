@@ -52,7 +52,7 @@ it('verify exception code', function () {
             ->toBe(1);
         expect($throw->getMessage())
             ->toBeString()
-            ->toBe('The socket resource to the whois server is not valid [via writeString]');
+            ->toBe('The calling method writeString requires the socket to be connected');
     }
 });
 

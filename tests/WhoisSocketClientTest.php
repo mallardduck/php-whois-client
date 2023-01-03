@@ -12,7 +12,7 @@ it('can create a socket client', function () {
 it('can set the timeout value', function () {
     $client = new SocketClient("tcp://whois.iana.org:43");
     expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
-    expect(getProperty($client, 'timeout'))->toBe(30);
+    expect(getProperty($client, 'timeout'))->toBe(15);
 
     $client = new SocketClient("tcp://whois.iana.org:43", 10);
     expect(getProperty($client, 'timeout'))->toBe(10);
