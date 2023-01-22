@@ -29,7 +29,6 @@ If you're looking for a higher level client, please use: [Whodis](https://github
 ### Past PHP version support
 | PHP | Package |
 |-----|---------|
-| 8.1 | Current |
 | 8.0 | Current |
 | 7.4 | 2.0.7   |
 | 7.3 | 1.2.1   |
