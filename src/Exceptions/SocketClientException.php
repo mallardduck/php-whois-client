@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MallardDuck\Whois\Exceptions;
 
 use Exception;
@@ -16,7 +18,7 @@ use Exception;
 class SocketClientException extends Exception
 {
     /** @var int    An integer code for the exception. */
-    public const CODE = 0;
+    public const CODE = 1;
 
     /**
      * Basic Exception Constructor

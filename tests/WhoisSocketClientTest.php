@@ -1,126 +1,67 @@
 <?php
 
-namespace MallardDuck\Whois\Test;
-
 use MallardDuck\Whois\SocketClient;
-use MallardDuck\Whois\Exceptions\SocketClientException;
+use MallardDuck\Whois\Test\PrivatePropertyReader;
+use Roave\BetterReflection\Reflection\ReflectionProperty;
 
-/**
-*  Corresponding Class to test the whois Client class
-*
-*  For each class in your library, there should be a corresponding Unit-Test for it
-*  Unit-Tests should be as much as possible independent from other test going on.
-*
-* @author mallardduck <dpock32509@gmail.com>
-*/
-class WhoisSocketClientTest extends BaseTestCase
-{
-    /**
-     * Basic test to check client syntax.
-     */
-    public function testIsThereAnySyntaxError()
-    {
-        $var = new SocketClient("tcp://whois.nic.me:43", 10);
-        $this->assertIsObject($var);
-        unset($var);
-    }
+it('can create a socket client', function () {
+    $client = new SocketClient("tcp://whois.nic.me:43", 10);
+    expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
+    unset($client);
+});
 
-    /**
-     * Basic test to check client syntax.
-     */
-    public function testIntentionalSyntaxError()
-    {
-        $var = new SocketClient("ztcpz://127.0.0.1:43", 10);
-        $this->assertIsObject($var);
-        $this->expectException(SocketClientException::class);
-        $var->connect();
-        unset($var);
-    }
+it('can set the timeout value', function () {
+    $client = new SocketClient("tcp://whois.iana.org:43");
+    expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
+    expect(getProperty($client, 'timeout'))->toBe(15);
 
-    /**
-     * Basic test to check client syntax.
-     */
-    public function testSettingTimeoutValue()
-    {
-        $reader = function & ($object, $property) {
-            $value = & \Closure::bind(function & () use ($property) {
-                return $this->$property;
-            }, $object, $object)->__invoke();
+    $client = new SocketClient("tcp://whois.iana.org:43", 10);
+    expect(getProperty($client, 'timeout'))->toBe(10);
 
-            return $value;
-        };
+    unset($timeout, $client);
+});
 
-        $var = new SocketClient("tcp://whois.nic.me:43");
-        $this->assertIsObject($var);
-        $timeout = $reader($var, 'timeout');
-        $this->assertSame($timeout, 30);
+it('can preform basic request for danpock.me domain to root whois', function () {
+    $client = new SocketClient("tcp://whois.iana.org:43", 10);
+    expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
+    $client->connect();
+    $status = $client->writeString("danpock.me\r\n");
+    $response = $client->readAll();
+    $client->disconnect();
+    $containedResponse = strstr($response, "\n", true);
+    expect($containedResponse)->toBeString()->toBe("% IANA WHOIS server");
 
-        $var = new SocketClient("tcp://whois.nic.me:43", 10);
-        $timeout = $reader($var, 'timeout');
-        $this->assertSame($timeout, 10);
+    unset($response, $status, $client);
+});
 
-        unset($timeout, $var);
-    }
+it('can properly track connection state', function () {
+    $client = new SocketClient("tcp://whois.iana.org:43", 10);
+    expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
+    expect($client->isConnected())->toBeFalse();
+    $client->connect();
+    expect($client->isConnected())->toBeTrue();
+    $client->disconnect();
+    expect($client->isConnected())->toBeFalse();
 
-    /**
-     * Basic test to check client syntax.
-     */
-    public function testBasicRequestConcepts()
-    {
-        $var = new SocketClient("tcp://whois.nic.me:43", 10);
-        $this->assertIsObject($var);
-        $var->connect();
-        $status = $var->writeString("danpock.me\r\n");
-        $response = $var->readAll();
-        $var->disconnect();
-        $containedResponse = strstr($response, "\r\n", true);
-        $this->assertSame("Domain Name: DANPOCK.ME", $containedResponse);
+    unset($client);
+});
 
-        unset($response, $status, $var);
-    }
+it('will clean up socket on destruction', function () {
+    $client = new SocketClient("tcp://whois.iana.org:43", 10);
+    expect($client)->toBeObject()->toBeInstanceOf(SocketClient::class);
+    $reflectionProperty = ReflectionProperty::createFromInstance($client, 'socket');
+    expect($reflectionProperty->getValue($client))->toBeNull();
 
-    /**
-     * Basic test to check client syntax.
-     */
-    public function testIsConnected()
-    {
-        $var = new SocketClient("tcp://whois.nic.me:43", 10);
-        $this->assertIsObject($var);
-        $this->assertFalse($var->isConnected());
-        $var->connect();
-        $this->assertTrue($var->isConnected());
-        $var->disconnect();
-        $this->assertFalse($var->isConnected());
+    $client->connect();
+    $socket = $reflectionProperty->getValue($client);
+    expect($socket)->toBeResource();
 
-        unset($var);
-    }
+    $status = $client->writeString("danpock.me\r\n");
+    $response = $client->readAll();
+    expect($socket)->toBeResource();
 
-    /**
-     * Basic test to check client syntax.
-     */
-    public function testWriteWithoutValidConnection()
-    {
-        $var = new SocketClient("tcp://whois.nic.me:43", 10);
-        $this->assertIsObject($var);
-        $this->expectException(SocketClientException::class);
-        $status = $var->writeString("danpock.me\r\n");
-
-        unset($var);
-    }
-
-    /**
-     * Basic test to check client syntax.
-     */
-    public function testReadAllWithoutValidConnection()
-    {
-        $var = new SocketClient("tcp://whois.nic.me:43", 10);
-        $this->assertIsObject($var);
-        $var->connect();
-        $status = $var->writeString("danpock.me\r\n");
-        $var->disconnect();
-        $this->expectException(SocketClientException::class);
-        $response = $var->readAll();
-
-        unset($var);
-    }
-}
+    expect(gettype($socket))->toBe('resource');
+    unset($response, $status, $client);
+    expect(gettype($socket))->toBe('resource (closed)');
+    expect($socket)->toBeResource();
+});

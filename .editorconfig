@@ -22,3 +22,6 @@ indent_size = 4
 [*.yml]
 indent_style = space
 indent_size = 2
+
+[tests/*]
+insert_final_newline = false

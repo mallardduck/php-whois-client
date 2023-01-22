@@ -1,4 +1,5 @@
 {
+    "testFramework": "pest",
     "source": {
         "directories": [
             "src"

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MallardDuck\Whois;
 
 use MallardDuck\Whois\Exceptions\SocketClientException;
@@ -15,15 +17,16 @@ use MallardDuck\Whois\Exceptions\SocketClientException;
  */
 final class SocketClient
 {
-    protected string $socketUri = '';
+    protected string $socketUri;
     /**
-     * @var null|resource
+     * @var null|resource|closed-resource
      */
-    protected $socket;
-    protected int $timeout = 30;
+    protected $socket = null;
+    protected int $timeout = 15;
     protected bool $connected = false;
+    protected bool $requestSent = false;
 
-    public function __construct(string $socketUri, int $timeout = 30)
+    public function __construct(string $socketUri, int $timeout = 15)
     {
         $this->socketUri = $socketUri;
         $this->timeout = $timeout;
@@ -37,14 +40,14 @@ final class SocketClient
      */
     public function connect(): self
     {
-        $fp = @stream_socket_client($this->socketUri, $errno, $errstr, $this->timeout);
-        if (false === $fp) {
+        $fp = @stream_socket_client($this->socketUri, $errorCode, $errorString, $this->timeout);
+        if (!is_resource($fp)) {
             $message = sprintf(
                 "Stream Connection Failed: unable to connect to %s. System Error: %s ",
                 $this->socketUri,
-                $errstr
+                $errorString
             );
-            throw new SocketClientException($message, $errno);
+            throw new SocketClientException($message, $errorCode);
         }
 
         $this->socket = $fp;
@@ -63,6 +66,17 @@ final class SocketClient
     }
 
     /**
+     * Check if a request was sent
+     *
+     * @return bool
+     */
+    public function hasSentRequest(): bool
+    {
+        return $this->requestSent;
+    }
+
+
+    /**
      * Write (or send) the string to the current socket stream.
      *
      * @param string $string
@@ -72,11 +86,19 @@ final class SocketClient
      */
     public function writeString(string $string)
     {
-        if (!$this->connected || null === $this->socket) {
-            $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
-            throw new SocketClientException($message);
+        if (!$this->isConnected()) {
+            throw new SocketClientException('Cannot read, the socket is not yet connected; call `connect()` first.');
         }
-        return stream_socket_sendto($this->socket, $string);
+
+        if (!is_resource($this->socket)) {
+            throw new SocketClientException('The socket resource is not valid for sending data');
+        }
+        $results = stream_socket_sendto($this->socket, $string);
+        if ($results === 0) {
+            throw new SocketClientException('Error writing to socket');
+        }
+        $this->requestSent = true;
+        return $results;
     }
 
     /**
@@ -87,11 +109,23 @@ final class SocketClient
      */
     public function readAll(): string
     {
-        if (!$this->connected || null === $this->socket) {
-            $message = sprintf("The calling method %s requires the socket to be connected", __FUNCTION__);
-            throw new SocketClientException($message);
+        if (!$this->isConnected()) {
+            throw new SocketClientException('Cannot read, the socket is not yet connected; call `connect()` first.');
         }
-        return stream_get_contents($this->socket);
+
+        if (!$this->hasSentRequest()) {
+            throw new SocketClientException('Cannot read before sending data; call `writeString()` first.');
+        }
+
+        if (!is_resource($this->socket)) {
+            throw new SocketClientException('The socket resource is not valid when reading');
+        }
+
+        $response = stream_get_contents($this->socket);
+        if ($response === false) {
+            throw new SocketClientException('Error while reading from socket');
+        }
+        return $response;
     }
 
     /**
@@ -101,12 +135,11 @@ final class SocketClient
      */
     public function disconnect(): self
     {
-        if ($this->socket !== null) {
-            stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
-            /** @psalm-suppress InvalidPropertyAssignmentValue **/
-            fclose($this->socket);
+        if (is_resource($this->socket)) {
+            $results = stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
+            $results ?: fclose($this->socket);
+            $this->socket = null;
         }
-        $this->socket = null;
         $this->connected = false;
 
         return $this;
