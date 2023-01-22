@@ -21,12 +21,15 @@ Rather than focus on the user-friendly output this library focuses on the raw Wh
 function since its intended to be a low-level client that handles only request and raw output. Basically the package
 supports the look-up of a TLDs primary Whois server and then will do a query of the domain provided.
 
+If you're looking for a higher level client, please use: [Whodis](https://github.com/mallardduck/whodis).
+
 ## Requirements
-* PHP >= 8.0
+* PHP >= 8.1
 
 ### Past PHP version support
 | PHP | Package |
 |-----|---------|
+| 8.1 | Current |
 | 8.0 | Current |
 | 7.4 | 2.0.7   |
 | 7.3 | 1.2.1   |
